@@ -11,3 +11,21 @@
   --link: #2563eb;
   --focus-ring: color-mix(in oklab, #2563eb 45%, transparent);
 }
+
+/* GitHub-flavored grays, replacing Tailwind's stock (bluer, higher-chroma)
+   gray scale - carried over from bastion-old's own @theme override, which
+   tuned each step to how it's actually used here (e.g. gray-900 as the dark
+   <body> background, tuned to GitHub's canvas.default dark #0d1117, rather
+   than importing GitHub's literal gray-9 text shade). */
+@theme {
+  --color-gray-50:  #f6f8fa;
+  --color-gray-100: #eaeef2;
+  --color-gray-200: #e1e4e8;
+  --color-gray-300: #d0d7de;
+  --color-gray-400: #afb8c1;
+  --color-gray-500: #6e7781;
+  --color-gray-600: #57606a;
+  --color-gray-700: #424a53;
+  --color-gray-800: #161b22;
+  --color-gray-900: #0d1117;
+}
