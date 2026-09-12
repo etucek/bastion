@@ -1,3 +1,13 @@
+# v0.1.9
+## 09/13/2026
+
+1. [](#bugfix)
+   * Using Tailwind's `gray-*` class names wasn't enough - its own default gray
+     scale is different (bluer, higher-chroma) from bastion-old's, which
+     overrides it entirely via a GitHub-flavored `@theme` scale. Ported all
+     ten steps verbatim, so e.g. dark mode's `gray-900` background is now a
+     true near-black (#0d1117) instead of Tailwind's default dark slate-blue.
+
 # v0.1.8
 ## 09/13/2026
 
