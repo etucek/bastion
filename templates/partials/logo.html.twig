@@ -9,7 +9,6 @@
         <img src="{{ url('theme://images/logo/' ~ logo_file) }}" alt="{{ site.title }}" class="h-8 w-auto" />
     {% endif %}
 {% else %}
-    <span class="logo-svg block h-8 w-auto">{% include '@images/grav-logo.svg' ignore missing %}</span>
-    <span>{{ site.title }}</span>
+    <span class="logo-svg block h-8 w-auto">{{ svg_image('theme://images/bastion-mark.svg', 'fill-current')|raw }}</span>
 {% endif %}
 </a>
