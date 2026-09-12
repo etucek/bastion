@@ -1,3 +1,13 @@
+# v0.1.5
+## 09/13/2026
+
+1. [](#bugfix)
+   * Rebuilt the header/nav to match bastion-old's actual structure: a single
+     toggle button + centered nav panel used at every viewport (not a separate
+     always-visible desktop bar plus a full-screen mobile overlay), no header
+     logo (moved to the footer), and hover/active states now use the site's
+     configured accent color instead of flat neutral grays.
+
 # v0.1.4
 ## 09/13/2026
 
