@@ -1,3 +1,22 @@
+# v0.1.2
+## 09/12/2026
+
+1. [](#bugfix)
+   * Added the page/modular templates Quark 2's default set didn't ship that this
+     site's actual content needs - `modular/image-block`, `modular/contact`,
+     `partials/lightbox`, `post`, `recipe`, `recipes` - fixing "template not found"
+     errors on the home page's About/Contact sections, blog posts, and recipes.
+   * Fixed `modular/features.html.twig` reading `feature.header`/`feature.url` when
+     this site's content uses `feature.title`/`feature.link` (rendered icons with
+     no text), a `modular/gallery.html.twig` inline style referencing CSS variables
+     removed along with `theme.css`, and `partials/hero.html.twig` only understanding
+     a flat `hero_image` arg when all real content uses a nested `hero: {...}` block.
+
+2. [](#new)
+   * Tailwind pass on `blog.html.twig`, the blog list/date/title/taxonomy partials,
+     `layout.html.twig`, and `default.html.twig`, plus a hand-written `.prose`
+     ruleset in `custom.css` for readable body text.
+
 # v0.1.1
 ## 09/12/2026
 
