@@ -6,17 +6,17 @@
         <h1 class="mb-8 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
 
         {% if page.content %}
-        <div class="prose mb-8 max-w-none text-neutral-600 dark:text-neutral-300">
+        <div class="prose mb-8 max-w-none text-gray-600 dark:text-gray-300">
             {{ page.content|raw }}
         </div>
         {% endif %}
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {% for child in page.collection() %}
-            <a href="{{ child.url }}" class="block rounded-lg border border-neutral-200 p-5 hover:border-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700">
+            <a href="{{ child.url }}" class="block rounded-lg border border-gray-200 p-5 hover:border-gray-300 dark:border-gray-800 dark:hover:border-gray-700">
                 <h2 class="text-lg font-semibold">{{ child.title }}</h2>
                 {% if child.header.recipe.difficulty %}
-                <span class="mt-2 inline-block rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+                <span class="mt-2 inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
                     {{ child.header.recipe.difficulty }}
                 </span>
                 {% endif %}

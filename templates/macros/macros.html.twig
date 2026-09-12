@@ -2,7 +2,7 @@
   {% import _self as macros %}
   {% set depth = depth|default(0) %}
   {% for p in page.children.visible %}
-    {% set active_page = (p.active or p.activeChild) ? 'text-neutral-900 dark:text-white' : 'text-neutral-700 dark:text-neutral-300' %}
+    {% set active_page = (p.active or p.activeChild) ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300' %}
     {% set has_children = p.children.visible.count > 0 %}
     <li{% if has_children %} class="has-children relative"{% endif %}>
       <a href="{{ p.url }}" class="flex items-center gap-1.5 rounded-md px-3 py-2 text-base font-medium hover:text-[var(--accent)] {{ active_page }}">

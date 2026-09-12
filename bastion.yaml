@@ -12,6 +12,13 @@ fontawesome:
   enabled: true
   local: false
 
+footer:
+  copyright: "&copy; 2022 Tucek"
+  social:
+    - { network: twitter, link: 'https://twitter.com/etucek' }
+    - { network: github, link: 'https://github.com/etucek' }
+    - { network: linkedin, link: 'https://www.linkedin.com/in/emir-tucek' }
+
 tailwind4:
   input: css/site.css
   output: build/css/site.css

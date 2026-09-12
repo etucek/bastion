@@ -1,11 +1,25 @@
-<footer id="footer" class="border-t border-neutral-200 py-8 dark:border-neutral-800">
-    <div class="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 text-center sm:px-6 lg:px-8">
-        {% include 'partials/logo.html.twig' %}
-        <p class="text-sm text-neutral-500 dark:text-neutral-400">
-            <a href="https://getgrav.org" class="hover:text-neutral-900 dark:hover:text-white">Grav</a>
-            was <i class="fa-solid fa-code" aria-hidden="true"></i>
-            with <i class="fa-solid fa-heart text-red-500" aria-hidden="true"></i>
-            by <a href="https://trilby.media" class="hover:text-neutral-900 dark:hover:text-white">Trilby Media</a>.
-        </p>
+{% set footer = theme_var('footer') %}
+<footer id="footer" class="border-t border-gray-200 bg-gray-50 text-sm dark:border-gray-800 dark:bg-gray-900">
+    <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+        {% if footer.social %}
+        <div class="mb-6 flex items-center justify-center gap-3 md:justify-start">
+            {% for item in footer.social %}
+                {% set brand = item.network|replace({'__brands': ''}) %}
+                <a href="{{ item.link }}" aria-label="{{ brand }}" target="_blank" rel="noopener"
+                   class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-gray-700 opacity-75 transition hover:opacity-100 dark:bg-gray-800 dark:text-gray-200">
+                    <i class="fa-brands fa-{{ brand }}" aria-hidden="true"></i>
+                </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="flex flex-col items-center justify-between gap-4 text-gray-600 md:flex-row dark:text-gray-400">
+            <div class="text-center md:text-left">
+                {{ footer.copyright|markdown|raw }}
+            </div>
+            <a href="{{ home_url }}" aria-label="{{ site.title }}" class="opacity-75 transition hover:opacity-100">
+                {% include 'partials/logo.html.twig' %}
+            </a>
+        </div>
     </div>
 </footer>

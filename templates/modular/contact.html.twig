@@ -4,12 +4,10 @@
     <div class="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
         {% if page.title %}<h2 class="mb-6 text-2xl font-bold sm:text-3xl">{{ page.title }}</h2>{% endif %}
         {% if page.content %}
-        <div class="prose mx-auto max-w-none text-neutral-600 dark:text-neutral-300">
+        <div class="prose mx-auto max-w-none {{ page.header.colors.text_style|default('text-gray-600 dark:text-gray-300') }}">
             {{ page.content|raw }}
         </div>
         {% endif %}
-        {% if page.header.form %}
-            {% include 'forms/form.html.twig' ignore missing %}
-        {% endif %}
+        {% include 'forms/form.html.twig' ignore missing %}
     </div>
 </section>

@@ -6,12 +6,12 @@
         <h1 class="mb-2 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
 
         {% if page.header.recipe.difficulty %}
-        <span class="mb-6 inline-block rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+        <span class="mb-6 inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
             {{ page.header.recipe.difficulty }}
         </span>
         {% endif %}
 
-        <div class="prose max-w-none text-neutral-700 dark:text-neutral-300">
+        <div class="prose max-w-none text-gray-700 dark:text-gray-300">
             {{ page.content|raw }}
         </div>
     </div>

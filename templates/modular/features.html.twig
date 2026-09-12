@@ -4,7 +4,7 @@
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {% if page.title %}<h2 class="mb-6 text-2xl font-bold sm:text-3xl">{{ page.title }}</h2>{% endif %}
         {% if content %}
-        <div class="prose max-w-none text-neutral-600 dark:text-neutral-300">
+        <div class="prose max-w-none {{ page.header.colors.text_style|default('text-gray-600 dark:text-gray-300') }}">
             {{ content|raw }}
         </div>
         {% endif %}
@@ -16,12 +16,12 @@
                 {% set label = feature.title|default(feature.header) %}
                 <a href="{{ link }}" class="group flex flex-col items-center gap-3 text-center {{ link ? '' : 'pointer-events-none' }}">
                     {% if feature.icon %}
-                    <span class="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100 text-xl text-neutral-700 group-hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-200 dark:group-hover:bg-neutral-700">
+                    <span class="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-xl text-gray-700 group-hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:group-hover:bg-gray-700">
                         <i class="{{ feature.icon|fa_icon }}" aria-hidden="true"></i>
                     </span>
                     {% endif %}
                     {% if label %}<span class="font-semibold">{{ label }}</span>{% endif %}
-                    {% if feature.text %}<p class="text-sm text-neutral-500 dark:text-neutral-400">{{ feature.text }}</p>{% endif %}
+                    {% if feature.text %}<p class="text-sm text-gray-500 dark:text-gray-400">{{ feature.text }}</p>{% endif %}
                 </a>
             {% endfor %}
         </div>

@@ -7,14 +7,14 @@
 #}
 {% if config.plugins.simplesearch.enabled %}
 <div id="search-overlay"
-     class="search-overlay invisible fixed inset-0 z-[60] flex items-start justify-center bg-neutral-900/60 px-4 pt-24 opacity-0 backdrop-blur-sm transition-opacity duration-300 sm:pt-32 [&.open]:visible [&.open]:opacity-100">
-  <div class="w-full max-w-xl rounded-lg bg-white p-4 shadow-xl dark:bg-neutral-900">
+     class="search-overlay invisible fixed inset-0 z-[60] flex items-start justify-center bg-gray-900/60 px-4 pt-24 opacity-0 backdrop-blur-sm transition-opacity duration-300 sm:pt-32 [&.open]:visible [&.open]:opacity-100">
+  <div class="w-full max-w-xl rounded-lg bg-white p-4 shadow-xl dark:bg-gray-900">
     <div class="mb-3 flex items-center justify-between">
-      <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
         {{ 'THEME_BASTION.SEARCH.HEADLINE'|t }}
       </h2>
       <button type="button" data-search-toggle="close" aria-label="{{ 'THEME_BASTION.SEARCH.CLOSE'|t|e('html_attr') }}"
-              class="-m-1 rounded-md p-1 text-neutral-500 hover:text-[var(--accent)] dark:text-neutral-400">
+              class="-m-1 rounded-md p-1 text-gray-500 hover:text-[var(--accent)] dark:text-gray-400">
         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
     </div>

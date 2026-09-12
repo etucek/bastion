@@ -82,13 +82,13 @@
     {{ assets.js()|raw }}
 {% endblock %}
 </head>
-<body id="top" class="{% block body_classes %}{{ body_classes }}{% endblock %} min-h-screen flex flex-col bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+<body id="top" class="{% block body_classes %}{{ body_classes }}{% endblock %} min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
     <div id="page-wrapper" class="flex flex-col flex-1">
     {% block header %}
-        <header id="header" class="sticky top-0 z-40 border-b border-neutral-200 bg-white/90 backdrop-blur transition-shadow dark:border-neutral-800 dark:bg-neutral-950/90 [.scrolled_&]:shadow-sm">
+        <header id="header" class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur transition-shadow dark:border-gray-800 dark:bg-gray-950/90 [.scrolled_&]:shadow-sm">
             <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <nav class="flex h-16 items-center justify-between gap-4" aria-label="{{ 'THEME_BASTION.ARIA.PRIMARY_NAV'|t|e('html_attr') }}">
-                    <button type="button" id="toggle" class="relative -ml-2 inline-flex items-center gap-2 rounded-full border border-neutral-300 py-1.5 pl-2 pr-3 hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-neutral-600" aria-label="{{ 'THEME_BASTION.ARIA.OPEN_MENU'|t|e('html_attr') }}">
+                    <button type="button" id="toggle" class="relative -ml-2 inline-flex items-center gap-2 rounded-full border border-gray-300 py-1.5 pl-2 pr-3 hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-gray-600" aria-label="{{ 'THEME_BASTION.ARIA.OPEN_MENU'|t|e('html_attr') }}">
                         <span class="relative flex h-5 w-5 items-center justify-center">
                             <span class="top absolute h-0.5 w-4 -translate-y-1.5 bg-current transition-transform [#toggle.active_&]:translate-y-0 [#toggle.active_&]:rotate-45"></span>
                             <span class="middle absolute h-0.5 w-4 bg-current transition-opacity [#toggle.active_&]:opacity-0"></span>
@@ -96,16 +96,16 @@
                         </span>
                         <span class="text-sm font-medium">{{ 'THEME_BASTION.ARIA.MENU'|t }}</span>
                     </button>
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1">
                         {% if config.plugins.simplesearch.enabled %}
-                        <button type="button" data-search-toggle="open" class="flex h-8 w-8 items-center justify-center rounded-md text-neutral-600 hover:text-[var(--accent)] dark:text-neutral-300" aria-label="{{ 'THEME_BASTION.SEARCH.OPEN'|t|e('html_attr') }}">
+                        <button type="button" data-search-toggle="open" class="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 hover:text-[var(--accent)] dark:text-gray-300" aria-label="{{ 'THEME_BASTION.SEARCH.OPEN'|t|e('html_attr') }}">
                             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                         </button>
                         {% endif %}
-                        {% include 'partials/theme-toggle.html.twig' %}
                         {% if config.plugins.login.enabled and grav.user.username %}
-                            <span class="flex items-center gap-1.5 text-sm"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' ignore missing %}</span>
+                            <span class="flex items-center gap-1.5 px-2 text-sm"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' ignore missing %}</span>
                         {% endif %}
+                        {% include 'partials/theme-toggle.html.twig' %}
                     </div>
                 </nav>
             </div>
@@ -134,26 +134,11 @@
     {% endblock %}
 
     {% block mobile %}
-    <div id="overlay" class="invisible fixed inset-0 z-50 flex items-start justify-center bg-neutral-900/50 px-4 pt-20 opacity-0 backdrop-blur-sm transition-opacity duration-300 sm:pt-24 [&.open]:visible [&.open]:opacity-100" role="dialog" aria-label="{{ 'THEME_BASTION.ARIA.MENU'|t|e('html_attr') }}">
-        <div class="max-h-[75vh] w-full max-w-xl overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl sm:p-6 dark:bg-neutral-900">
-            <div class="mb-4 flex items-center justify-between">
-                <span class="text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{{ 'THEME_BASTION.ARIA.MENU'|t }}</span>
-                <button type="button" data-mobile-close class="-m-1 flex h-8 w-8 items-center justify-center rounded-md text-neutral-500 hover:text-[var(--accent)] dark:text-neutral-400" aria-label="{{ 'THEME_BASTION.ARIA.CLOSE_MENU'|t|e('html_attr') }}">
-                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                </button>
-            </div>
-            {% if config.plugins.simplesearch.enabled %}
-            <button type="button" data-search-toggle="open" data-mobile-close class="mb-3 flex items-center gap-2 rounded-md px-1 py-2 text-base font-medium text-neutral-700 hover:text-[var(--accent)] dark:text-neutral-300">
-                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                {{ 'THEME_BASTION.SEARCH.OPEN'|t }}
-            </button>
-            {% endif %}
+    <div id="overlay" class="invisible fixed inset-0 z-40 flex items-start justify-center bg-gray-900/50 px-4 pt-20 opacity-0 backdrop-blur-sm transition-opacity duration-300 sm:pt-24 [&.open]:visible [&.open]:opacity-100" role="dialog" aria-label="{{ 'THEME_BASTION.ARIA.MENU'|t|e('html_attr') }}">
+        <div class="max-h-[75vh] w-full max-w-xl overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl sm:p-6 dark:bg-gray-900">
             <nav aria-label="{{ 'THEME_BASTION.ARIA.MOBILE_NAV'|t|e('html_attr') }}">
                 {% include 'partials/navigation.html.twig' %}
             </nav>
-            <div class="mt-4 border-t border-neutral-200 pt-4 dark:border-neutral-800">
-                {% include 'partials/theme-toggle.html.twig' with {labeled: true} %}
-            </div>
         </div>
     </div>
     {% endblock %}

@@ -7,6 +7,14 @@
  * than as Tailwind utility soup (dropdown popovers, mobile overlay).
  */
 
+/* Tailwind's preflight sets buttons to cursor: default (matching native
+   browser behavior) rather than cursor: pointer. Every button in this theme
+   is acting as a clickable control, not a native form submit, so restore
+   the pointer cursor globally instead of annotating each one. */
+button {
+  cursor: pointer;
+}
+
 /* Nav panel: a single toggle-revealed menu used at every viewport width
    (no separate always-visible desktop bar) - nested children render inline,
    indented, rather than as hover popovers. */
@@ -64,14 +72,47 @@
   filter: invert(1);
 }
 
-/* Theme toggle icon swap, driven by the data-mode attribute theme-toggle.js
-   sets on the button. Plain CSS rather than a Tailwind arbitrary variant:
-   the ported engine doesn't resolve nested-bracket attribute selectors like
-   [[data-mode=light]_&] (candidate is silently dropped, no build error). */
-button[data-theme-toggle][data-mode="light"] .icon-sun,
-button[data-theme-toggle][data-mode="dark"] .icon-moon,
-button[data-theme-toggle][data-mode="auto"] .icon-auto {
-  display: inline-block;
+/* The form plugin's default field/button layouts ship no CSS of their own
+   either - same story as simplesearch above. */
+.form-field {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.form-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.form-input,
+.form-input-wrapper select {
+  width: 100%;
+  border: 1px solid rgb(229 229 229);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  background: #ffffff;
+  color: inherit;
+}
+.dark .form-input,
+.dark .form-input-wrapper select {
+  border-color: #404040;
+  background: #171717;
+}
+.form-input:focus {
+  outline: 2px solid var(--focus-ring, #2563eb);
+  outline-offset: 1px;
+}
+.form-field button[type="submit"] {
+  border-radius: 0.375rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: var(--accent, #2563eb);
+  color: var(--accent-contrast, #ffffff);
+}
+.form-field button[type="submit"]:hover {
+  filter: brightness(0.92);
 }
 
 /* Minimal prose styling for rendered Markdown content (page.content). A

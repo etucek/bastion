@@ -14,7 +14,7 @@
             <div class="w-full {{ image ? 'md:w-1/2' : '' }}">
                 {% if page.title %}<h2 class="mb-4 text-2xl font-bold sm:text-3xl">{{ page.title }}</h2>{% endif %}
                 {% if page.content %}
-                <div class="prose max-w-none text-neutral-600 dark:text-neutral-300">
+                <div class="prose max-w-none {{ page.header.colors.text_style|default('text-gray-600 dark:text-gray-300') }}">
                     {{ page.content|raw }}
                 </div>
                 {% endif %}

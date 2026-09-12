@@ -86,7 +86,7 @@
       document.body.classList.toggle('overlay-open');
     });
     overlay.addEventListener('click', function (e) {
-      if (e.target === overlay || e.target.tagName === 'A' || e.target.closest('[data-mobile-close]')) {
+      if (e.target === overlay || e.target.tagName === 'A') {
         closeMobileMenu();
       }
     });

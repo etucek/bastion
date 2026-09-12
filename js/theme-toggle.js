@@ -6,13 +6,15 @@
  * swap data-theme live.
  *
  * The inline bootstrap in base.html.twig sets data-theme before first paint
- * to eliminate FOUC. This file handles the runtime toggling UI.
+ * to eliminate FOUC. This file handles the runtime toggling UI: a 3-way
+ * segmented control (light/auto/dark) rather than a single cycling button.
  */
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'bastion-theme';
   var root = document.documentElement;
+  var ORDER = ['light', 'auto', 'dark'];
 
   function getStored() {
     try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
@@ -37,35 +39,14 @@
     return getStored() || root.getAttribute('data-theme-default') || 'auto';
   }
 
-  function cyclePreference(pref) {
-    // auto -> light -> dark -> auto
-    if (pref === 'auto')  return 'light';
-    if (pref === 'light') return 'dark';
-    return 'auto';
-  }
-
-  // English defaults only. The real strings come from the button's data-*
-  // attributes, which theme-toggle.html.twig fills from languages.yaml, so a
-  // translated site (or a child theme overriding THEME_QUARK2.THEME_TOGGLE.*)
-  // gets translated labels. These stand in for a custom template that renders
-  // the button without them.
-  var FALLBACK_LABELS = { auto: 'Auto', light: 'Light', dark: 'Dark' };
-  var FALLBACK_ARIA = 'Appearance: %s';
-  var FALLBACK_TITLE = 'Appearance: %s (click to cycle)';
-
-  function attr(button, name, fallback) {
-    var value = button.getAttribute(name);
-    return value !== null && value !== '' ? value : fallback;
-  }
-
-  function updateToggleLabel(button, pref) {
-    if (!button) return;
-    var label = attr(button, 'data-label-' + pref, FALLBACK_LABELS[pref]);
-    var aria = attr(button, 'data-aria-template', FALLBACK_ARIA);
-    var title = attr(button, 'data-title-template', FALLBACK_TITLE);
-    button.setAttribute('aria-label', aria.replace('%s', label));
-    button.setAttribute('title', title.replace('%s', label));
-    button.setAttribute('data-mode', pref);
+  function updateGroup(group, pref) {
+    var index = ORDER.indexOf(pref);
+    if (index === -1) index = 1;
+    var indicator = group.querySelector('[data-theme-indicator]');
+    if (indicator) indicator.style.transform = 'translateX(' + (index * 100) + '%)';
+    group.querySelectorAll('[data-mode-option]').forEach(function (btn) {
+      btn.setAttribute('aria-checked', btn.getAttribute('data-mode-option') === pref ? 'true' : 'false');
+    });
   }
 
   // React to OS changes when in auto mode
@@ -79,16 +60,18 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    var buttons = document.querySelectorAll('[data-theme-toggle]');
+    var groups = document.querySelectorAll('[data-theme-toggle]');
     var pref = currentPreference();
     applyMode(pref);
-    buttons.forEach(function (btn) {
-      updateToggleLabel(btn, pref);
-      btn.addEventListener('click', function () {
-        var next = cyclePreference(currentPreference());
-        setStored(next);
-        applyMode(next);
-        buttons.forEach(function (b) { updateToggleLabel(b, next); });
+    groups.forEach(function (group) {
+      updateGroup(group, pref);
+      group.querySelectorAll('[data-mode-option]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var next = btn.getAttribute('data-mode-option');
+          setStored(next);
+          applyMode(next);
+          groups.forEach(function (g) { updateGroup(g, next); });
+        });
       });
     });
   });
