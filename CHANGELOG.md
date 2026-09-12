@@ -1,3 +1,28 @@
+# v0.1.7
+## 09/13/2026
+
+1. [](#bugfix)
+   * Found the actual cause of "colors not right": this theme used Tailwind's
+     `neutral` palette everywhere while bastion-old consistently uses `gray` -
+     swapped every occurrence, and wired up `page.header.colors.text_style`
+     which content sets per-section but nothing read.
+   * The contact section's form was gated behind `page.header.form`, which no
+     content sets, so it silently never rendered. Now included unconditionally
+     like bastion-old, and styled the Form plugin's unstyled field/button classes.
+   * Buttons had no pointer cursor (Tailwind preflight default); added a
+     blanket rule to restore it.
+   * Header z-index was lower than the nav panel's, covering the header's
+     search/theme controls when the panel opened - swapped the order and
+     removed the duplicate controls that had been added inside the panel to
+     compensate.
+
+2. [](#new)
+   * Rebuilt the footer to match bastion-old: background band, social icons,
+     markdown copyright, logo bottom-right - carrying over the real social
+     links and copyright text as this theme's own defaults.
+   * Rebuilt the theme switcher as a 3-way segmented pill (light/auto/dark,
+     sliding indicator) instead of a single cycling icon button.
+
 # v0.1.6
 ## 09/13/2026
 
