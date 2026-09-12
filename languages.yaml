@@ -31,6 +31,7 @@ en:
       MENU: "Menu"
       OPEN_MENU: "Open menu"
       CLOSE_MENU: "Close menu"
+      EXPAND_MENU: "Expand / collapse menu"
       BREADCRUMB: "Breadcrumb"
       PAGINATION: "Pagination"
       POST_NAVIGATION: "Post navigation"
@@ -41,3 +42,6 @@ en:
       OPEN: "Search"
       CLOSE: "Close search"
       HEADLINE: "Search"
+    MENU:
+      OPEN: "Menu"
+      CLOSE: "Close"

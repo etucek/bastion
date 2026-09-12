@@ -70,20 +70,29 @@
     });
   }
 
-  // Mobile menu toggle
+  // Mobile menu toggle - header hamburger doubles as the close button, its
+  // icon morphs bars <-> xmark in place, plus backdrop click.
   var toggle = document.getElementById('toggle');
   var overlay = document.getElementById('overlay');
-  function closeMobileMenu() {
+  function setMobileNavOpen(open) {
     if (!toggle || !overlay) return;
-    toggle.classList.remove('active');
-    overlay.classList.remove('open');
-    document.body.classList.remove('overlay-open');
+    overlay.classList.toggle('open', open);
+    document.documentElement.classList.toggle('overflow-hidden', open);
+    var label = open ? toggle.dataset.labelClose : toggle.dataset.labelOpen;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (label) toggle.setAttribute('aria-label', label);
+    toggle.querySelectorAll('[data-mobile-nav-icon]').forEach(function (icon) {
+      icon.classList.toggle('hidden', (icon.dataset.mobileNavIcon === 'open') !== open);
+    });
+    var textLabel = toggle.querySelector('[data-mobile-nav-label]');
+    if (textLabel && label) textLabel.textContent = label;
+  }
+  function closeMobileMenu() {
+    setMobileNavOpen(false);
   }
   if (toggle && overlay) {
     toggle.addEventListener('click', function () {
-      toggle.classList.toggle('active');
-      overlay.classList.toggle('open');
-      document.body.classList.toggle('overlay-open');
+      setMobileNavOpen(!overlay.classList.contains('open'));
     });
     overlay.addEventListener('click', function (e) {
       if (e.target === overlay || e.target.tagName === 'A') {
@@ -95,17 +104,39 @@
     });
   }
 
+  // Collapsible submenus in the nav panel (accordion: click to expand/collapse)
+  document.addEventListener('click', function (event) {
+    var menuToggle = event.target.closest('[data-menu-toggle]');
+    if (!menuToggle) return;
+
+    var item = menuToggle.closest('[data-menu-item]');
+    if (!item) return;
+
+    var expanded = item.dataset.expanded !== 'true';
+    item.dataset.expanded = expanded ? 'true' : 'false';
+
+    var panel = item.querySelector(':scope > [data-menu-panel]');
+    if (panel) panel.classList.toggle('hidden', !expanded);
+
+    var iconOpen = menuToggle.querySelector('[data-menu-icon-open]');
+    var iconClosed = menuToggle.querySelector('[data-menu-icon-closed]');
+    if (iconOpen) iconOpen.classList.toggle('hidden', !expanded);
+    if (iconClosed) iconClosed.classList.toggle('hidden', expanded);
+  });
+
   // Search overlay toggle
   var searchOverlay = document.getElementById('search-overlay');
   if (searchOverlay) {
     var openSearch = function () {
       closeMobileMenu();
       searchOverlay.classList.add('open');
+      document.documentElement.classList.add('overflow-hidden');
       var field = searchOverlay.querySelector('input[name="searchfield"]');
       if (field) field.focus();
     };
     var closeSearch = function () {
       searchOverlay.classList.remove('open');
+      document.documentElement.classList.remove('overflow-hidden');
     };
     document.querySelectorAll('[data-search-toggle="open"]').forEach(function (btn) {
       btn.addEventListener('click', openSearch);

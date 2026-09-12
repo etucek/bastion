@@ -1,17 +1,34 @@
 {% macro nav_loop(page, depth) %}
   {% import _self as macros %}
   {% set depth = depth|default(0) %}
+  {% set default_classes = {
+    a: 'flex w-full items-center gap-1.5 rounded-lg px-3 py-3 text-xl font-medium hover:bg-gray-700/60 hover:text-[var(--accent)]',
+    li: 'text-gray-300'
+  } %}
+  {% set nested_classes = {
+    a: 'flex w-full items-center gap-1.5 px-2 py-2 text-base hover:text-[var(--accent)]',
+    li: 'text-gray-300'
+  } %}
+  {% set classes = depth == 0 ? default_classes : nested_classes %}
+
   {% for p in page.children.visible %}
-    {% set active_page = (p.active or p.activeChild) ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300' %}
+    {% set active_page = (p.active or p.activeChild) ? 'text-white' : classes.li %}
     {% set has_children = p.children.visible.count > 0 %}
-    <li{% if has_children %} class="has-children relative"{% endif %}>
-      <a href="{{ p.url }}" class="flex items-center gap-1.5 rounded-md px-3 py-2 text-base font-medium hover:text-[var(--accent)] {{ active_page }}">
-        {% if p.header.menu_icon %}<i class="{{ p.header.menu_icon|fa_icon }}" aria-hidden="true"></i>{% endif %}
-        {{ p.menu }}
-        {% if has_children %}<i class="fa-solid fa-chevron-down text-xs opacity-60" aria-hidden="true"></i>{% endif %}
-      </a>
+    <li data-menu-item data-expanded="{{ p.activeChild ? 'true' : 'false' }}" class="{{ active_page }}">
+      <div class="flex w-full items-center">
+        <a class="{{ classes.a }}" href="{{ p.url }}">
+          {% if p.header.menu_icon %}<i class="{{ p.header.menu_icon|fa_icon }}" aria-hidden="true"></i>{% endif %}
+          {{ p.menu }}
+        </a>
+        {% if has_children %}
+        <button type="button" data-menu-toggle class="flex h-10 w-10 shrink-0 items-center justify-center text-gray-500" aria-label="{{ 'THEME_BASTION.ARIA.EXPAND_MENU'|t|e('html_attr') }}">
+          <div data-menu-icon-open class="{{ p.activeChild ? '' : 'hidden' }}"><i class="fa-solid fa-minus" aria-hidden="true"></i></div>
+          <div data-menu-icon-closed class="{{ p.activeChild ? 'hidden' : '' }}"><i class="fa-solid fa-plus" aria-hidden="true"></i></div>
+        </button>
+        {% endif %}
+      </div>
       {% if has_children %}
-      <ul class="dropmenu-panel">
+      <ul data-menu-panel class="space-y-1 py-1 pl-4 {{ p.activeChild ? '' : 'hidden' }}">
         {{ macros.nav_loop(p, depth + 1) }}
       </ul>
       {% endif %}
