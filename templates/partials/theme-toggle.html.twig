@@ -4,7 +4,7 @@
    has no access to Grav's translations. A child theme overriding
    THEME_BASTION.THEME_TOGGLE.* in its own languages.yaml changes both. #}
 <button type="button"
-        class="theme-toggle flex h-8 w-8 items-center justify-center rounded-md text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white"
+        class="theme-toggle flex h-8 w-8 items-center justify-center rounded-md text-neutral-600 hover:text-[var(--accent)] dark:text-neutral-300"
         data-theme-toggle
         data-label-auto="{{ 'THEME_BASTION.THEME_TOGGLE.AUTO'|t|e('html_attr') }}"
         data-label-light="{{ 'THEME_BASTION.THEME_TOGGLE.LIGHT'|t|e('html_attr') }}"

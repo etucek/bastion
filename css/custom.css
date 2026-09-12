@@ -7,53 +7,10 @@
  * than as Tailwind utility soup (dropdown popovers, mobile overlay).
  */
 
-/* Desktop dropdown submenus */
-.dropmenu:not(.tree) li.has-children {
-  position: relative;
-}
-.dropmenu:not(.tree) .dropmenu-panel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 50;
-  display: none;
-  min-width: 12rem;
-  flex-direction: column;
-  gap: 0.125rem;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgb(229 229 229);
-  background: #ffffff;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
-.dark .dropmenu:not(.tree) .dropmenu-panel {
-  border-color: #262626;
-  background: #171717;
-}
-.dropmenu:not(.tree) li.has-children:hover > .dropmenu-panel,
-.dropmenu:not(.tree) li.has-children.open > .dropmenu-panel {
-  display: flex;
-}
-.dropmenu:not(.tree) li.has-children.flip-x > .dropmenu-panel {
-  left: auto;
-  right: 0;
-}
-.dropmenu:not(.tree) .dropmenu-panel .dropmenu-panel {
-  top: 0;
-  left: 100%;
-  margin-top: 0;
-  margin-left: 0.5rem;
-}
-.dropmenu:not(.tree) li.has-children.flip-x .dropmenu-panel .dropmenu-panel {
-  left: auto;
-  right: 100%;
-  margin-left: 0;
-  margin-right: 0.5rem;
-}
-
-/* Mobile tree menu: nested submenus render inline, indented */
-.dropmenu.tree .dropmenu-panel {
+/* Nav panel: a single toggle-revealed menu used at every viewport width
+   (no separate always-visible desktop bar) - nested children render inline,
+   indented, rather than as hover popovers. */
+.dropmenu .dropmenu-panel {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
