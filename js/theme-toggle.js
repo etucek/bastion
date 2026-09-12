@@ -1,5 +1,5 @@
 /*
- * Quark 2 — appearance controller
+ * Bastion — appearance controller
  *
  * Order of precedence: user preference (localStorage) > theme-mode default >
  * OS preference. When the user picks "auto", we listen for OS changes and
@@ -11,7 +11,7 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'quark2-theme';
+  var STORAGE_KEY = 'bastion-theme';
   var root = document.documentElement;
 
   function getStored() {

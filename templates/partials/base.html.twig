@@ -29,16 +29,16 @@
     {# User-configured accent: tint links, focus ring, and filled UI accents with the chosen hex #}
     <style>
       :root {
-        --q2-accent: {{ accent }};
-        --q2-accent-contrast: #ffffff;
-        --q2-link: {{ accent }};
-        --q2-focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
+        --accent: {{ accent }};
+        --accent-contrast: #ffffff;
+        --link: {{ accent }};
+        --focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
       }
       :root[data-theme='dark'] {
-        --q2-accent: color-mix(in oklab, {{ accent }} 80%, white 20%);
-        --q2-accent-contrast: #ffffff;
-        --q2-link: color-mix(in oklab, {{ accent }} 75%, white 25%);
-        --q2-focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
+        --accent: color-mix(in oklab, {{ accent }} 80%, white 20%);
+        --accent-contrast: #ffffff;
+        --link: color-mix(in oklab, {{ accent }} 75%, white 25%);
+        --focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
       }
     </style>
     {% endif %}
@@ -82,46 +82,42 @@
     {{ assets.js()|raw }}
 {% endblock %}
 </head>
-<body id="top" class="{% block body_classes %}{{ body_classes }}{% endblock %}">
-    <div id="page-wrapper">
+<body id="top" class="{% block body_classes %}{{ body_classes }}{% endblock %} min-h-screen flex flex-col bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+    <div id="page-wrapper" class="flex flex-col flex-1">
     {% block header %}
-        <header id="header" class="section">
-            <div class="container">
-                <nav class="navbar" aria-label="{{ 'THEME_BASTION.ARIA.PRIMARY_NAV'|t|e('html_attr') }}">
-                    <div class="navbar-section logo">
+        <header id="header" class="sticky top-0 z-40 border-b border-neutral-200 bg-white/90 backdrop-blur transition-shadow dark:border-neutral-800 dark:bg-neutral-950/90 [.scrolled_&]:shadow-sm">
+            <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+                <nav class="flex h-16 items-center justify-between gap-4" aria-label="{{ 'THEME_BASTION.ARIA.PRIMARY_NAV'|t|e('html_attr') }}">
+                    <div class="flex items-center">
                         {% include 'partials/logo.html.twig' %}
                     </div>
-                    <div class="navbar-section desktop-menu">
-                        <div class="dropmenu">
-                        {% block header_navigation %}
-                            {% include 'partials/navigation.html.twig' %}
-                        {% endblock %}
-                        </div>
+                    <div class="hidden md:flex md:items-center">
+                    {% block header_navigation %}
+                        {% include 'partials/navigation.html.twig' %}
+                    {% endblock %}
                     </div>
-                    <div class="navbar-section actions">
+                    <div class="flex items-center gap-3">
                         {% include 'partials/theme-toggle.html.twig' %}
                         {% if config.plugins.login.enabled and grav.user.username %}
-                            <span class="login-status-wrapper"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' ignore missing %}</span>
+                            <span class="flex items-center gap-1.5 text-sm"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' ignore missing %}</span>
                         {% endif %}
+                        <button type="button" id="toggle" class="relative flex h-8 w-8 items-center justify-center md:hidden" aria-label="{{ 'THEME_BASTION.ARIA.OPEN_MENU'|t|e('html_attr') }}">
+                            <span class="top absolute h-0.5 w-5 -translate-y-1.5 bg-current transition-transform [#toggle.active_&]:translate-y-0 [#toggle.active_&]:rotate-45"></span>
+                            <span class="middle absolute h-0.5 w-5 bg-current transition-opacity [#toggle.active_&]:opacity-0"></span>
+                            <span class="bottom absolute h-0.5 w-5 translate-y-1.5 bg-current transition-transform [#toggle.active_&]:translate-y-0 [#toggle.active_&]:-rotate-45"></span>
+                        </button>
                     </div>
                 </nav>
             </div>
         </header>
-        <div class="mobile-menu">
-            <button type="button" class="button_container" id="toggle" aria-label="{{ 'THEME_BASTION.ARIA.OPEN_MENU'|t|e('html_attr') }}">
-                <span class="top"></span>
-                <span class="middle"></span>
-                <span class="bottom"></span>
-            </button>
-        </div>
     {% endblock %}
 
     {% block hero %}{% endblock %}
 
-        <main id="start">
+        <main id="start" class="flex-1">
         {% block body %}
-            <section id="body-wrapper" class="section">
-                <div class="container">
+            <section id="body-wrapper" class="py-10">
+                <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                     {% block messages %}
                         {% include 'partials/messages.html.twig' ignore missing %}
                     {% endblock %}
@@ -139,14 +135,14 @@
 
     {% block mobile %}
     <div class="mobile-container">
-        <div class="overlay" id="overlay" role="dialog" aria-label="{{ 'THEME_BASTION.ARIA.MENU'|t|e('html_attr') }}">
-            <div class="mobile-logo">
+        <div class="overlay fixed inset-0 z-50 hidden flex-col bg-white p-6 dark:bg-neutral-950 [&.open]:flex" id="overlay" role="dialog" aria-label="{{ 'THEME_BASTION.ARIA.MENU'|t|e('html_attr') }}">
+            <div class="mb-8">
                 {% include 'partials/logo.html.twig' with {mobile: true} %}
             </div>
-            <nav class="overlay-menu" aria-label="{{ 'THEME_BASTION.ARIA.MOBILE_NAV'|t|e('html_attr') }}">
+            <nav class="overlay-menu flex-1 overflow-y-auto" aria-label="{{ 'THEME_BASTION.ARIA.MOBILE_NAV'|t|e('html_attr') }}">
                 {% include 'partials/navigation.html.twig' with {tree: true} %}
             </nav>
-            <div style="margin-top:2rem;">
+            <div class="mt-8">
                 {% include 'partials/theme-toggle.html.twig' with {labeled: true} %}
             </div>
         </div>

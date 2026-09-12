@@ -1,6 +1,71 @@
 /*
- * Quark 2 — user customizations
+ * Bastion — user customizations
  *
  * This file is safe to edit. It is loaded last so anything here overrides
- * theme.css without having to mark rules !important.
+ * build/css/site.css without having to mark rules !important. It also holds
+ * the handful of stateful nav/mobile-menu rules that are easier as plain CSS
+ * than as Tailwind utility soup (dropdown popovers, mobile overlay).
  */
+
+/* Desktop dropdown submenus */
+.dropmenu:not(.tree) li.has-children {
+  position: relative;
+}
+.dropmenu:not(.tree) .dropmenu-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  display: none;
+  min-width: 12rem;
+  flex-direction: column;
+  gap: 0.125rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(229 229 229);
+  background: #ffffff;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+.dark .dropmenu:not(.tree) .dropmenu-panel {
+  border-color: #262626;
+  background: #171717;
+}
+.dropmenu:not(.tree) li.has-children:hover > .dropmenu-panel,
+.dropmenu:not(.tree) li.has-children.open > .dropmenu-panel {
+  display: flex;
+}
+.dropmenu:not(.tree) li.has-children.flip-x > .dropmenu-panel {
+  left: auto;
+  right: 0;
+}
+.dropmenu:not(.tree) .dropmenu-panel .dropmenu-panel {
+  top: 0;
+  left: 100%;
+  margin-top: 0;
+  margin-left: 0.5rem;
+}
+.dropmenu:not(.tree) li.has-children.flip-x .dropmenu-panel .dropmenu-panel {
+  left: auto;
+  right: 100%;
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Mobile tree menu: nested submenus render inline, indented */
+.dropmenu.tree .dropmenu-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding-left: 1rem;
+}
+
+/* Theme toggle icon swap, driven by the data-mode attribute theme-toggle.js
+   sets on the button. Plain CSS rather than a Tailwind arbitrary variant:
+   the ported engine doesn't resolve nested-bracket attribute selectors like
+   [[data-mode=light]_&] (candidate is silently dropped, no build error). */
+button[data-theme-toggle][data-mode="light"] .icon-sun,
+button[data-theme-toggle][data-mode="dark"] .icon-moon,
+button[data-theme-toggle][data-mode="auto"] .icon-auto {
+  display: inline-block;
+}

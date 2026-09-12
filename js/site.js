@@ -1,5 +1,5 @@
 /*
- * Quark 2 — navigation, dropdowns, scroll state.
+ * Bastion — navigation, dropdowns, scroll state.
  */
 (function () {
   'use strict';

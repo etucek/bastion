@@ -1,14 +1,15 @@
 {% set logo = theme_var(mobile ? 'custom_logo_mobile' : 'custom_logo') %}
 {% set logo_first = (logo is iterable and logo|length > 0) ? logo|first : null %}
 {% set logo_file = logo_first.name|default(null) %}
-<a href="{{ home_url }}" class="navbar-brand" aria-label="{{ site.title }}" title="{{ site.title }}">
+<a href="{{ home_url }}" class="flex items-center gap-2 text-lg font-semibold" aria-label="{{ site.title }}" title="{{ site.title }}">
 {% if logo_file %}
     {% if logo_file|lower ends with '.svg' %}
-        {{ svg_image('theme://images/logo/' ~ logo_file)|raw }}
+        <span class="h-8 w-auto">{{ svg_image('theme://images/logo/' ~ logo_file)|raw }}</span>
     {% else %}
-        <img src="{{ url('theme://images/logo/' ~ logo_file) }}" alt="{{ site.title }}" />
+        <img src="{{ url('theme://images/logo/' ~ logo_file) }}" alt="{{ site.title }}" class="h-8 w-auto" />
     {% endif %}
 {% else %}
-    {% include '@images/grav-logo.svg' ignore missing %}
+    <span class="h-8 w-auto">{% include '@images/grav-logo.svg' ignore missing %}</span>
+    <span>{{ site.title }}</span>
 {% endif %}
 </a>
