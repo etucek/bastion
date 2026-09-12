@@ -1,0 +1,24 @@
+{#
+  Site-wide search overlay. Opened/closed via [data-search-toggle] buttons
+  in the header (see base.html.twig), Escape, or a backdrop click - wired up
+  in js/site.js. The actual search form comes from the simplesearch plugin
+  (partials/simplesearch_searchbox.html.twig); that plugin's own JS handles
+  submitting the query, this overlay just presents it.
+#}
+{% if config.plugins.simplesearch.enabled %}
+<div id="search-overlay"
+     class="search-overlay fixed inset-0 z-[60] hidden items-start justify-center bg-neutral-900/60 px-4 pt-24 backdrop-blur-sm sm:pt-32 [&.open]:flex">
+  <div class="w-full max-w-xl rounded-lg bg-white p-4 shadow-xl dark:bg-neutral-900">
+    <div class="mb-3 flex items-center justify-between">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+        {{ 'THEME_BASTION.SEARCH.HEADLINE'|t }}
+      </h2>
+      <button type="button" data-search-toggle="close" aria-label="{{ 'THEME_BASTION.SEARCH.CLOSE'|t|e('html_attr') }}"
+              class="-m-1 rounded-md p-1 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+    {% include 'partials/simplesearch_searchbox.html.twig' ignore missing %}
+  </div>
+</div>
+{% endif %}

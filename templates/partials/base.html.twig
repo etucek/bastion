@@ -97,6 +97,11 @@
                     {% endblock %}
                     </div>
                     <div class="flex items-center gap-3">
+                        {% if config.plugins.simplesearch.enabled %}
+                        <button type="button" data-search-toggle="open" class="flex h-8 w-8 items-center justify-center rounded-md text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white" aria-label="{{ 'THEME_BASTION.SEARCH.OPEN'|t|e('html_attr') }}">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        </button>
+                        {% endif %}
                         {% include 'partials/theme-toggle.html.twig' %}
                         {% if config.plugins.login.enabled and grav.user.username %}
                             <span class="flex items-center gap-1.5 text-sm"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' ignore missing %}</span>
@@ -136,18 +141,29 @@
     {% block mobile %}
     <div class="mobile-container">
         <div class="overlay fixed inset-0 z-50 hidden flex-col bg-white p-6 dark:bg-neutral-950 [&.open]:flex" id="overlay" role="dialog" aria-label="{{ 'THEME_BASTION.ARIA.MENU'|t|e('html_attr') }}">
-            <div class="mb-8">
+            <div class="mb-6 flex items-center justify-between border-b border-neutral-200 pb-6 dark:border-neutral-800">
                 {% include 'partials/logo.html.twig' with {mobile: true} %}
+                <button type="button" data-mobile-close class="-m-1 flex h-8 w-8 items-center justify-center rounded-md text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white" aria-label="{{ 'THEME_BASTION.ARIA.CLOSE_MENU'|t|e('html_attr') }}">
+                    <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+                </button>
             </div>
-            <nav class="overlay-menu flex-1 overflow-y-auto" aria-label="{{ 'THEME_BASTION.ARIA.MOBILE_NAV'|t|e('html_attr') }}">
+            {% if config.plugins.simplesearch.enabled %}
+            <button type="button" data-search-toggle="open" data-mobile-close class="mb-4 flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                {{ 'THEME_BASTION.SEARCH.OPEN'|t }}
+            </button>
+            {% endif %}
+            <nav class="overlay-menu flex-1 overflow-y-auto text-base" aria-label="{{ 'THEME_BASTION.ARIA.MOBILE_NAV'|t|e('html_attr') }}">
                 {% include 'partials/navigation.html.twig' with {tree: true} %}
             </nav>
-            <div class="mt-8">
+            <div class="mt-8 border-t border-neutral-200 pt-6 dark:border-neutral-800">
                 {% include 'partials/theme-toggle.html.twig' with {labeled: true} %}
             </div>
         </div>
     </div>
     {% endblock %}
+
+    {% include 'partials/search-overlay.html.twig' ignore missing %}
 
 {% block bottom %}
     {{ assets.js('bottom')|raw }}

@@ -60,6 +60,53 @@
   padding-left: 1rem;
 }
 
+/* simplesearch's searchbox partial ships no CSS of its own
+   (plugins.simplesearch.built_in_css: false) - these three classes are its
+   entire contract. */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.search-wrapper .search-input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgb(229 229 229);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  background: #ffffff;
+  color: inherit;
+}
+.dark .search-wrapper .search-input {
+  border-color: #404040;
+  background: #171717;
+}
+.search-wrapper .search-input:focus {
+  outline: 2px solid var(--focus-ring, #2563eb);
+  outline-offset: 1px;
+}
+.search-wrapper .search-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgb(229 229 229);
+  background: none;
+}
+.dark .search-wrapper .search-submit {
+  border-color: #404040;
+}
+.search-wrapper .search-submit img {
+  height: 1rem;
+  width: 1rem;
+}
+.dark .search-wrapper .search-submit img {
+  filter: invert(1);
+}
+
 /* Theme toggle icon swap, driven by the data-mode attribute theme-toggle.js
    sets on the button. Plain CSS rather than a Tailwind arbitrary variant:
    the ported engine doesn't resolve nested-bracket attribute selectors like

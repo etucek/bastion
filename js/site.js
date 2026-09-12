@@ -73,6 +73,12 @@
   // Mobile menu toggle
   var toggle = document.getElementById('toggle');
   var overlay = document.getElementById('overlay');
+  function closeMobileMenu() {
+    if (!toggle || !overlay) return;
+    toggle.classList.remove('active');
+    overlay.classList.remove('open');
+    document.body.classList.remove('overlay-open');
+  }
   if (toggle && overlay) {
     toggle.addEventListener('click', function () {
       toggle.classList.toggle('active');
@@ -80,11 +86,34 @@
       document.body.classList.toggle('overlay-open');
     });
     overlay.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        toggle.classList.remove('active');
-        overlay.classList.remove('open');
-        document.body.classList.remove('overlay-open');
+      if (e.target.tagName === 'A' || e.target.closest('[data-mobile-close]')) {
+        closeMobileMenu();
       }
+    });
+  }
+
+  // Search overlay toggle
+  var searchOverlay = document.getElementById('search-overlay');
+  if (searchOverlay) {
+    var openSearch = function () {
+      closeMobileMenu();
+      searchOverlay.classList.add('open');
+      var field = searchOverlay.querySelector('input[name="searchfield"]');
+      if (field) field.focus();
+    };
+    var closeSearch = function () {
+      searchOverlay.classList.remove('open');
+    };
+    document.querySelectorAll('[data-search-toggle="open"]').forEach(function (btn) {
+      btn.addEventListener('click', openSearch);
+    });
+    searchOverlay.addEventListener('click', function (e) {
+      if (e.target === searchOverlay || e.target.closest('[data-search-toggle="close"]')) {
+        closeSearch();
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && searchOverlay.classList.contains('open')) closeSearch();
     });
   }
 
