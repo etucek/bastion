@@ -1,0 +1,4 @@
+@import 'tailwindcss';
+
+/* Sets dark mode to use the .dark class, matching theme-toggle.js */
+@custom-variant dark (&:where(.dark, .dark *));
