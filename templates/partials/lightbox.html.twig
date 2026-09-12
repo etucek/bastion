@@ -1,18 +1,22 @@
 {#
-  A single gallery item trigger. Used by modular/gallery.html.twig, which
-  sets in scope: content (pre-rendered thumbnail <img> html), image/video
-  (media keys), title, gallery (grouping id), class (wrapper classes).
-
-  Plain link-to-full-size for now - no JS lightbox library is bundled with
-  this theme (the old bastion theme's popup relied on GLightbox vendored via
-  the bastion-gallery plugin, which this theme no longer depends on).
+  A single gallery item trigger, opened via GLightbox (vendored MIT-licensed
+  in this theme's own vendor/glightbox - see base.html.twig for load/init).
+  Used by modular/gallery.html.twig, which sets in scope: content
+  (pre-rendered thumbnail <img> html), image/video (media keys), title,
+  desc (a ".desc-<hash>" selector into a hidden .glightbox-desc block),
+  gallery (grouping id), class (wrapper classes).
 #}
 {% if video %}
+  {% set type = 'video' %}
   {% set target = page.media[video].url ?? video %}
 {% else %}
+  {% set type = 'image' %}
   {% set target = page.media[image].url ?? image %}
 {% endif %}
-<a href="{{ target }}" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg {{ class }}"
-   {% if title %}aria-label="{{ title }}"{% endif %}>
+<a href="{{ target }}" class="glightbox block overflow-hidden rounded-lg {{ class }}"
+   data-gallery="{{ gallery }}"
+   {% if title %}data-title="{{ title }}"{% endif %}
+   {% if desc %}data-description="{{ desc }}"{% endif %}
+   data-type="{{ type }}">
   {{ content|raw }}
 </a>

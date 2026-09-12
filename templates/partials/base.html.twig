@@ -70,11 +70,14 @@
         {% endif %}
     {% endif %}
     {% do assets.addCss('theme://css/custom.css', 80) %}
+    {% do assets.addCss('theme://vendor/glightbox/glightbox.min.css', 75) %}
 {% endblock %}
 
 {% block javascripts %}
     {% do assets.addJs('theme://js/theme-toggle.js', {group:'head', priority: 100}) %}
+    {% do assets.addJs('theme://vendor/glightbox/glightbox.min.js', {group: 'bottom'}) %}
     {% do assets.addJs('theme://js/site.js', {group:'bottom', priority: 100}) %}
+    {% do assets.addInlineJs("document.addEventListener('DOMContentLoaded', function() { if (window.GLightbox) { GLightbox({selector: '.glightbox', touchNavigation: true, loop: false, zoomable: true, draggable: true}); } });", {group: 'bottom'}) %}
 {% endblock %}
 
 {% block assets deferred %}
