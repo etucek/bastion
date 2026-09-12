@@ -86,9 +86,12 @@
       document.body.classList.toggle('overlay-open');
     });
     overlay.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A' || e.target.closest('[data-mobile-close]')) {
+      if (e.target === overlay || e.target.tagName === 'A' || e.target.closest('[data-mobile-close]')) {
         closeMobileMenu();
       }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeMobileMenu();
     });
   }
 

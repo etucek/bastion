@@ -7,7 +7,7 @@
 #}
 {% if config.plugins.simplesearch.enabled %}
 <div id="search-overlay"
-     class="search-overlay fixed inset-0 z-[60] hidden items-start justify-center bg-neutral-900/60 px-4 pt-24 backdrop-blur-sm sm:pt-32 [&.open]:flex">
+     class="search-overlay invisible fixed inset-0 z-[60] flex items-start justify-center bg-neutral-900/60 px-4 pt-24 opacity-0 backdrop-blur-sm transition-opacity duration-300 sm:pt-32 [&.open]:visible [&.open]:opacity-100">
   <div class="w-full max-w-xl rounded-lg bg-white p-4 shadow-xl dark:bg-neutral-900">
     <div class="mb-3 flex items-center justify-between">
       <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
