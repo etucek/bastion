@@ -11,6 +11,15 @@
    browser behavior) rather than cursor: pointer. Every button in this theme
    is acting as a clickable control, not a native form submit, so restore
    the pointer cursor globally instead of annotating each one. */
+/* Tailwind's preflight sets svg/img { height: auto }. An inline <svg> with
+   only a viewBox (no width/height attributes) has no intrinsic size for
+   "auto" to resolve against, so it silently renders at 0x0 - it was in the
+   DOM the whole time, just invisible. Force it to fill its sized wrapper. */
+.logo-svg svg {
+  height: 100%;
+  width: auto;
+}
+
 button {
   cursor: pointer;
 }
@@ -28,10 +37,11 @@ button {
 /* simplesearch's searchbox partial ships no CSS of its own
    (plugins.simplesearch.built_in_css: false) - these three classes are its
    entire contract. */
-.search-wrapper {
+.search-wrapper form {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
 }
 .search-wrapper .search-input {
   flex: 1;
@@ -53,6 +63,7 @@ button {
 }
 .search-wrapper .search-submit {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   height: 2.25rem;
