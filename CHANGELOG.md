@@ -1,3 +1,13 @@
+# v0.1.6
+## 09/13/2026
+
+1. [](#bugfix)
+   * The nav panel had no backdrop-click-to-close - only the toggle button and
+     nav links closed it, so clicking outside the card (the natural way to
+     dismiss a modal) did nothing and the menu felt stuck open. Matched
+     bastion-old's actual close behavior (toggle, link, backdrop, Escape) and
+     its fade transition (invisible/opacity) instead of instant hidden/flex.
+
 # v0.1.5
 ## 09/13/2026
 
