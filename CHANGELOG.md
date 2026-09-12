@@ -1,3 +1,13 @@
+# v0.1.12
+## 09/13/2026
+
+1. [](#new)
+   * Restored a proper lightbox for gallery photos - vendored GLightbox
+     (MIT, unrelated to Typhoon) directly into this theme rather than
+     depending on the bastion-gallery plugin. Clicking a photo now opens
+     a real overlay with left/right navigation and a close button instead
+     of just opening the raw image file in a new tab.
+
 # v0.1.11
 ## 09/13/2026
 
