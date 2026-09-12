@@ -1,3 +1,15 @@
+# v0.1.8
+## 09/13/2026
+
+1. [](#bugfix)
+   * Ported the menu panel's exact behavior from bastion-old: it's an
+     accordion (children start collapsed behind a +/- toggle) on an always-
+     dark card, not the always-expanded, adaptive-light/dark tree this build
+     had. The header toggle button now morphs bars/xmark and its label swaps
+     "Menu"/"Close", matching bastion-old instead of animating in place.
+     Scroll lock now uses the real `overflow-hidden` utility instead of an
+     unstyled leftover class.
+
 # v0.1.7
 ## 09/13/2026
 
