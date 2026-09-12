@@ -1,3 +1,12 @@
+# v0.1.3
+## 09/12/2026
+
+1. [](#bugfix)
+   * The home page (and any modular page) defaulted to an unstyled on-page anchor
+     menu instead of the site's real navigation, replacing it entirely - broke both
+     the visible menu and the header's layout. Now opt-in per page via
+     `onpage_menu: true`; defaults to the normal site nav like every other page.
+
 # v0.1.2
 ## 09/12/2026
 
