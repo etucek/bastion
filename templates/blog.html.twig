@@ -14,34 +14,34 @@
 {% endblock %}
 
 {% block body %}
-    <section id="body-wrapper" class="section blog-listing">
-        <div class="container">
+    <section id="body-wrapper" class="py-10">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled %}
                 {% include 'partials/breadcrumbs.html.twig' %}
             {% endif %}
 
             {% if not blog_image and page.title %}
-                <header class="blog-page-header">
-                    <h1>{{ page.title }}</h1>
+                <header class="blog-page-header mb-8">
+                    <h1 class="text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
                     {% if page.header.subtitle %}
-                        <p class="lead">{{ page.header.subtitle }}</p>
+                        <p class="lead mt-2 text-lg text-neutral-500 dark:text-neutral-400">{{ page.header.subtitle }}</p>
                     {% endif %}
                     {% if page.content|striptags|trim is not empty %}
-                        <div class="blog-page-intro">{{ page.content|raw }}</div>
+                        <div class="blog-page-intro prose mt-4 max-w-none text-neutral-600 dark:text-neutral-300">{{ page.content|raw }}</div>
                     {% endif %}
                 </header>
             {% endif %}
 
             {% embed 'partials/layout.html.twig' with {blog: page, show_sidebar: show_sidebar} %}
                 {% block item %}
-                    <div class="blog-grid">
+                    <div class="blog-grid grid grid-cols-1 gap-6 sm:grid-cols-2">
                     {% for child in collection %}
                         {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
                     {% endfor %}
                     </div>
 
                     {% if show_pagination and config.plugins.pagination.enabled and collection.params.pagination %}
-                        <div id="listing-footer">
+                        <div id="listing-footer" class="mt-8">
                             {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
                         </div>
                     {% endif %}

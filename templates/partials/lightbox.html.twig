@@ -1,0 +1,18 @@
+{#
+  A single gallery item trigger. Used by modular/gallery.html.twig, which
+  sets in scope: content (pre-rendered thumbnail <img> html), image/video
+  (media keys), title, gallery (grouping id), class (wrapper classes).
+
+  Plain link-to-full-size for now - no JS lightbox library is bundled with
+  this theme (the old bastion theme's popup relied on GLightbox vendored via
+  the bastion-gallery plugin, which this theme no longer depends on).
+#}
+{% if video %}
+  {% set target = page.media[video].url ?? video %}
+{% else %}
+  {% set target = page.media[image].url ?? image %}
+{% endif %}
+<a href="{{ target }}" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg {{ class }}"
+   {% if title %}aria-label="{{ title }}"{% endif %}>
+  {{ content|raw }}
+</a>

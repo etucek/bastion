@@ -1,10 +1,10 @@
 {% set show_sidebar = show_sidebar is defined ? show_sidebar : true %}
-<div class="columns{% if show_sidebar %} has-sidebar{% endif %}">
-    <div id="item" class="column extra-spacing">
+<div class="flex flex-col gap-10 {{ show_sidebar ? 'lg:flex-row' : '' }}">
+    <div id="item" class="min-w-0 flex-1">
         {% block item %}{% endblock %}
     </div>
     {% if show_sidebar %}
-    <aside id="sidebar" class="column">
+    <aside id="sidebar" class="w-full lg:w-72 lg:shrink-0">
         {% block sidebar %}{% endblock %}
     </aside>
     {% endif %}

@@ -1,7 +1,8 @@
 {% extends 'partials/base.html.twig' %}
 
 {% block content %}
-    <article class="content-item">
+    <article class="content-item prose mx-auto max-w-3xl text-neutral-700 dark:text-neutral-300">
+        <h1 class="mb-2 text-3xl font-bold text-neutral-900 sm:text-4xl dark:text-white">{{ page.title }}</h1>
         {{ page.content|raw }}
     </article>
 {% endblock %}

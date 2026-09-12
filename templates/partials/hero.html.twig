@@ -1,11 +1,22 @@
-{% set id = id|default('hero') %}
-{% set content = content|default(page.content) %}
-<section id="{{ id }}"
-         class="section modular-hero hero {{ page.header.hero_classes }} {{ page.header.background.parallax ? 'parallax' : '' }}"
-         {% if hero_image %}style="background-image: url('{{ hero_image.url }}');"{% endif %}>
-    {% if hero_image %}<div class="image-overlay"></div>{% endif %}
-    <div class="container" style="text-align: {{ page.header.hero_align|default('center') }}">
-        {{ content|raw }}
+{#
+  Renders a page/section hero banner from the page's own `hero:` frontmatter
+  block: display, alignment, padding, overlay (dark|light), title.text,
+  subtitle, image, content.
+#}
+{% set hero = page.header.hero %}
+{% if hero.display %}
+{% set hero_image = hero.image ? page.media[hero.image] : null %}
+{% set overlay_class = hero.overlay == 'dark' ? 'bg-black/50' : (hero.overlay == 'light' ? 'bg-white/60' : '') %}
+{% set text_class = (hero_image and hero.overlay == 'dark') ? 'text-white' : '' %}
+<section class="relative overflow-hidden {{ hero.padding|default('py-24 md:py-32') }} {{ hero.alignment == 'left' ? 'text-left' : 'text-center' }}"
+         {% if hero_image %}style="background-image:url('{{ hero_image.url }}');background-size:cover;background-position:center;"{% endif %}>
+    {% if hero_image and overlay_class %}
+    <div class="absolute inset-0 {{ overlay_class }}"></div>
+    {% endif %}
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 {{ text_class }}">
+        {% if hero.subtitle %}<p class="mb-2 text-sm font-semibold uppercase tracking-wide opacity-80">{{ hero.subtitle }}</p>{% endif %}
+        {% if hero.title.text %}<h1 class="text-3xl font-bold sm:text-4xl lg:text-5xl">{{ hero.title.text }}</h1>{% endif %}
+        {% if hero.content %}<div class="mt-4 text-lg opacity-90">{{ hero.content }}</div>{% endif %}
     </div>
-    <i id="to-start" class="pulse fa-solid fa-angle-down" aria-hidden="true"></i>
 </section>
+{% endif %}

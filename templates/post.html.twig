@@ -1,0 +1,47 @@
+{% extends 'partials/base.html.twig' %}
+
+{% set hero_image = page.header.hero.image ? page.media[page.header.hero.image] : page.media.images|first %}
+
+{% block hero %}
+    {% if hero_image %}
+    <section class="relative h-64 overflow-hidden sm:h-80 md:h-96" style="background-image:url('{{ hero_image.url }}');background-size:cover;background-position:center;">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative flex h-full items-end">
+            <div class="mx-auto w-full max-w-3xl px-4 pb-8 text-white sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<section class="py-10">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        {% if not hero_image %}
+        <h1 class="mb-2 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
+        {% endif %}
+        <div class="mb-8 flex flex-wrap items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400">
+            {% if page.header.author %}<span>{{ page.header.author }}</span>{% endif %}
+            {% if page.date %}<span>&middot; {{ page.date|date('F j, Y') }}</span>{% endif %}
+        </div>
+
+        <div class="prose max-w-none text-neutral-700 dark:text-neutral-300">
+            {{ page.content|raw }}
+        </div>
+
+        {% if page.header.comments and config.plugins['comments-pro'].enabled %}
+            {% include 'partials/comments-section.html.twig' ignore missing %}
+        {% endif %}
+
+        <nav class="mt-10 flex justify-between border-t border-neutral-200 pt-6 text-sm dark:border-neutral-800" aria-label="{{ 'THEME_BASTION.ARIA.POST_NAVIGATION'|t|e('html_attr') }}">
+            {% if page.prevSibling %}
+                <a class="hover:underline" href="{{ page.prevSibling.url }}"><i class="fa-solid fa-angle-left" aria-hidden="true"></i> {{ 'THEME_BASTION.BLOG.ITEM.PREV_POST'|t }}</a>
+            {% else %}<span></span>{% endif %}
+            {% if page.nextSibling %}
+                <a class="hover:underline" href="{{ page.nextSibling.url }}">{{ 'THEME_BASTION.BLOG.ITEM.NEXT_POST'|t }} <i class="fa-solid fa-angle-right" aria-hidden="true"></i></a>
+            {% else %}<span></span>{% endif %}
+        </nav>
+    </div>
+</section>
+{% endblock %}

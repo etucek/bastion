@@ -1,23 +1,30 @@
-<section class="section modular-features" data-layout="{{ page.header.class|default('small') }}">
-    <div class="container">
-        <div class="frame-box">
-            {{ content|raw }}
+{% include 'partials/hero.html.twig' %}
 
-            <div class="columns">
-            {% for feature in page.header.features %}
-                <div class="column">
-                    {% if feature.url %}<a href="{{ feature.url }}" style="text-decoration:none;color:inherit;display:block;">{% endif %}
-                    <div class="feature-icon">
-                        {% if feature.icon %}<i class="{{ feature.icon|fa_icon }}" aria-hidden="true"></i>{% endif %}
-                        {% if feature.header %}<h6>{{ feature.header }}</h6>{% endif %}
-                    </div>
-                    <div class="feature-content">
-                        {% if feature.text %}<p>{{ feature.text }}</p>{% endif %}
-                    </div>
-                    {% if feature.url %}</a>{% endif %}
-                </div>
-            {% endfor %}
-            </div>
+<section class="{{ page.header.section_classes|default('py-16 md:py-24') }}">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {% if page.title %}<h2 class="mb-6 text-2xl font-bold sm:text-3xl">{{ page.title }}</h2>{% endif %}
+        {% if content %}
+        <div class="prose max-w-none text-neutral-600 dark:text-neutral-300">
+            {{ content|raw }}
         </div>
+        {% endif %}
+
+        {% if page.header.features %}
+        <div class="mt-8 grid grid-cols-1 gap-8 {{ page.header.variation == 'horizontal' ? 'sm:grid-cols-2 lg:grid-cols-4' : '' }}">
+            {% for feature in page.header.features %}
+                {% set link = feature.link|default(feature.url) %}
+                {% set label = feature.title|default(feature.header) %}
+                <a href="{{ link }}" class="group flex flex-col items-center gap-3 text-center {{ link ? '' : 'pointer-events-none' }}">
+                    {% if feature.icon %}
+                    <span class="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100 text-xl text-neutral-700 group-hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-200 dark:group-hover:bg-neutral-700">
+                        <i class="{{ feature.icon|fa_icon }}" aria-hidden="true"></i>
+                    </span>
+                    {% endif %}
+                    {% if label %}<span class="font-semibold">{{ label }}</span>{% endif %}
+                    {% if feature.text %}<p class="text-sm text-neutral-500 dark:text-neutral-400">{{ feature.text }}</p>{% endif %}
+                </a>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 </section>

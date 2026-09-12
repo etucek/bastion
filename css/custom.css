@@ -69,3 +69,68 @@ button[data-theme-toggle][data-mode="dark"] .icon-moon,
 button[data-theme-toggle][data-mode="auto"] .icon-auto {
   display: inline-block;
 }
+
+/* Minimal prose styling for rendered Markdown content (page.content). A
+   hand-rolled stand-in for @tailwindcss/typography: that plugin is a JS
+   PostCSS plugin and support in the ported PHP engine is unverified, so
+   this avoids depending on it for body text to be readable at all. */
+.prose {
+  line-height: 1.75;
+}
+.prose > * + * {
+  margin-top: 1.25em;
+}
+.prose > *:first-child {
+  margin-top: 0;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+}
+.prose h1 { font-size: 1.875em; }
+.prose h2 { font-size: 1.5em; }
+.prose h3 { font-size: 1.25em; }
+.prose ul, .prose ol {
+  padding-left: 1.5em;
+}
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose a {
+  color: var(--link, #2563eb);
+  text-decoration: underline;
+}
+.prose blockquote {
+  border-left: 3px solid rgb(229 229 229);
+  padding-left: 1em;
+  font-style: italic;
+  color: rgb(115 115 115);
+}
+.dark .prose blockquote {
+  border-color: #404040;
+  color: rgb(163 163 163);
+}
+.prose img {
+  border-radius: 0.5rem;
+}
+.prose code {
+  background: rgb(245 245 245);
+  border-radius: 0.25rem;
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+}
+.dark .prose code {
+  background: #262626;
+}
+.prose pre {
+  background: rgb(23 23 23);
+  color: rgb(245 245 245);
+  border-radius: 0.5rem;
+  padding: 1em;
+  overflow-x: auto;
+}
+.prose pre code {
+  background: none;
+  padding: 0;
+}
