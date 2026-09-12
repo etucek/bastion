@@ -1,3 +1,16 @@
+# v0.1.4
+## 09/13/2026
+
+1. [](#new)
+   * Added a search overlay - a centered, backdrop-blurred modal around the
+     simplesearch plugin's searchbox, triggered from the desktop header and
+     mobile menu, styled since that plugin ships no CSS of its own.
+
+2. [](#bugfix)
+   * The mobile menu had no way to close itself except tapping a nav link -
+     the open overlay sits above the header and covers the hamburger button
+     that would otherwise toggle it. Added an explicit close button.
+
 # v0.1.3
 ## 09/12/2026
 
