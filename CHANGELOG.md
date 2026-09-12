@@ -1,3 +1,12 @@
+# v0.1.11
+## 09/13/2026
+
+1. [](#bugfix)
+   * The logo fallback was Quark 2's own leftover scaffold asset - Grav's
+     product wordmark - plus a separate site-title span, rendering together
+     as "[Grav wordmark] Tucek". Replaced with bastion-old's actual fallback:
+     a single custom mark (images/bastion-mark.svg), shown alone.
+
 # v0.1.10
 ## 09/13/2026
 
