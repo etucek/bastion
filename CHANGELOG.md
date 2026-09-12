@@ -1,3 +1,15 @@
+# v0.1.10
+## 09/13/2026
+
+1. [](#bugfix)
+   * Footer logo was invisible: nested `<a>` tags (invalid HTML) from
+     wrapping an already-self-linking logo partial in a second link, plus
+     the inline SVG itself collapsing to 0x0 under Tailwind's `height: auto`
+     preflight rule with no width/height attributes to resolve it against.
+   * The search form's input and button rendered stacked instead of inline -
+     `display: flex` was on the wrong element (`.search-wrapper`, one level
+     above the actual `<form>` containing the fields).
+
 # v0.1.9
 ## 09/13/2026
 
