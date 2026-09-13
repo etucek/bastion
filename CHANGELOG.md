@@ -1,3 +1,11 @@
+# v1.0.8
+## 09/13/2026
+
+1. [](#bugfix)
+   * recipe.html.twig never checked the Enable Comments toggle at all -
+     turning it on for a recipe page did nothing. Added the same
+     check/include post.html.twig already uses.
+
 # v1.0.7
 ## 09/13/2026
 
