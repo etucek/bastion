@@ -1,3 +1,14 @@
+# v0.1.15
+## 09/13/2026
+
+1. [](#bugfix)
+   * `blog.html.twig` still had Quark 2's two-column sidebar layout, despite
+     bastion-old dropping the sidebar site-wide (its own CHANGELOG v3.2.2).
+     Removed it in favor of a plain full-bleed 4-column card grid, redesigned
+     the post card to match bastion-old's actual styling, and switched
+     post.html.twig's prev/next nav to centered bordered pills. Deleted the
+     now-fully-dead item.html.twig/layout.html.twig/sidebar.html.twig.
+
 # v0.1.14
 ## 09/13/2026
 
