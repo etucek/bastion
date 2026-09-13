@@ -7,6 +7,18 @@ form:
       fields:
         advanced:
           fields:
+            # Same restriction as onAdminPageTypes (bastion.php) applied to
+            # the "Page Template" field here too - that event only filters
+            # the picker shown when *creating* a page; this dropdown is how
+            # an *existing* page's template gets changed, a separate
+            # data-options@ call that bypasses the event entirely.
+            columns:
+              fields:
+                column1:
+                  fields:
+                    name:
+                      data-options@: '\Grav\Theme\Bastion::pageTypes'
+
             section_layout:
               type: section
               title: THEME_BASTION.BLUEPRINTS.LAYOUT_CLASSES

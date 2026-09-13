@@ -1,7 +1,9 @@
 <?php
 namespace Grav\Theme;
 
+use Grav\Common\Data\Blueprint;
 use Grav\Common\Grav;
+use Grav\Common\Page\Pages;
 use Grav\Common\Theme;
 use Grav\Common\Twig\Twig;
 use RocketTheme\Toolbox\Event\Event;
@@ -48,11 +50,23 @@ class Bastion extends Theme
     public static function getSubscribedEvents(): array
     {
         return [
-            'onThemeInitialized' => ['onThemeInitialized', 0],
-            'onTwigLoader'       => ['onTwigLoader', 0],
-            'onTwigInitialized'  => ['onTwigInitialized', 0],
-            'onAdminPageTypes'   => ['onAdminPageTypes', 0],
+            'onPluginsInitialized' => ['onPluginsInitialized', 0],
+            'onThemeInitialized'   => ['onThemeInitialized', 0],
+            'onTwigLoader'         => ['onTwigLoader', 0],
+            'onTwigInitialized'    => ['onTwigInitialized', 0],
+            'onAdminPageTypes'     => ['onAdminPageTypes', 0],
         ];
+    }
+
+    /**
+     * Allow-list pageTypes() as a `data-options@` provider - see
+     * blueprints/default.yaml, where the Advanced tab's "Page Template"
+     * field is pointed at it instead of core's own
+     * \Grav\Common\Page\Pages::pageTypes.
+     */
+    public function onPluginsInitialized(): void
+    {
+        Blueprint::addAllowedDynamicCallable(self::class . '::pageTypes');
     }
 
     /**
@@ -68,13 +82,40 @@ class Bastion extends Theme
      */
     public function onAdminPageTypes(Event $event): void
     {
-        $user = $this->grav['user'] ?? null;
+        $types = $event['types'] ?? [];
+        $event['types'] = self::filterPageTypes(is_array($types) ? $types : []);
+    }
+
+    /**
+     * `data-options@` provider for the Advanced tab's "Page Template" field
+     * (see blueprints/default.yaml) - the picker shown when *creating* a
+     * page goes through the onAdminPageTypes event (filtered above), but
+     * the dropdown for changing an *existing* page's template is a plain
+     * blueprint `data-options@` call straight to
+     * \Grav\Common\Page\Pages::pageTypes, which never fires that event and
+     * so was never filtered - a recipe editor could still retype an
+     * existing page as `vlan` from this one spot. Same restriction list,
+     * same super-admin bypass, applied here too.
+     *
+     * @return array<string, string>
+     */
+    public static function pageTypes(?string $type = null): array
+    {
+        return self::filterPageTypes(Pages::pageTypes($type));
+    }
+
+    /**
+     * @param array<string, string> $types
+     * @return array<string, string>
+     */
+    private static function filterPageTypes(array $types): array
+    {
+        $user = Grav::instance()['user'] ?? null;
         if (!$user || $user->authorize('admin.super') === true) {
-            return;
+            return $types;
         }
 
         $userGroups = (array) $user->get('groups');
-        $types = $event['types'] ?? [];
 
         foreach (self::RESTRICTED_PAGE_TYPES as $type => $group) {
             if (!isset($types[$type])) {
@@ -86,7 +127,7 @@ class Bastion extends Theme
             unset($types[$type]);
         }
 
-        $event['types'] = $types;
+        return $types;
     }
 
     public function onThemeInitialized(): void
