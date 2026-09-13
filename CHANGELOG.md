@@ -1,3 +1,12 @@
+# v1.0.6
+## 09/13/2026
+
+1. [](#improvement)
+   * bastion.php: $user's docblock now names AuthorizeInterface directly
+     as an intersection type - phpactor's worse-reflection doesn't walk
+     UserInterface's own "extends AuthorizeInterface" to find
+     authorize(), so the warning persisted through v1.0.4/v1.0.5's fixes.
+
 # v1.0.5
 ## 09/13/2026
 
