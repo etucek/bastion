@@ -3,10 +3,16 @@
   display, alignment, padding, overlay (dark/light/none), overlay_direction,
   overlay_gradient (two opacity stops), title.text, subtitle, image, content.
 
-  A caller may pass its own `hero_image` and/or `content` in via `with
-  {...}` (blog.html.twig does, falling back to the blog listing's first
-  post image when no hero.image is set) - honored here only if actually
-  passed, so plain page-header-driven callers behave exactly as before.
+  A caller may pass its own `hero_image` and/or `hero_content_override` in
+  via `with {...}` (blog.html.twig does, falling back to the blog
+  listing's first post image when no hero.image is set) - honored here
+  only if actually passed, so plain page-header-driven callers behave
+  exactly as before. Note this is NOT named `content`: Grav's own Twig
+  processing injects a global `content` variable (== page.content) into
+  every template's context, so `content is defined` was always true here
+  regardless of whether a caller passed anything - every hero on every
+  page was silently rendering the page's entire body instead of the
+  short hero.content header field.
   `id` is passed straight through as the section's DOM id, if given.
 
   bastion-old computes the overlay color via a custom color_object Twig
@@ -22,8 +28,8 @@
 {# page.content arrives pre-rendered HTML; hero.content is raw markdown text
    from the page header and needs the |markdown filter below - keep track of
    which one this is so it isn't double-processed either way. #}
-{% set hero_content_is_html = content is defined %}
-{% set hero_content = hero_content_is_html ? content : hero.content %}
+{% set hero_content_is_html = hero_content_override is defined %}
+{% set hero_content = hero_content_is_html ? hero_content_override : hero.content %}
 {% set overlay = hero.overlay|default('dark') %}
 {% set overlay_rgb = overlay == 'light' ? '255,255,255' : '0,0,0' %}
 {% set light_text = hero_image and overlay != 'light' %}

@@ -7,7 +7,7 @@
 
 {% block hero %}
     {% if recipes_image %}
-        {% include 'partials/hero.html.twig' with {id: 'recipes-hero', content: page.content, hero_image: recipes_image, force_display: true} %}
+        {% include 'partials/hero.html.twig' with {id: 'recipes-hero', hero_content_override: page.content, hero_image: recipes_image, force_display: true} %}
     {% endif %}
 {% endblock %}
 

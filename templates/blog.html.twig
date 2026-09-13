@@ -7,7 +7,7 @@
 
 {% block hero %}
     {% if blog_image %}
-        {% include 'partials/hero.html.twig' with {id: 'blog-hero', content: page.content, hero_image: blog_image, force_display: true} %}
+        {% include 'partials/hero.html.twig' with {id: 'blog-hero', hero_content_override: page.content, hero_image: blog_image, force_display: true} %}
     {% endif %}
 {% endblock %}
 

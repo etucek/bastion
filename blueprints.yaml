@@ -2,7 +2,7 @@ name: Bastion
 slug: bastion
 type: theme
 version: 0.1.31
-description: A Tailwind CSS 4 Grav theme, built independently from Quark 2 (no Typhoon/Grav Premium code), compiled with the tailwind4 plugin - no Node.js toolchain required.
+description: A Tailwind CSS 4 Grav theme, built independently from Quark 2, compiled with the tailwind4 plugin - no Node.js toolchain required.
 icon: bolt
 author:
   name: Emir Tucek
@@ -267,4 +267,3 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-
