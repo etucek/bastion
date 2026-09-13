@@ -1,3 +1,17 @@
+# v0.1.14
+## 09/13/2026
+
+1. [](#bugfix)
+   * `default.html.twig` never rendered a hero at all - pages like `/tech`
+     with a configured hero image/content were silently showing nothing.
+   * `partials/hero.html.twig` used a flat overlay instead of the
+     direction+two-stop gradient every page's `overlay_gradient`/
+     `overlay_direction` fields configure.
+   * The home page's English "Welcome" section never rendered its title/
+     subtitle/content at all - its hero.display flag is only set on the
+     Swedish translation, and the dedicated hero template shouldn't gate
+     on that flag in the first place (it's for other templates opting in).
+
 # v0.1.13
 ## 09/13/2026
 
