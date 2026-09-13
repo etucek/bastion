@@ -12,7 +12,7 @@ form:
 
         blog:
           type: tab
-          title: THEME_BASTION.BLUEPRINTS.POST
+          title: THEME_BASTION.BLUEPRINTS.BLOG_CONFIGURATION
           ordering@: 2
 
           fields:

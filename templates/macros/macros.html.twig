@@ -16,7 +16,7 @@
      .visible alone doesn't know that, it only looks at that prefix. #}
   {% for p in page.children.visible if p.template not in ['post', 'recipe'] %}
     {% set active_page = (p.active or p.activeChild) ? 'text-white' : classes.li %}
-    {% set has_children = p.children.visible.count > 0 %}
+    {% set has_children = p.children.visible|filter(c => c.template not in ['post', 'recipe'])|length > 0 %}
     <li data-menu-item data-expanded="{{ p.activeChild ? 'true' : 'false' }}" class="{{ active_page }}">
       <div class="flex w-full items-center">
         <a class="{{ classes.a }}" href="{{ p.url }}">
