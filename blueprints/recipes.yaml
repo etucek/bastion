@@ -27,7 +27,15 @@ form:
                   type: textarea
                   yaml: true
                   label: THEME_BASTION.BLUEPRINTS.BLOG_ITEMS
-                  default: '@self.children'
+                  # A bare '@self.children' scalar round-trips through this
+                  # yaml:true field as an unquoted document root - '@' is a
+                  # reserved YAML indicator that can't start one, so Admin's
+                  # own dump of its own default broke saving with "end of
+                  # the stream or a document separator is expected (1:1)".
+                  # The list form (self@ prefix, not @self) sidesteps it:
+                  # the list marker starts the document, not the scalar.
+                  default:
+                    - self@.children
                   validate:
                     required: true
                     type: yaml
