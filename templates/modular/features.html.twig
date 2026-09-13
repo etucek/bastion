@@ -10,19 +10,36 @@
         {% endif %}
 
         {% if page.header.features %}
-        <div class="mt-8 grid grid-cols-1 gap-8 {{ page.header.variation == 'horizontal' ? 'sm:grid-cols-2 lg:grid-cols-4' : '' }}">
+        {% set vertical_classes = page.header.vertical_classes|default('grid-cols-2 sm:grid-cols-3 lg:grid-cols-4') %}
+        {% set horizontal_classes = page.header.horizontal_classes|default('md:grid-cols-2 xl:grid-cols-3') %}
+        {% set columns = page.header.variation == 'vertical' ? vertical_classes : horizontal_classes %}
+        <div class="mt-8 grid {{ columns }} gap-x-8 gap-y-8">
             {% for feature in page.header.features %}
                 {% set link = feature.link|default(feature.url) %}
                 {% set label = feature.title|default(feature.header) %}
-                <a href="{{ link }}" class="group flex flex-col items-center gap-3 text-center {{ link ? '' : 'pointer-events-none' }}">
-                    {% if feature.icon %}
-                    <span class="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-xl text-gray-700 group-hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:group-hover:bg-gray-700">
-                        <i class="{{ feature.icon|fa_icon }}" aria-hidden="true"></i>
-                    </span>
-                    {% endif %}
-                    {% if label %}<span class="font-semibold">{{ label }}</span>{% endif %}
-                    {% if feature.text %}<p class="text-sm text-gray-500 dark:text-gray-400">{{ feature.text }}</p>{% endif %}
-                </a>
+                {% if page.header.variation == 'vertical' %}
+                    <div class="group flex flex-col rounded-md transition duration-300 hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <a class="flex flex-col items-center p-3 text-center {{ link ? '' : 'pointer-events-none' }}" href="{{ link }}">
+                            {% if feature.icon %}<i class="{{ feature.icon|fa_icon }} mb-2 text-4xl text-gray-500 group-hover:text-[var(--accent)]" aria-hidden="true"></i>{% endif %}
+                            {% if label %}<h3 class="mb-1 text-base font-semibold group-hover:text-[var(--accent)] md:text-lg">{{ label }}</h3>{% endif %}
+                            {% if feature.text %}<p class="prose text-sm text-gray-500 dark:text-gray-400">{{ feature.text }}</p>{% endif %}
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="flex duration-300 hover:scale-105">
+                        <div class="shrink-0">
+                            <div class="rounded-md p-3 text-gray-100" style="background-color: var(--accent)">
+                                {% if feature.icon %}<i class="{{ feature.icon|fa_icon }} text-2xl" aria-hidden="true"></i>{% endif %}
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <a class="hover:text-[var(--accent)] {{ link ? '' : 'pointer-events-none' }}" href="{{ link }}">
+                                {% if label %}<h3 class="mb-2 text-lg font-bold">{{ label }}</h3>{% endif %}
+                            </a>
+                            {% if feature.text %}<p class="prose text-sm text-gray-500 dark:text-gray-400">{{ feature.text }}</p>{% endif %}
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
         {% endif %}
