@@ -1,3 +1,20 @@
+# v0.1.17
+## 09/13/2026
+
+1. [](#bugfix)
+   * Found while chasing "comments don't match the site": the accent color
+     has actually been rendering as generic blue (#2563eb) instead of the
+     configured purple (#8428DF) on every page this whole build. Two
+     competing `:root` blocks defined the same custom properties, and the
+     external stylesheet's fallback always loaded after (and so beat) the
+     real per-page inline value. Now there's exactly one definition.
+   * comments-pro ships its own accent_color setting that injects a late
+     inline style overriding the comment UI's colors regardless of theme
+     CSS - disabled it and remapped the plugin's color tokens onto this
+     theme's own instead.
+   * Form/search inputs, prose blockquotes/code blocks now use the theme's
+     actual color tokens instead of independent hardcoded hex values.
+
 # v0.1.16
 ## 09/13/2026
 
