@@ -1,3 +1,10 @@
+# v1.0.4
+## 09/13/2026
+
+1. [](#improvement)
+   * bastion.php: added a @var UserInterface docblock in
+     filterPageTypes() so authorize()/get() resolve in an IDE.
+
 # v1.0.3
 ## 09/13/2026
 
