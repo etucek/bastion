@@ -1,3 +1,12 @@
+# v0.1.25
+## 09/13/2026
+
+1. [](#bugfix)
+   * Custom favicon `<link>` had an empty `type=""` attribute -
+     `get_mime_type()` is a bastion-old-only function, undefined here, and
+     Grav's undefined-function handling resolves silently to null rather
+     than erroring. Used the file field's own upload metadata instead.
+
 # v0.1.24
 ## 09/13/2026
 
