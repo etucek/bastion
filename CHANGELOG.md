@@ -1,3 +1,14 @@
+# v0.1.13
+## 09/13/2026
+
+1. [](#bugfix)
+   * `modular/features.html.twig`'s vertical/horizontal variation logic was
+     backwards - both variations grid multi-column in bastion-old, the
+     variation only picks each item's internal layout (icon-over-text vs.
+     icon-beside-text). "What's on this website" (variation: vertical)
+     was collapsing to one narrow centered column instead of a proper
+     multi-column grid.
+
 # v0.1.12
 ## 09/13/2026
 
