@@ -3,14 +3,13 @@
 /* Sets dark mode to use the .dark class, matching theme-toggle.js */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Fallback accent, in case the admin-configured accent-color is ever blank -
-   base.html.twig overrides these when theme.accent-color is a valid hex. */
-:root {
-  --accent: #2563eb;
-  --accent-contrast: #ffffff;
-  --link: #2563eb;
-  --focus-ring: color-mix(in oklab, #2563eb 45%, transparent);
-}
+/* --accent/--link/--focus-ring/--accent-darker are defined exactly once, in
+   base.html.twig's inline <style> (always emitted, with its own built-in
+   fallback) - not here. An external stylesheet redefining the same :root
+   custom properties loads after that inline block on every page and would
+   silently win the cascade (equal specificity, later source position),
+   overriding the real configured accent - which is exactly what a
+   duplicate fallback block here used to do. */
 
 /* GitHub-flavored grays, replacing Tailwind's stock (bluer, higher-chroma)
    gray scale - carried over from bastion-old's own @theme override, which
