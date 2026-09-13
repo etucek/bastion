@@ -1,3 +1,12 @@
+# v1.0.5
+## 09/13/2026
+
+1. [](#improvement)
+   * bastion.php: split filterPageTypes()'s null-guard into its own
+     early return - some IDEs don't narrow $user across a single
+     ||-chained condition, so the authorize() warning persisted even
+     with the @var docblock from v1.0.4.
+
 # v1.0.4
 ## 09/13/2026
 
