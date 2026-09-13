@@ -7,6 +7,16 @@
  * than as Tailwind utility soup (dropdown popovers, mobile overlay).
  */
 
+/* Cal Sans is loaded and preloaded (see fonts.css / base.html.twig) but was
+   never actually applied anywhere - the browser warns on every page load
+   that the preloaded font goes unused. Wire it in as the heading font
+   (custom.css rather than site.css's @theme: the tailwind4 engine strips
+   unused custom theme properties, and nothing generates a `font-display`
+   utility class, so it never survived into the compiled output). */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cal Sans', var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+}
+
 /* partials/breadcrumbs.html.twig - a plain <ol class="breadcrumbs"> of
    <li> crumbs built from Grav's own breadcrumbs.get(), not the breadcrumbs
    plugin's markup, so it needs its own styling rather than reusing
