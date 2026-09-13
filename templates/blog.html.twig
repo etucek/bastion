@@ -1,5 +1,5 @@
 {% extends 'partials/base.html.twig' %}
-{% set blog_image = page.media.images[page.header.hero_image] ?: page.media.images|first %}
+{% set blog_image = page.header.hero.image ? page.media[page.header.hero.image] : page.media.images|first %}
 {% set collection = page.collection() %}
 {% set show_breadcrumbs = header_var('show_breadcrumbs', [page])|defined(true) %}
 {% set show_pagination = header_var('show_pagination', [page])|defined(true) %}
@@ -7,7 +7,7 @@
 
 {% block hero %}
     {% if blog_image %}
-        {% include 'partials/hero.html.twig' with {id: 'blog-hero', content: page.content, hero_image: blog_image} %}
+        {% include 'partials/hero.html.twig' with {id: 'blog-hero', content: page.content, hero_image: blog_image, force_display: true} %}
     {% endif %}
 {% endblock %}
 

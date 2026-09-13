@@ -11,3 +11,15 @@ form:
         0: PLUGIN_ADMIN.NO
       validate:
         type: bool
+
+    header.show_pagination:
+      type: toggle
+      toggleable: true
+      label: THEME_BASTION.BLUEPRINTS.BLOG_SHOW_PAGINATION
+      highlight: 1
+      size: medium
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool

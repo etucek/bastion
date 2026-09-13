@@ -139,7 +139,7 @@
 
         <main id="start" class="flex-1">
         {% block body %}
-            <section id="body-wrapper" class="py-10">
+            <section id="body-wrapper" class="{{ page.header.section_classes|default('py-10') }}">
                 <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                     {% block messages %}
                         {% include 'partials/messages.html.twig' ignore missing %}

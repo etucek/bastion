@@ -132,8 +132,6 @@ en:
     ADMIN:
       BODY_CLASSES: "Body Classes"
       BODY_CLASSES_HELP: "Provide default tailwind classes for the HTML body tag"
-      WRAPPER_CLASSES: "Wrapper Classes"
-      WRAPPER_CLASSES_HELP: "Override the wrapper classes used to set the max-width of the page"
       SECTION_CLASSES: "Section Classes"
       SECTION_CLASSES_HELP: "Override the classes to wrap the content section for regular or modular pages"
       HERO_DISPLAY: "Display"

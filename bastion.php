@@ -3,10 +3,12 @@ namespace Grav\Theme;
 
 use Grav\Common\Grav;
 use Grav\Common\Theme;
+use Grav\Common\Twig\Twig;
+use RocketTheme\Toolbox\ResourceLocator\UniformResourceLocator;
 
 class Bastion extends Theme
 {
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             'onThemeInitialized' => ['onThemeInitialized', 0],
@@ -15,20 +17,24 @@ class Bastion extends Theme
         ];
     }
 
-    public function onThemeInitialized()
+    public function onThemeInitialized(): void
     {
     }
 
-    public function onTwigLoader()
+    public function onTwigLoader(): void
     {
+        /** @var UniformResourceLocator $locator */
         $locator = Grav::instance()['locator'];
+        /** @var Twig $twig */
+        $twig = $this->grav['twig'];
         foreach ((array) $locator->findResources('theme://images') as $path) {
-            $this->grav['twig']->addPath($path, 'images');
+            $twig->addPath($path, 'images');
         }
     }
 
-    public function onTwigInitialized()
+    public function onTwigInitialized(): void
     {
+        /** @var Twig $twig */
         $twig = $this->grav['twig'];
 
         $form_class_variables = [

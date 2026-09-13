@@ -2,6 +2,20 @@
 {% set recipe_meta = page.header.recipe|default({}) %}
 {% set show_breadcrumbs = header_var('show_breadcrumbs', [page])|defined(true) %}
 {% set show_pagination = header_var('show_pagination', [page])|defined(true) %}
+{% set hero_image = page.header.hero.image ? page.media[page.header.hero.image] : page.media.images|first %}
+
+{% block hero %}
+    {% if hero_image %}
+    <section class="relative h-64 overflow-hidden sm:h-80 md:h-96" style="background-image:url('{{ hero_image.url }}');background-size:cover;background-position:center;">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative flex h-full items-end">
+            <div class="mx-auto w-full max-w-3xl px-4 pb-8 text-white sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}
 
 {% block body %}
 <section class="py-10">
@@ -12,7 +26,9 @@
             </div>
         {% endif %}
 
+        {% if not hero_image %}
         <h1 class="mb-2 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
+        {% endif %}
 
         {% if recipe_meta.prep_time or recipe_meta.cook_time or recipe_meta.servings or recipe_meta.difficulty %}
         <div class="my-4 flex flex-wrap gap-6 text-sm text-gray-600 dark:text-gray-400">

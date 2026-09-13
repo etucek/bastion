@@ -1,8 +1,15 @@
 {% extends 'partials/base.html.twig' %}
+{% set recipes_image = page.header.hero.image ? page.media[page.header.hero.image] : page.media.images|first %}
 {% set show_breadcrumbs = header_var('show_breadcrumbs', [page])|defined(true) %}
 {% set show_pagination = header_var('show_pagination', [page])|defined(true) %}
 {% set grid_classes = page.header.content.grid_classes|default('grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6') %}
 {% set collection = page.collection() %}
+
+{% block hero %}
+    {% if recipes_image %}
+        {% include 'partials/hero.html.twig' with {id: 'recipes-hero', content: page.content, hero_image: recipes_image, force_display: true} %}
+    {% endif %}
+{% endblock %}
 
 {# No sidebar and no secondary navigation on this template, matching
    bastion-old's recipes.html.twig - a plain full-bleed card grid. #}
@@ -15,11 +22,13 @@
                 </div>
             {% endif %}
 
+            {% if not recipes_image %}
             {% if page.title %}<h1 class="mb-8 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>{% endif %}
             {% if page.content %}
             <div class="prose mb-8 max-w-none text-gray-600 dark:text-gray-300">
                 {{ page.content|raw }}
             </div>
+            {% endif %}
             {% endif %}
 
             <div class="grid {{ grid_classes }}">
