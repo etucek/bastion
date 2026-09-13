@@ -1,3 +1,21 @@
+# v0.1.20
+## 09/13/2026
+
+1. [](#bugfix)
+   * Contact form submit button was unstyled - wrong CSS selector, plus
+     `hover:bg-primary` (set in the page's own form config) needed a real
+     `--color-primary` Tailwind token this theme never defined. Added it,
+     fixed the selector, and gave every submit button baseline padding.
+   * FontAwesome was CDN-only; bundled it locally like bastion-old and
+     fixed the (wrong) local path this theme referenced.
+   * Opening the nav panel shifted the whole page right by the scrollbar's
+     width. Added `scrollbar-gutter: stable`.
+   * Blog posts appeared in the main nav. Excluded post/recipe templates
+     from the nav loop regardless of folder-prefix visibility.
+   * Visible seam between sections in dark mode: `<body>` used Tailwind's
+     stock (uncustomized) gray-950 while sections use this theme's custom
+     gray-900 - changed body/header to match exactly.
+
 # v0.1.19
 ## 09/13/2026
 
