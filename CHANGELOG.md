@@ -1,3 +1,21 @@
+# v0.1.30
+## 09/13/2026
+
+1. [](#new)
+   * Added composer.json (standard Grav theme metadata, classmap
+     autoload for bastion.php) so the theme can be required via
+     Composer/Packagist, not just GPM.
+
+2. [](#improvement)
+   * bastion.yaml (the theme-shipped defaults) was actually this site's
+     live accent color, personal social links, and old copyright text -
+     not a usable starting point for a new install. Genericized it
+     (accent-color now matches the blueprint field's own stated default
+     instead of silently contradicting it; social links empty; copyright
+     a plain placeholder) and moved this site's real values to
+     user/config/themes/bastion.yaml, where site-specific config
+     belongs.
+
 # v0.1.29
 ## 09/13/2026
 
