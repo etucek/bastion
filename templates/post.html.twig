@@ -15,9 +15,17 @@
     {% endif %}
 {% endblock %}
 
+{% set show_breadcrumbs = header_var('show_breadcrumbs', [page])|defined(true) %}
+{% set show_pagination = header_var('show_pagination', [page])|defined(true) %}
+
 {% block body %}
 <section class="py-10">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled %}
+            <div class="mb-4">
+                {% include 'partials/breadcrumbs.html.twig' %}
+            </div>
+        {% endif %}
         {% if not hero_image %}
         <h1 class="mb-2 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
         {% endif %}
@@ -34,6 +42,7 @@
             {% include 'partials/comments-section.html.twig' ignore missing %}
         {% endif %}
 
+        {% if show_pagination %}
         <nav class="mt-10 flex justify-center gap-3 border-t border-gray-200 pt-6 text-center dark:border-gray-800" aria-label="{{ 'THEME_BASTION.ARIA.POST_NAVIGATION'|t|e('html_attr') }}">
             {% if page.prevSibling %}
                 <a class="inline-block rounded-md border border-gray-300 px-4 py-2 text-sm hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800" href="{{ page.prevSibling.url }}"><i class="fa-solid fa-angle-left" aria-hidden="true"></i> {{ 'THEME_BASTION.BLOG.ITEM.PREV_POST'|t }}</a>
@@ -42,6 +51,7 @@
                 <a class="inline-block rounded-md border border-gray-300 px-4 py-2 text-sm hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800" href="{{ page.nextSibling.url }}">{{ 'THEME_BASTION.BLOG.ITEM.NEXT_POST'|t }} <i class="fa-solid fa-angle-right" aria-hidden="true"></i></a>
             {% endif %}
         </nav>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

@@ -1,49 +1,59 @@
 title: Gallery
-'@extends': default
+extends@: default
 
 form:
   fields:
     tabs:
       fields:
-        gallery:
-          type: tab
-          title: Gallery
+        content:
           fields:
-            header.gallery.thumb.width:
+            header.media_order:
+              ordering@: 99
+
+            section_title:
+              type: section
+              ordering@: 2
+              import@:
+                type: modular/partials/title
+
+            header.gallery.grid_classes:
               type: text
-              label: Thumbnail Width
-              default: 600
+              default: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-2'
+              label: THEME_BASTION.BLUEPRINTS.GRID_CLASSES
+              help: THEME_BASTION.BLUEPRINTS.GRID_CLASSES_HELP
+
+            header.gallery.thumb.width:
+              type: number
+              label: THEME_BASTION.BLUEPRINTS.THUMBNAIL_WIDTH
               size: x-small
-              validate:
-                type: int
-                min: 1
+              append: px
+              default: 600
 
             header.gallery.thumb.height:
-              type: text
-              label: Thumbnail Height
-              default: 450
+              type: number
+              label: THEME_BASTION.BLUEPRINTS.THUMBNAIL_HEIGHT
               size: x-small
-              validate:
-                type: int
-                min: 1
+              append: px
+              default: 450
 
             header.gallery.items:
-              name: items
               type: list
-              label: Gallery Items
               style: vertical
-              collapsed: true
+              label: THEME_BASTION.BLUEPRINTS.GALLERY_ITEMS
 
               fields:
-                .image:
-                  type: filepicker
-                  label: Image
-                  preview_images: true
                 .title:
                   type: text
-                  label: Title
+                  label: THEME_BASTION.BLUEPRINTS.TITLE
+                .image:
+                  type: filepicker
+                  preview_images: true
+                  label: THEME_BASTION.BLUEPRINTS.IMAGE
                 .desc:
                   type: textarea
-                  label: Description
-                  markdown: true
                   rows: 4
+                  label: THEME_BASTION.BLUEPRINTS.DESCRIPTION
+                .video:
+                  type: text
+                  label: THEME_BASTION.BLUEPRINTS.VIDEO
+                  help: THEME_BASTION.BLUEPRINTS.VIDEO_HELP

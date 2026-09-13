@@ -1,0 +1,13 @@
+form:
+  fields:
+    header.body_classes:
+      toggleable: true
+      type: text
+      label: THEME_BASTION.ADMIN.BODY_CLASSES
+      help: THEME_BASTION.ADMIN.BODY_CLASSES_HELP
+
+    header.section_classes:
+      toggleable: true
+      type: text
+      label: THEME_BASTION.ADMIN.SECTION_CLASSES
+      help: THEME_BASTION.ADMIN.SECTION_CLASSES_HELP

@@ -1,4 +1,4 @@
-title: Hero
+title: Contact
 extends@: default
 
 form:
@@ -7,14 +7,11 @@ form:
       fields:
         content:
           fields:
-            content:
-              unset@: true
             header.media_order:
               ordering@: 99
-            hero_section:
+
+            section_title:
               type: section
               ordering@: 2
               import@:
-                type: partials/hero
-        hero:
-          unset@: true
+                type: modular/partials/title

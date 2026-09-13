@@ -5,15 +5,38 @@
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <h1 class="mb-2 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
 
-        {% if page.header.recipe.difficulty %}
-        <span class="mb-6 inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            {{ page.header.recipe.difficulty }}
-        </span>
-        {% endif %}
+        <div class="mb-6 flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+            {% if page.header.recipe.difficulty %}
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium dark:bg-gray-800">
+                {{ ('THEME_BASTION.BLUEPRINTS.RECIPE_DIFFICULTY_' ~ page.header.recipe.difficulty|upper)|t }}
+            </span>
+            {% endif %}
+            {% if page.header.recipe.prep_time %}<span>{{ 'THEME_BASTION.BLUEPRINTS.RECIPE_PREP_TIME'|t }}: {{ page.header.recipe.prep_time }}</span>{% endif %}
+            {% if page.header.recipe.cook_time %}<span>{{ 'THEME_BASTION.BLUEPRINTS.RECIPE_COOK_TIME'|t }}: {{ page.header.recipe.cook_time }}</span>{% endif %}
+            {% if page.header.recipe.servings %}<span>{{ 'THEME_BASTION.BLUEPRINTS.RECIPE_SERVINGS'|t }}: {{ page.header.recipe.servings }}</span>{% endif %}
+        </div>
 
         <div class="prose max-w-none text-gray-700 dark:text-gray-300">
             {{ page.content|raw }}
         </div>
+
+        {% if page.header.recipe.ingredients %}
+        <h2 class="mt-8 mb-3 text-xl font-bold">{{ 'THEME_BASTION.BLUEPRINTS.RECIPE_INGREDIENTS'|t }}</h2>
+        <ul class="list-disc space-y-1 pl-5 text-gray-700 dark:text-gray-300">
+            {% for ingredient in page.header.recipe.ingredients %}
+            <li>{{ [ingredient.amount, ingredient.unit, ingredient.name]|filter(v => v)|join(' ') }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if page.header.recipe.instructions %}
+        <h2 class="mt-8 mb-3 text-xl font-bold">{{ 'THEME_BASTION.BLUEPRINTS.RECIPE_INSTRUCTIONS'|t }}</h2>
+        <ol class="list-decimal space-y-2 pl-5 text-gray-700 dark:text-gray-300">
+            {% for instruction in page.header.recipe.instructions %}
+            <li>{{ instruction.step }}</li>
+            {% endfor %}
+        </ol>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

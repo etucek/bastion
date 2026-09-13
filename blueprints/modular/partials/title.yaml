@@ -1,0 +1,6 @@
+form:
+  fields:
+    header.subtitle:
+      toggleable: true
+      type: text
+      label: THEME_BASTION.BLUEPRINTS.SUBTITLE

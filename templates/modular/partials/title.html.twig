@@ -5,7 +5,10 @@
   (image-block) show page.content itself, laid out beside an image instead
   of stacked under the title.
 #}
-{% set include_content = include_content|default(true) %}
+{# Twig's |default() filter treats boolean false the same as undefined/empty,
+   which would silently turn an explicit include_content: false back into
+   true - check definedness instead so the caller's false actually sticks. #}
+{% set include_content = include_content is defined ? include_content : true %}
 {% if page.title or page.header.subtitle or (include_content and page.content) %}
 <div class="mx-auto mb-16 w-5/6 text-center md:w-3/4 lg:w-2/3 xl:w-1/2">
     {% if page.header.subtitle %}

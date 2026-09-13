@@ -1,3 +1,4 @@
+title: Default
 extends@: default
 
 form:
@@ -6,10 +7,50 @@ form:
       fields:
         advanced:
           fields:
-            columns:
+            section_layout:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.LAYOUT_CLASSES
+              underline: true
+              ordering@: 1
+
+              import@:
+                type: partials/layout
+
+            section_colors:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.COLORS
+              underline: true
+              ordering@: 1
+
+              import@:
+                type: partials/colors
+
+        hero:
+          title: THEME_BASTION.BLUEPRINTS.HERO
+          type: tab
+          ordering@: 1
+
+          import@:
+            type: partials/hero
+
+        options:
+          fields:
+            section_comments:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.COMMENTS_CONFIGURATION
+              underline: true
+
               fields:
-                column1:
-                   fields:
-                     header.body_classes:
-                       markdown: true
-                       description: 'Available classes in Bastion (space separated):<br />`header-fixed`, `header-animated`, `header-transparent`, `sticky-footer`'
+                header.comments:
+                  type: toggle
+                  toggleable: true
+                  label: THEME_BASTION.BLUEPRINTS.ENABLE_COMMENTS
+                  help: THEME_BASTION.BLUEPRINTS.ENABLE_COMMENTS_HELP
+                  highlight: 1
+                  size: medium
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool

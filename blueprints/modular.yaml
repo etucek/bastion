@@ -15,17 +15,6 @@ form:
               type: spacer
               title: PLUGIN_ADMIN.MODULE_SETUP
 
-            header.onpage_menu:
-              type: toggle
-              style: vertical
-              label: On-page Menu
-              help: Show an in-page anchor menu for modular sections
-              default: 0
-              highlight: 0
-              options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
-
             header.content.items:
               type: text
               label: PLUGIN_ADMIN.ITEMS

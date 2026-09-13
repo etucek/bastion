@@ -1,0 +1,108 @@
+form:
+  fields:
+
+    section_herotab:
+      type: section
+      title: THEME_BASTION.BLUEPRINTS.HERO
+      underline: true
+
+    header.hero.subtitle:
+      toggleable: true
+      type: text
+      label: THEME_BASTION.BLUEPRINTS.SUBTITLE
+      help: THEME_BASTION.BLUEPRINTS.SUBTITLE_HELP
+
+    header.hero.title.text:
+      toggleable: true
+      type: text
+      label: THEME_BASTION.BLUEPRINTS.TITLE
+
+    header.hero.content:
+      toggleable: true
+      type: textarea
+      label: THEME_BASTION.BLUEPRINTS.HERO
+      rows: 5
+
+    section_herosettings:
+      type: section
+      title: THEME_BASTION.ADMIN.HERO_DISPLAY
+      underline: true
+
+    header.hero.display:
+      type: toggle
+      toggleable: true
+      label: THEME_BASTION.ADMIN.HERO_DISPLAY
+      help: THEME_BASTION.ADMIN.HERO_DISPLAY_HELP
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+
+    header.hero.alignment:
+      toggleable: true
+      type: toggle
+      label: THEME_BASTION.ADMIN.HERO_ALIGNMENT
+      highlight: left
+      default: left
+      options:
+        left: THEME_BASTION.ADMIN.HERO_ALIGNMENT_LEFT
+        center: THEME_BASTION.ADMIN.HERO_ALIGNMENT_CENTER
+        right: THEME_BASTION.ADMIN.HERO_ALIGNMENT_RIGHT
+
+    header.hero.image:
+      toggleable: true
+      type: filepicker
+      label: THEME_BASTION.ADMIN.HERO_IMAGE
+      help: THEME_BASTION.ADMIN.HERO_IMAGE_HELP
+      preview_images: true
+      accept:
+        - .png
+        - .jpg
+        - .jpeg
+        - .webp
+
+    header.hero.padding:
+      toggleable: true
+      type: text
+      label: THEME_BASTION.ADMIN.HERO_PADDING_CLASSES
+      default: 'py-24 md:py-32'
+
+    section_overlay:
+      type: section
+      title: THEME_BASTION.ADMIN.HERO_OVERLAY_TITLE
+      underline: true
+
+    header.hero.overlay:
+      toggleable: true
+      type: select
+      label: THEME_BASTION.ADMIN.HERO_OVERLAY
+      help: THEME_BASTION.ADMIN.HERO_OVERLAY_HELP
+      default: dark
+      options:
+        dark: THEME_BASTION.ADMIN.HERO_OVERLAY_DARK
+        light: THEME_BASTION.ADMIN.HERO_OVERLAY_LIGHT
+        none: THEME_BASTION.ADMIN.HERO_OVERLAY_NONE
+
+    header.hero.overlay_gradient:
+      toggleable: true
+      type: selectize
+      label: THEME_BASTION.ADMIN.HERO_OVERLAY_GRADIENT_OPACITY
+      help: THEME_BASTION.ADMIN.HERO_OVERLAY_GRADIENT_OPACITY_HELP
+      default: [0.6, 0.2]
+      classes: fancy
+      validate:
+        type: commalist
+
+    header.hero.overlay_direction:
+      toggleable: true
+      type: select
+      label: THEME_BASTION.ADMIN.HERO_OVERLAY_GRADIENT_DIRECTION
+      default: bottom
+      options:
+        right: THEME_BASTION.ADMIN.HERO_OVERLAY_GRADIENT_DIRECTION_RIGHT
+        bottom: THEME_BASTION.ADMIN.HERO_OVERLAY_GRADIENT_DIRECTION_BOTTOM
+        top: THEME_BASTION.ADMIN.HERO_OVERLAY_GRADIENT_DIRECTION_TOP
+        left: THEME_BASTION.ADMIN.HERO_OVERLAY_GRADIENT_DIRECTION_LEFT

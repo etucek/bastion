@@ -1,4 +1,4 @@
-title: Blog
+title: Recipes
 extends@: default
 
 form:
@@ -10,16 +10,16 @@ form:
             header.media_order:
               ordering@: 99
 
-        blog:
+        recipes:
           type: tab
-          title: THEME_BASTION.BLUEPRINTS.POST
+          title: THEME_BASTION.BLUEPRINTS.RECIPES
           ordering@: 2
 
           fields:
 
-            blog_config_section:
+            recipes_config_section:
               type: section
-              title: THEME_BASTION.BLUEPRINTS.BLOG_CONFIGURATION
+              title: THEME_BASTION.BLUEPRINTS.RECIPES_CONFIGURATION
               underline: true
 
               fields:
@@ -44,7 +44,7 @@ form:
                 header.content.limit:
                   type: number
                   label: THEME_BASTION.BLUEPRINTS.BLOG_MAX_ITEM_COUNT
-                  default: 10
+                  default: 12
                   validate:
                     required: true
                     type: int
@@ -68,18 +68,11 @@ form:
                     asc: THEME_BASTION.BLUEPRINTS.BLOG_ORDER_ASC
                     desc: THEME_BASTION.BLUEPRINTS.BLOG_ORDER_DESC
 
-                header.content.grid_classes:
-                  toggleable: true
-                  type: text
-                  label: THEME_BASTION.BLUEPRINTS.GRID_CLASSES
-                  help: THEME_BASTION.BLUEPRINTS.GRID_CLASSES_HELP
-                  default: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'
-
-            blog_layout_section:
+            recipes_layout_section:
               type: section
               title: THEME_BASTION.BLUEPRINTS.LAYOUT_CONFIGURATION
               underline: true
               ordering@: 1
 
               import@:
-                type: partials/blog
+                type: partials/recipes

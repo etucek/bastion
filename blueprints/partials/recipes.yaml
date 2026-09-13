@@ -1,0 +1,13 @@
+form:
+  fields:
+    header.show_breadcrumbs:
+      type: toggle
+      toggleable: true
+      label: THEME_BASTION.BLUEPRINTS.BLOG_SHOW_BREADCRUMBS
+      highlight: 1
+      size: medium
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool

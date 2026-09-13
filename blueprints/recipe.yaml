@@ -1,0 +1,96 @@
+title: Recipe
+extends@: default
+
+form:
+  fields:
+    tabs:
+      fields:
+
+        recipe:
+          type: tab
+          title: THEME_BASTION.BLUEPRINTS.RECIPE
+          ordering@: 2
+
+          fields:
+
+            recipe_details_section:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.RECIPE_DETAILS
+              underline: true
+
+              fields:
+                header.recipe.prep_time:
+                  type: text
+                  label: THEME_BASTION.BLUEPRINTS.RECIPE_PREP_TIME
+                  placeholder: '15 min'
+                  size: small
+
+                header.recipe.cook_time:
+                  type: text
+                  label: THEME_BASTION.BLUEPRINTS.RECIPE_COOK_TIME
+                  placeholder: '30 min'
+                  size: small
+
+                header.recipe.servings:
+                  type: number
+                  label: THEME_BASTION.BLUEPRINTS.RECIPE_SERVINGS
+                  size: small
+
+                header.recipe.difficulty:
+                  type: select
+                  label: THEME_BASTION.BLUEPRINTS.RECIPE_DIFFICULTY
+                  size: small
+                  default: easy
+                  options:
+                    easy: THEME_BASTION.BLUEPRINTS.RECIPE_DIFFICULTY_EASY
+                    medium: THEME_BASTION.BLUEPRINTS.RECIPE_DIFFICULTY_MEDIUM
+                    hard: THEME_BASTION.BLUEPRINTS.RECIPE_DIFFICULTY_HARD
+
+            recipe_ingredients_section:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.RECIPE_INGREDIENTS
+              underline: true
+
+              fields:
+                header.recipe.ingredients:
+                  type: list
+                  style: vertical
+                  label: THEME_BASTION.BLUEPRINTS.RECIPE_INGREDIENTS
+
+                  fields:
+                    .amount:
+                      type: text
+                      label: THEME_BASTION.BLUEPRINTS.RECIPE_INGREDIENT_AMOUNT
+                      size: x-small
+                    .unit:
+                      type: text
+                      label: THEME_BASTION.BLUEPRINTS.RECIPE_INGREDIENT_UNIT
+                      size: x-small
+                    .name:
+                      type: text
+                      label: THEME_BASTION.BLUEPRINTS.RECIPE_INGREDIENT_NAME
+
+            recipe_instructions_section:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.RECIPE_INSTRUCTIONS
+              underline: true
+
+              fields:
+                header.recipe.instructions:
+                  type: list
+                  style: vertical
+                  label: THEME_BASTION.BLUEPRINTS.RECIPE_INSTRUCTIONS
+
+                  fields:
+                    .step:
+                      type: textarea
+                      label: THEME_BASTION.BLUEPRINTS.RECIPE_INSTRUCTION_STEP
+
+            recipe_layout_section:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.LAYOUT_CONFIGURATION
+              underline: true
+              ordering@: 1
+
+              import@:
+                type: partials/recipe

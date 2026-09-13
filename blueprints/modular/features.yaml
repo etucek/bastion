@@ -1,38 +1,59 @@
 title: Features
-'@extends': default
+extends@: default
 
 form:
   fields:
     tabs:
       fields:
-        features:
-          type: tab
-          title: Features
+        content:
           fields:
-            header.class:
+            header.media_order:
+              ordering@: 99
+
+            section_title:
+              type: section
+              ordering@: 2
+              import@:
+                type: modular/partials/title
+
+            header.variation:
               type: select
-              label: Layout
-              default: small
-              size: medium
+              label: THEME_BASTION.BLUEPRINTS.VARIATION
+              default: horizontal
               options:
-                small: Small   = 4 / 3 / 2 columns
-                standard: Standard  = 3 / 2 / 1 columns
+                horizontal: THEME_BASTION.BLUEPRINTS.VARIATION_HORIZONTAL
+                vertical: THEME_BASTION.BLUEPRINTS.VARIATION_VERTICAL
+
+            header.vertical_classes:
+              toggleable: true
+              type: text
+              label: THEME_BASTION.BLUEPRINTS.VERTICAL_CLASSES
+              help: THEME_BASTION.BLUEPRINTS.VERTICAL_CLASSES_HELP
+              default: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
+
+            header.horizontal_classes:
+              toggleable: true
+              type: text
+              label: THEME_BASTION.BLUEPRINTS.HORIZONTAL_CLASSES
+              help: THEME_BASTION.BLUEPRINTS.HORIZONTAL_CLASSES_HELP
+              default: 'md:grid-cols-2 xl:grid-cols-3'
 
             header.features:
-              name: features
               type: list
-              label: Features
+              style: vertical
+              label: THEME_BASTION.BLUEPRINTS.VARIATION
 
               fields:
-                .icon:
-                  type: iconpicker
-                  label: Icon
-                .header:
+                .title:
                   type: text
-                  label: Header
+                  label: THEME_BASTION.BLUEPRINTS.TITLE
                 .text:
                   type: text
-                  label: Text
-                .url:
+                  label: THEME_BASTION.BLUEPRINTS.TEXT
+                .icon:
                   type: text
-                  label: Link
+                  label: THEME_BASTION.BLUEPRINTS.ICON
+                  placeholder: 'fa-solid fa-rocket'
+                .link:
+                  type: text
+                  label: THEME_BASTION.BLUEPRINTS.LINK
