@@ -1,1 +1,5 @@
-{% include 'partials/hero.html.twig' %}
+{# The dedicated hero template implies display regardless of the hero.display
+   flag - that flag exists to let OTHER templates (image-block, features,
+   contact, default, ...) optionally opt into showing a hero banner above
+   their own content, not to gate a page whose entire template is a hero. #}
+{% include 'partials/hero.html.twig' with {force_display: true} %}

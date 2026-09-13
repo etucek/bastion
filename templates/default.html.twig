@@ -1,8 +1,14 @@
 {% extends 'partials/base.html.twig' %}
 
+{% block hero %}
+    {% include 'partials/hero.html.twig' %}
+{% endblock %}
+
 {% block content %}
     <article class="content-item prose mx-auto max-w-3xl text-gray-700 dark:text-gray-300">
+        {% if not page.header.hero.display %}
         <h1 class="mb-2 text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white">{{ page.title }}</h1>
+        {% endif %}
         {{ page.content|raw }}
     </article>
 {% endblock %}
