@@ -1,3 +1,13 @@
+# v1.0.3
+## 09/13/2026
+
+1. [](#improvement)
+   * The Advanced tab's "Page Template" dropdown (for changing an
+     existing page's template) now respects the same group-based
+     restriction as the create-page picker - it was a separate,
+     unfiltered code path before, so a restricted type was still
+     reachable from there even with the picker filtered.
+
 # v1.0.2
 ## 09/13/2026
 
