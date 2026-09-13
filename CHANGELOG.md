@@ -1,3 +1,16 @@
+# v0.1.32
+## 09/13/2026
+
+1. [](#bugfix)
+   * Every hero banner (default.html.twig and any modular template) was
+     showing the page's entire body content instead of the short
+     hero.content header field - Grav injects a global `content`
+     variable into every template's context, so partials/hero.html.twig's
+     `content is defined` check was always true. Made /tech look
+     strangely tall with the whole article crammed into the banner.
+     Renamed the override parameter so it can't collide with Grav's own
+     globals.
+
 # v0.1.31
 ## 09/13/2026
 
