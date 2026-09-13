@@ -1,0 +1,29 @@
+{% set image = page.media.images|first %}
+{% set recipe_meta = page.header.recipe|default({}) %}
+<article class="flex h-full flex-col overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-700/40 dark:ring-white/10">
+    {% if image %}
+    <a href="{{ page.url }}">{{ image.cropZoom(800, 420).html|raw }}</a>
+    {% endif %}
+    <div class="flex-1 p-4">
+        <a href="{{ page.url }}" class="transition">
+            <h3 class="mb-2 text-xl font-semibold text-gray-900 hover:text-black dark:text-gray-100 dark:hover:text-white">
+                {{ page.title }}
+            </h3>
+        </a>
+        {% if recipe_meta.prep_time or recipe_meta.cook_time or recipe_meta.servings %}
+        <div class="mb-2 flex flex-wrap gap-3 text-xs text-gray-500 dark:text-gray-400">
+            {% if recipe_meta.prep_time %}<span><i class="fa-solid fa-clock" aria-hidden="true"></i> {{ recipe_meta.prep_time }}</span>{% endif %}
+            {% if recipe_meta.cook_time %}<span><i class="fa-solid fa-fire" aria-hidden="true"></i> {{ recipe_meta.cook_time }}</span>{% endif %}
+            {% if recipe_meta.servings %}<span><i class="fa-solid fa-utensils" aria-hidden="true"></i> {{ recipe_meta.servings }}</span>{% endif %}
+        </div>
+        {% endif %}
+        {% if recipe_meta.difficulty %}
+        <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+            {{ ('THEME_BASTION.BLUEPRINTS.RECIPE_DIFFICULTY_' ~ recipe_meta.difficulty|upper)|t }}
+        </span>
+        {% endif %}
+        <div class="prose mt-2 text-base leading-normal text-gray-600 dark:text-gray-300">
+            {{ page.summary|raw }}
+        </div>
+    </div>
+</article>

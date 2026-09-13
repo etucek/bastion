@@ -1,0 +1,30 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block body %}
+<section class="py-10">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h1 class="mb-6 text-3xl font-bold sm:text-4xl">{{ "PLUGIN_SIMPLESEARCH.SEARCH_RESULTS"|t }}</h1>
+
+        <div class="max-w-xl">
+            {% include 'partials/simplesearch_searchbox.html.twig' ignore missing %}
+        </div>
+
+        {% if query %}
+            {% set count = search_results ? search_results.count : 0 %}
+            <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                {% if count is same as(1) %}
+                    {{ "PLUGIN_SIMPLESEARCH.SEARCH_RESULTS_SUMMARY_SINGULAR"|t(query|e)|raw }}
+                {% else %}
+                    {{ "PLUGIN_SIMPLESEARCH.SEARCH_RESULTS_SUMMARY_PLURAL"|t(query|e, count)|raw }}
+                {% endif %}
+            </p>
+        {% endif %}
+
+        <div class="simplesearch-results mt-2">
+            {% for result_page in search_results %}
+                {% include 'partials/simplesearch_item.html.twig' with {'page': result_page} %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

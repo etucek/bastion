@@ -1,0 +1,11 @@
+{# Google-style result: url breadcrumb, title link, snippet - no thumbnail #}
+<article class="search-row">
+  <div class="search-url">{{ page.url(true) }}</div>
+  <h3 class="search-title"><a href="{{ page.url }}">{{ page.title }}</a></h3>
+  {% set summary = page.summary|trim %}
+  {% if summary or page.date %}
+    <p class="search-snippet">
+      {% if page.date %}<span class="search-date">{{ page.date|date(config.system.pages.dateformat.short) }}{{ summary ? ' — ' }}</span>{% endif %}{{ summary|raw }}
+    </p>
+  {% endif %}
+</article>

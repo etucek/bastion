@@ -7,6 +7,56 @@
  * than as Tailwind utility soup (dropdown popovers, mobile overlay).
  */
 
+/* Results on the /search results page - styled after a classic
+   search-engine result: a small url line, a larger link-colored title, a
+   muted snippet. No thumbnail, no dividers - whitespace alone separates
+   results. */
+.simplesearch-results .search-row {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.simplesearch-results .search-row:first-child {
+  padding-top: 0;
+}
+.simplesearch-results .search-url {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dark .simplesearch-results .search-url {
+  color: var(--color-gray-400);
+}
+.simplesearch-results .search-title {
+  margin: 0.125rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.simplesearch-results .search-title a {
+  color: var(--accent);
+}
+.simplesearch-results .search-title a:hover {
+  text-decoration: underline;
+}
+.simplesearch-results .search-snippet {
+  margin: 0.25rem 0 0;
+  line-height: 1.6;
+  color: var(--color-gray-600);
+}
+.dark .simplesearch-results .search-snippet {
+  color: var(--color-gray-300);
+}
+.simplesearch-results .search-date {
+  color: var(--color-gray-500);
+}
+.dark .simplesearch-results .search-date {
+  color: var(--color-gray-400);
+}
+.simplesearch-results hr {
+  display: none;
+}
+
 /* Tailwind's preflight sets buttons to cursor: default (matching native
    browser behavior) rather than cursor: pointer. Every button in this theme
    is acting as a clickable control, not a native form submit, so restore

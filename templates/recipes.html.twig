@@ -1,28 +1,38 @@
 {% extends 'partials/base.html.twig' %}
+{% set show_breadcrumbs = header_var('show_breadcrumbs', [page])|defined(true) %}
+{% set show_pagination = header_var('show_pagination', [page])|defined(true) %}
+{% set grid_classes = page.header.content.grid_classes|default('grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6') %}
+{% set collection = page.collection() %}
 
+{# No sidebar and no secondary navigation on this template, matching
+   bastion-old's recipes.html.twig - a plain full-bleed card grid. #}
 {% block body %}
-<section class="py-10">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h1 class="mb-8 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>
+    <section id="body-wrapper" class="bg-gray-100 py-12 dark:bg-gray-800">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled %}
+                <div class="mb-4">
+                    {% include 'partials/breadcrumbs.html.twig' %}
+                </div>
+            {% endif %}
 
-        {% if page.content %}
-        <div class="prose mb-8 max-w-none text-gray-600 dark:text-gray-300">
-            {{ page.content|raw }}
-        </div>
-        {% endif %}
+            {% if page.title %}<h1 class="mb-8 text-3xl font-bold sm:text-4xl">{{ page.title }}</h1>{% endif %}
+            {% if page.content %}
+            <div class="prose mb-8 max-w-none text-gray-600 dark:text-gray-300">
+                {{ page.content|raw }}
+            </div>
+            {% endif %}
 
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {% for child in page.collection() %}
-            <a href="{{ child.url }}" class="block rounded-lg border border-gray-200 p-5 hover:border-gray-300 dark:border-gray-800 dark:hover:border-gray-700">
-                <h2 class="text-lg font-semibold">{{ child.title }}</h2>
-                {% if child.header.recipe.difficulty %}
-                <span class="mt-2 inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-                    {{ child.header.recipe.difficulty }}
-                </span>
-                {% endif %}
-            </a>
+            <div class="grid {{ grid_classes }}">
+            {% for child in collection %}
+                {% include 'partials/recipe-item.html.twig' with {page: child} %}
             {% endfor %}
+            </div>
+
+            {% if show_pagination and config.plugins.pagination.enabled and collection.params.pagination %}
+                <div class="mt-8 flex justify-center">
+                    {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
+                </div>
+            {% endif %}
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
