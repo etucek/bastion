@@ -1,3 +1,16 @@
+# v0.1.22
+## 09/13/2026
+
+1. [](#bugfix)
+   * The simplesearch results page had no theme template, falling back to
+     the plugin's unstyled default markup. Added a Google-style results
+     page (url breadcrumb, title link, snippet) matching bastion-old.
+   * recipes.html.twig and recipe.html.twig were built from the blueprint
+     alone, without checking bastion-old's actual template - missing
+     breadcrumbs, icon-based prep/cook time & servings & difficulty meta,
+     the ingredients/instructions grid layout, and prev/next pagination.
+     Rebuilt both, plus a new recipe-item.html.twig card for the listing.
+
 # v0.1.21
 ## 09/13/2026
 
