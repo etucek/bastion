@@ -1,3 +1,13 @@
+# v1.0.7
+## 09/13/2026
+
+1. [](#bugfix)
+   * Fixed "end of the stream or a document separator is expected (1:1)"
+     when opening/saving the Recipes or Blog tab's Items field - its
+     default was a bare '@self.children' scalar, which is invalid as a
+     standalone YAML document ('@' is a reserved indicator). Switched to
+     the equivalent list form.
+
 # v1.0.6
 ## 09/13/2026
 
