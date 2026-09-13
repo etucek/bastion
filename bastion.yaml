@@ -1,3 +1,9 @@
+#
+# Theme-shipped defaults - a starting point for a new install, not this
+# site's actual configuration. Anything you change in Admin (or in
+# user/config/themes/bastion.yaml) overrides these without editing this
+# file, and survives theme updates; this file does not.
+#
 enabled: true
 header-fixed: true
 header-animated: true
@@ -6,7 +12,7 @@ header-dark: false
 header-light: false
 sticky-footer: true
 theme-mode: auto
-accent-color: '#8428DF'
+accent-color: '#242424'
 blog-page: '/blog'
 
 login:
@@ -15,14 +21,11 @@ langswitcher:
   enabled: true
 
 footer:
-  copyright: "&copy; 2022 Tucek"
+  copyright: "&copy; My Site. All rights reserved."
   menu_enabled: false
   menu: []
-  social_enabled: true
-  social:
-    - { network: twitter, link: 'https://twitter.com/etucek', newtab: true }
-    - { network: github, link: 'https://github.com/etucek', newtab: true }
-    - { network: linkedin, link: 'https://www.linkedin.com/in/emir-tucek', newtab: true }
+  social_enabled: false
+  social: []
 
 tailwind4:
   input: css/site.css
