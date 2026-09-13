@@ -6,6 +6,7 @@
 {% set favicon = theme_var('custom_favicon') %}
 {% set favicon_first = (favicon is iterable and favicon|length > 0) ? favicon|first : null %}
 {% set favicon_file = favicon_first.name|default(null) %}
+{% set favicon_type = favicon_first.type|default('image/png') %}
 {% set show_login = theme_var('login.enabled') and config.plugins.login.enabled %}
 {% set show_langswitcher = theme_var('langswitcher.enabled') and config.plugins.langswitcher.enabled and langswitcher.languages|default([])|length > 1 %}
 {% use 'blocks/base.html.twig' %}
@@ -23,7 +24,7 @@
     {% include 'partials/metadata.html.twig' %}
 
     {% if favicon_file %}
-    <link rel="icon" type="{{ get_mime_type('theme://images/favicon/' ~ favicon_file) }}" href="{{ url('theme://images/favicon/' ~ favicon_file) }}" />
+    <link rel="icon" type="{{ favicon_type }}" href="{{ url('theme://images/favicon/' ~ favicon_file) }}" />
     {% else %}
     <link rel="icon" type="image/svg+xml" href="{{ url('theme://images/bastion-favicon.svg') }}" />
     {% endif %}
