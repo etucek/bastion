@@ -1,3 +1,18 @@
+# v0.1.19
+## 09/13/2026
+
+1. [](#bugfix)
+   * Fixed a Twig `default()` gotcha in modular/partials/title.html.twig that
+     silently coerced an explicit `include_content: false` back to `true`,
+     causing the About section's content to render twice.
+   * Ported Admin blueprints for every page type from bastion-old, adapted to
+     what this theme's templates actually read: contact and image-block had
+     no blueprint at all (hence the untitled "_contact" page and no Title
+     field when editing About), and features/gallery still referenced the
+     pre-fix Quark 2 field names. Also wired up recipe.html.twig and
+     post.html.twig to actually use the newly-exposed fields instead of
+     letting them be no-ops in the editor.
+
 # v0.1.18
 ## 09/13/2026
 
