@@ -1,3 +1,15 @@
+# v0.1.27
+## 09/13/2026
+
+1. [](#bugfix)
+   * Fixed the "preloaded but not used" DevTools warning for Cal Sans -
+     it was loaded and preloaded but never actually applied anywhere. Now
+     used as the heading font (h1-h6) site-wide.
+   * Mobile-nav-toggle border, theme-toggle border, and footer social
+     icon circles were nearly invisible in dark mode (too close in value
+     to the surrounding background). Increased contrast, and gave the
+     footer its own dark background instead of matching `<body>` exactly.
+
 # v0.1.26
 ## 09/13/2026
 
