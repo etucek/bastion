@@ -36,6 +36,7 @@ class Bastion extends Theme
         'simplesearch_results'  => 'super',
         'flex-objects'          => 'super',
         'form'                  => 'super',
+        'comments'              => 'super',
         // Created repeatedly, but only by editors who own that section.
         'recipes' => 'recipesadmins',
         'recipe'  => 'recipesadmins',
