@@ -7,9 +7,9 @@ icon: bolt
 author:
   name: Emir Tucek
   email: emir@tucek.me
-homepage: https://github.com/etucek/bastion
+homepage: https://github.com/etucek/bastion-theme
 keywords: grav, theme, bastion, tailwind, tailwindcss
-bugs: https://github.com/etucek/bastion/issues
+bugs: https://github.com/etucek/bastion-theme/issues
 license: MIT
 compatibility:
   grav: ['2.1']
