@@ -1,3 +1,10 @@
+# v0.1.31
+## 09/13/2026
+
+1. [](#improvement)
+   * bastion.php: added a shaped-array @return docblock to parseHex() so
+     its [$r, $g, $b] = ... destructuring resolves in an IDE.
+
 # v0.1.30
 ## 09/13/2026
 
