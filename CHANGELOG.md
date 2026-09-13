@@ -1,3 +1,12 @@
+# v0.1.16
+## 09/13/2026
+
+1. [](#bugfix)
+   * Blog cards had no cap on summary length, so one long post forced every
+     card in its grid row to match its height (measured 645px cards). Capped
+     summaries to 170 characters with an ellipsis - card height dropped to
+     505px with the same content.
+
 # v0.1.15
 ## 09/13/2026
 
