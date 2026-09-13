@@ -1,3 +1,24 @@
+# v0.1.29
+## 09/13/2026
+
+1. [](#bugfix)
+   * Audited every field on the Hero tab against what actually reads it.
+     header.hero.overlay (dark/light/none) was never wired up at all;
+     header.section_classes only worked on modular pages; recipe.html.twig
+     and recipes.html.twig had zero hero support despite inheriting the
+     full Hero tab. All fixed - see CHANGELOG detail in the commit.
+   * blog.html.twig's hero image fallback checked a header field
+     (hero_image) that never actually existed, instead of the real
+     nested hero.image.
+   * Added the missing header.show_pagination field to recipe.yaml and
+     recipes.yaml (the toggle worked, it just wasn't reachable from
+     Admin).
+
+2. [](#improvement)
+   * Removed blueprints/item.yaml and partials/blog-bits.yaml - dead,
+     unreachable Quark2-era blueprint with no template to render it.
+   * bastion.php: added missing return types and locator/twig docblocks.
+
 # v0.1.28
 ## 09/13/2026
 
