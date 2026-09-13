@@ -1,3 +1,10 @@
+# v1.0.2
+## 09/13/2026
+
+1. [](#improvement)
+   * Added 'comments' to the page types restricted to super admins in
+     the type picker - same treatment as root/error/form/etc.
+
 # v1.0.1
 ## 09/13/2026
 
