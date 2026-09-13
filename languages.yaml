@@ -42,6 +42,9 @@ en:
       OPEN: "Search"
       CLOSE: "Close search"
       HEADLINE: "Search"
+    LOGIN:
+      LOGIN: "Login"
+      LOGOUT: "Logout"
     MENU:
       OPEN: "Menu"
       CLOSE: "Close"

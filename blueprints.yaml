@@ -43,6 +43,17 @@ form:
       title: Header
       underline: true
 
+    custom_favicon:
+      type: file
+      label: Custom Favicon
+      help: Saved to user/themes/bastion/images/favicon. Accepts .png, .svg or .ico. Falls back to the theme default when empty.
+      size: large
+      destination: 'theme://images/favicon'
+      multiple: false
+      accept:
+        - image/*
+        - .ico
+
     custom_logo:
       type: file
       label: Custom Logo
@@ -148,6 +159,23 @@ form:
       label: Blog Page Route
       size: medium
       default: '/blog'
+
+    login_section:
+      type: section
+      title: Login
+      underline: true
+
+    login.enabled:
+      type: toggle
+      label: Show Login / Logout
+      help: Shows a login icon in the header for anonymous visitors, and username + logout once signed in. Requires the Login plugin to be installed and enabled.
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
 
     icons_section:
       type: section

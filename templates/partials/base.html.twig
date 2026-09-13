@@ -5,6 +5,10 @@
 {% set accent = accent_is_hex ? accent_configured : '#2563eb' %}
 {% set fa_enabled = theme_var('fontawesome.enabled') %}
 {% set fa_local   = theme_var('fontawesome.local') %}
+{% set favicon = theme_var('custom_favicon') %}
+{% set favicon_first = (favicon is iterable and favicon|length > 0) ? favicon|first : null %}
+{% set favicon_file = favicon_first.name|default(null) %}
+{% set show_login = theme_var('login.enabled') and config.plugins.login.enabled %}
 {% use 'blocks/base.html.twig' %}
 <!DOCTYPE html>
 <html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}"
@@ -19,7 +23,11 @@
 
     {% include 'partials/metadata.html.twig' %}
 
+    {% if favicon_file %}
+    <link rel="icon" type="{{ get_mime_type('theme://images/favicon/' ~ favicon_file) }}" href="{{ url('theme://images/favicon/' ~ favicon_file) }}" />
+    {% else %}
     <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.png') }}" />
+    {% endif %}
     <link rel="canonical" href="{{ page.url(true, true) }}" />
 
     {# Preload the critical latin subsets so headings + body text render in-font on first paint #}
@@ -114,8 +122,14 @@
                             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                         </button>
                         {% endif %}
-                        {% if config.plugins.login.enabled and grav.user.username %}
-                            <span class="flex items-center gap-1.5 px-2 text-sm"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' ignore missing %}</span>
+                        {% if show_login %}
+                            {% if grav.user.authenticated %}
+                            <span class="flex items-center gap-1.5 px-2 text-sm"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' %}</span>
+                            {% else %}
+                            <a href="{{ url(config.plugins.login.route) }}" class="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 hover:text-[var(--accent)] dark:text-gray-300" aria-label="{{ 'THEME_BASTION.LOGIN.LOGIN'|t|e('html_attr') }}" title="{{ 'THEME_BASTION.LOGIN.LOGIN'|t|e('html_attr') }}">
+                                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                            </a>
+                            {% endif %}
                         {% endif %}
                         {% include 'partials/theme-toggle.html.twig' %}
                     </div>

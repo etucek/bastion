@@ -12,6 +12,9 @@ fontawesome:
   enabled: true
   local: true
 
+login:
+  enabled: true
+
 footer:
   copyright: "&copy; 2022 Tucek"
   social:

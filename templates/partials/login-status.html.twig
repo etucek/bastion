@@ -1,0 +1,11 @@
+{% if grav.user.authenticated %}
+<span class="flex items-center gap-2">
+    <a href="{{ url(config.plugins.login.route_profile) }}" class="hover:text-[var(--accent)]">{{ grav.user.fullname ?: grav.user.username }}</a>
+    <a href="{{ url(uri.addNonce((uri.path)|trim('/') ~ '/task' ~ config.system.param_sep ~ 'login.logout', 'logout-form', 'logout-nonce'))|e }}"
+       class="inline-flex h-6 w-6 items-center justify-center rounded-md hover:text-[var(--accent)]"
+       aria-label="{{ 'THEME_BASTION.LOGIN.LOGOUT'|t|e('html_attr') }}"
+       title="{{ 'THEME_BASTION.LOGIN.LOGOUT'|t|e('html_attr') }}">
+        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+    </a>
+</span>
+{% endif %}
