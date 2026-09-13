@@ -8,11 +8,10 @@ sticky-footer: true
 theme-mode: auto
 accent-color: '#8428DF'
 blog-page: '/blog'
-fontawesome:
-  enabled: true
-  local: true
 
 login:
+  enabled: true
+langswitcher:
   enabled: true
 
 footer:

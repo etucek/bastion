@@ -45,6 +45,7 @@ en:
     LOGIN:
       LOGIN: "Login"
       LOGOUT: "Logout"
+    LANGUAGES: "Languages"
     MENU:
       OPEN: "Menu"
       CLOSE: "Close"

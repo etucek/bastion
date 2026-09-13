@@ -237,6 +237,39 @@ button {
   filter: brightness(0.95);
 }
 
+/* Login plugin's own login.css hardcodes a light #fcfcfc card with no dark
+   mode awareness - it just so happens the form fields inside are already
+   covered by the .form-input rules above, but the card itself needs its
+   own override, or dark mode ends up with a dark form floating in a
+   stark white box. */
+#grav-login {
+  max-width: 26rem;
+  margin: 4rem auto;
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+.dark #grav-login {
+  background: var(--color-gray-800);
+  border-color: var(--color-gray-700);
+}
+#grav-login h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+#grav-login .button-wrapper a {
+  color: var(--color-gray-500);
+  transition: color 0.3s ease-in-out;
+}
+.dark #grav-login .button-wrapper a {
+  color: var(--color-gray-400);
+}
+#grav-login .button-wrapper a:hover {
+  color: var(--accent);
+}
+
 /* Minimal prose styling for rendered Markdown content (page.content). A
    hand-rolled stand-in for @tailwindcss/typography: that plugin is a JS
    PostCSS plugin and support in the ported PHP engine is unverified, so
@@ -323,7 +356,8 @@ button {
 .dark .prose pre::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.25);
 }
-.prose pre code {
+.prose pre code,
+.dark .prose pre code {
   font-size: 100%;
   background: none;
   padding: 0;

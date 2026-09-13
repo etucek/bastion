@@ -177,15 +177,15 @@ form:
       validate:
         type: bool
 
-    icons_section:
+    langswitcher_section:
       type: section
-      title: Icons
+      title: Language Switcher
       underline: true
 
-    fontawesome.enabled:
+    langswitcher.enabled:
       type: toggle
-      label: Font Awesome 7
-      help: Load Font Awesome 7 free icon set.
+      label: Show Language Switcher
+      help: Shows a language switcher dropdown in the header. Requires the Langswitcher plugin to be installed and enabled, and more than one language configured.
       highlight: 1
       default: 1
       options:
@@ -194,14 +194,3 @@ form:
       validate:
         type: bool
 
-    fontawesome.local:
-      type: toggle
-      label: Serve Font Awesome locally
-      help: When enabled, expects `css/fontawesome/all.min.css` to exist in the theme. Otherwise uses the official CDN.
-      highlight: 0
-      default: 0
-      options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
-      validate:
-        type: bool

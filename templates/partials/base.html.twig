@@ -3,12 +3,11 @@
 {% set accent_configured = theme_var('accent-color') %}
 {% set accent_is_hex = accent_configured and accent_configured matches '/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/' %}
 {% set accent = accent_is_hex ? accent_configured : '#2563eb' %}
-{% set fa_enabled = theme_var('fontawesome.enabled') %}
-{% set fa_local   = theme_var('fontawesome.local') %}
 {% set favicon = theme_var('custom_favicon') %}
 {% set favicon_first = (favicon is iterable and favicon|length > 0) ? favicon|first : null %}
 {% set favicon_file = favicon_first.name|default(null) %}
 {% set show_login = theme_var('login.enabled') and config.plugins.login.enabled %}
+{% set show_langswitcher = theme_var('langswitcher.enabled') and config.plugins.langswitcher.enabled and langswitcher.languages|default([])|length > 1 %}
 {% use 'blocks/base.html.twig' %}
 <!DOCTYPE html>
 <html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}"
@@ -26,7 +25,7 @@
     {% if favicon_file %}
     <link rel="icon" type="{{ get_mime_type('theme://images/favicon/' ~ favicon_file) }}" href="{{ url('theme://images/favicon/' ~ favicon_file) }}" />
     {% else %}
-    <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.png') }}" />
+    <link rel="icon" type="image/svg+xml" href="{{ url('theme://images/bastion-favicon.svg') }}" />
     {% endif %}
     <link rel="canonical" href="{{ page.url(true, true) }}" />
 
@@ -76,13 +75,7 @@
 {% block stylesheets %}
     {% do assets.addCss('theme://css/fonts.css', 100) %}
     {% do assets.addCss('theme://build/css/site.css', 90) %}
-    {% if fa_enabled %}
-        {% if fa_local %}
-            {% do assets.addCss('theme://css/fontawesome/css/all.min.css', 85) %}
-        {% else %}
-            {% do assets.addCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css', 85) %}
-        {% endif %}
-    {% endif %}
+    {% do assets.addCss('theme://css/fontawesome/css/all.min.css', 85) %}
     {% do assets.addCss('theme://css/custom.css', 1) %}
     {% do assets.addCss('theme://vendor/glightbox/glightbox.min.css', 75) %}
 {% endblock %}
@@ -124,12 +117,15 @@
                         {% endif %}
                         {% if show_login %}
                             {% if grav.user.authenticated %}
-                            <span class="flex items-center gap-1.5 px-2 text-sm"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' %}</span>
+                            <span class="flex items-center gap-1.5 px-2 text-sm">{% include 'partials/login-status.html.twig' %}</span>
                             {% else %}
                             <a href="{{ url(config.plugins.login.route) }}" class="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 hover:text-[var(--accent)] dark:text-gray-300" aria-label="{{ 'THEME_BASTION.LOGIN.LOGIN'|t|e('html_attr') }}" title="{{ 'THEME_BASTION.LOGIN.LOGIN'|t|e('html_attr') }}">
-                                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                                <i class="fa-solid fa-user" aria-hidden="true"></i>
                             </a>
                             {% endif %}
+                        {% endif %}
+                        {% if show_langswitcher %}
+                            {% include 'partials/langswitcher-menu.html.twig' %}
                         {% endif %}
                         {% include 'partials/theme-toggle.html.twig' %}
                     </div>

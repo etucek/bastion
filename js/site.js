@@ -198,3 +198,40 @@
     });
   }
 })();
+
+// Generic small dropdown (button + panel) - currently just the header
+// language switcher, but built to be reusable for any future one.
+(function() {
+  var dropdowns = document.querySelectorAll('[data-dropdown]');
+  if (!dropdowns.length) return;
+
+  function setOpen(dropdown, open) {
+    var toggle = dropdown.querySelector('[data-dropdown-toggle]');
+    var panel = dropdown.querySelector('[data-dropdown-panel]');
+    if (!toggle || !panel) return;
+    panel.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  dropdowns.forEach(function(dropdown) {
+    var toggle = dropdown.querySelector('[data-dropdown-toggle]');
+    if (!toggle) return;
+    toggle.addEventListener('click', function(event) {
+      event.stopPropagation();
+      var panel = dropdown.querySelector('[data-dropdown-panel]');
+      setOpen(dropdown, panel && panel.classList.contains('hidden'));
+    });
+  });
+
+  document.addEventListener('click', function(event) {
+    dropdowns.forEach(function(dropdown) {
+      if (!dropdown.contains(event.target)) setOpen(dropdown, false);
+    });
+  });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      dropdowns.forEach(function(dropdown) { setOpen(dropdown, false); });
+    }
+  });
+})();
