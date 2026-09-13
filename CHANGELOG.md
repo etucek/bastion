@@ -1,3 +1,16 @@
+# v0.1.23
+## 09/13/2026
+
+1. [](#improvement)
+   * `<pre>`/`<code>` used a flat dark block in both light and dark mode.
+     Ported bastion-old's adaptive GitHub-style treatment instead.
+   * Added a `login.enabled` theme setting and a login icon in the header
+     for anonymous visitors (previously only the logged-in state rendered,
+     with no way to actually reach the login page from the frontend).
+   * Added a Custom Favicon field, falling back to the theme default.
+   * Styled `partials/breadcrumbs.html.twig`'s output, which had no CSS
+     at all before now.
+
 # v0.1.22
 ## 09/13/2026
 
