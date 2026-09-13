@@ -6,6 +6,7 @@ use Grav\Common\Grav;
 use Grav\Common\Page\Pages;
 use Grav\Common\Theme;
 use Grav\Common\Twig\Twig;
+use Grav\Common\User\Interfaces\AuthorizeInterface;
 use Grav\Common\User\Interfaces\UserInterface;
 use RocketTheme\Toolbox\Event\Event;
 use RocketTheme\Toolbox\ResourceLocator\UniformResourceLocator;
@@ -111,7 +112,7 @@ class Bastion extends Theme
      */
     private static function filterPageTypes(array $types): array
     {
-        /** @var UserInterface|null $user */
+        /** @var (UserInterface&AuthorizeInterface)|null $user */
         $user = Grav::instance()['user'] ?? null;
         if (!$user) {
             return $types;
