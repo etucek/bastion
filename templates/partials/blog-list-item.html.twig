@@ -10,12 +10,9 @@
                 {{ page.title }}
             </h3>
         </a>
+        {% set summary_text = page.summary|striptags|trim %}
         <div class="prose text-base leading-normal text-gray-600 dark:text-gray-300">
-            {% if page.summary != page.content %}
-                {{ page.summary|raw }}
-            {% else %}
-                {{ page.content|raw }}
-            {% endif %}
+            {{ summary_text|length > 170 ? summary_text|slice(0, 170)|trim ~ '…' : summary_text }}
         </div>
     </div>
     <div class="px-4 pb-4 text-sm text-gray-500 dark:text-gray-400">
