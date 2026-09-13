@@ -5,6 +5,8 @@
 
 <section class="{{ page.header.section_classes|default('py-16 md:py-24') }}">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {% include 'modular/partials/title.html.twig' with {include_content: false} %}
+
         <div class="flex flex-wrap items-center gap-8 md:flex-nowrap {{ align_right ? 'md:flex-row-reverse' : '' }}">
             {% if image %}
             <div class="w-full md:w-1/2">
@@ -12,7 +14,6 @@
             </div>
             {% endif %}
             <div class="w-full {{ image ? 'md:w-1/2' : '' }}">
-                {% if page.title %}<h2 class="mb-4 text-2xl font-bold sm:text-3xl">{{ page.title }}</h2>{% endif %}
                 {% if page.content %}
                 <div class="prose max-w-none {{ page.header.colors.text_style|default('text-gray-600 dark:text-gray-300') }}">
                     {{ page.content|raw }}

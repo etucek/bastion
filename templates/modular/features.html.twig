@@ -2,12 +2,7 @@
 
 <section class="{{ page.header.section_classes|default('py-16 md:py-24') }}">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {% if page.title %}<h2 class="mb-6 text-2xl font-bold sm:text-3xl">{{ page.title }}</h2>{% endif %}
-        {% if content %}
-        <div class="prose max-w-none {{ page.header.colors.text_style|default('text-gray-600 dark:text-gray-300') }}">
-            {{ content|raw }}
-        </div>
-        {% endif %}
+        {% include 'modular/partials/title.html.twig' with {include_content: true} %}
 
         {% if page.header.features %}
         {% set vertical_classes = page.header.vertical_classes|default('grid-cols-2 sm:grid-cols-3 lg:grid-cols-4') %}

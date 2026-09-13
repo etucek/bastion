@@ -2,21 +2,24 @@
 
 <section class="{{ page.header.section_classes|default('py-16 md:py-24') }}">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {% if page.title %}<h2 class="mb-6 text-2xl font-bold sm:text-3xl">{{ page.title }}</h2>{% endif %}
+        {% include 'modular/partials/title.html.twig' with {include_content: true} %}
 
         {% set data = page.header.gallery %}
         {% set thumb_width = data.thumb.width|default(600) %}
         {% set thumb_height = data.thumb.height|default(450) %}
 
-        <div class="grid {{ data.grid_classes|default('grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4') }}">
+        <div class="grid {{ data.grid_classes|default('grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-2') }}">
             {% set gallery = md5(page.url) %}
             {% for item in data.items %}
+                <div class="group inline-flex overflow-hidden rounded-md">
                 {% set item_image = page.media[item.image] %}
                 {% set title = item.title|default('') %}
                 {% set desc = item.desc ? '.desc-' ~ md5(item.desc) : '' %}
-                {% set content = item_image.cropZoom(thumb_width, thumb_height).html(title, title) %}
+                {% set content = item_image.cropZoom(thumb_width, thumb_height).classes('duration-200 group-hover:scale-110 group-hover:brightness-110').html(title, title) %}
                 {% set image = item_image.url %}
+                {% set class = 'inline-block' %}
                 {% include 'partials/lightbox.html.twig' ignore missing %}
+                </div>
             {% endfor %}
         </div>
         <div class="hidden">

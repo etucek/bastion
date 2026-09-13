@@ -1,0 +1,27 @@
+{#
+  Shared, centered section title used by every modular template (features,
+  image-block, contact, gallery) - matches bastion-old's actual
+  modular/partials/title.html.twig. include_content: false lets a caller
+  (image-block) show page.content itself, laid out beside an image instead
+  of stacked under the title.
+#}
+{% set include_content = include_content|default(true) %}
+{% if page.title or page.header.subtitle or (include_content and page.content) %}
+<div class="mx-auto mb-16 w-5/6 text-center md:w-3/4 lg:w-2/3 xl:w-1/2">
+    {% if page.header.subtitle %}
+    <div class="text-xs font-semibold uppercase tracking-wide opacity-75 text-gray-700 dark:text-gray-300 md:text-sm">
+        {{ page.header.subtitle }}
+    </div>
+    {% endif %}
+    {% if page.title %}
+    <h2 class="mt-1 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl md:text-4xl lg:text-5xl">
+        {{ page.title }}
+    </h2>
+    {% endif %}
+    {% if include_content and page.content %}
+    <div class="prose mt-3 max-w-none text-base md:text-lg lg:text-xl {{ page.header.colors.text_style|default('text-gray-600 dark:text-gray-300') }}">
+        {{ page.content|raw }}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
