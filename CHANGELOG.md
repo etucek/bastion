@@ -1,3 +1,16 @@
+# v0.1.21
+## 09/13/2026
+
+1. [](#bugfix)
+   * blog.yaml's config tab was labeled "Post" in Admin (copy-paste leftover
+     from adapting post.yaml) - fields were always correct, only the tab
+     title was wrong.
+   * The blog listing's menu item kept an expand toggle (+) even with posts
+     excluded from the panel, since `has_children` counted them before that
+     exclusion applied. Now uses the same filter.
+   * Added the missing `title:` field to the home page's contact section
+     (content, not theme code) - it never had one.
+
 # v0.1.20
 ## 09/13/2026
 
