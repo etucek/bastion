@@ -4,17 +4,88 @@ namespace Grav\Theme;
 use Grav\Common\Grav;
 use Grav\Common\Theme;
 use Grav\Common\Twig\Twig;
+use RocketTheme\Toolbox\Event\Event;
 use RocketTheme\Toolbox\ResourceLocator\UniformResourceLocator;
 
 class Bastion extends Theme
 {
+    /**
+     * Page type (template) -> who gets to see it in the "choose page type"
+     * picker. This is purely an editorial-UX filter, not access control -
+     * every user here is trusted to edit every page; the point is just to
+     * stop e.g. a recipe editor from being offered `vlan`/`device`/`post`
+     * in a list they'll never use. A user who can't see a type can still be
+     * handed a page of that type directly (by URL, sync, CLI, etc.) and
+     * edit it normally - this only hides the type from the *creation*
+     * picker.
+     *
+     * 'super' is a marker for Grav's own admin.super permission (site
+     * owner/full admin); anything else names a plain group membership with
+     * no access implications of its own - see user/config/groups.yaml.
+     */
+    private const RESTRICTED_PAGE_TYPES = [
+        // Singleton pages - each exists exactly once, only the site owner
+        // should ever need to create one again (e.g. after a rebuild).
+        'blog'                  => 'super',
+        'vlans'                 => 'super',
+        'customers'             => 'super',
+        // Structural/system types that aren't really "content" an editor
+        // would ever choose to create.
+        'root'                  => 'super',
+        'error'                 => 'super',
+        'simplesearch_results'  => 'super',
+        'flex-objects'          => 'super',
+        'form'                  => 'super',
+        // Created repeatedly, but only by editors who own that section.
+        'recipes' => 'recipesadmins',
+        'recipe'  => 'recipesadmins',
+        'post'    => 'blogadmins',
+        'vlan'    => 'netdocsadmins',
+        'device'  => 'netdocsadmins',
+    ];
+
     public static function getSubscribedEvents(): array
     {
         return [
             'onThemeInitialized' => ['onThemeInitialized', 0],
             'onTwigLoader'       => ['onTwigLoader', 0],
             'onTwigInitialized'  => ['onTwigInitialized', 0],
+            'onAdminPageTypes'   => ['onAdminPageTypes', 0],
         ];
+    }
+
+    /**
+     * [onAdminPageTypes] Hide RESTRICTED_PAGE_TYPES from the page-type picker
+     * for anyone who isn't a super admin or in the type's assigned group.
+     * A super admin always sees every type, restricted or not.
+     *
+     * Ported from bastion-old, where a fix in the `api` plugin
+     * (AuthMiddleware::setActiveUser(), getgrav/grav-plugin-api#36) was
+     * needed before $grav['user'] reflected the real authenticated account
+     * on this event rather than guest - check that plugin's version if this
+     * silently stops filtering for everyone again.
+     */
+    public function onAdminPageTypes(Event $event): void
+    {
+        $user = $this->grav['user'] ?? null;
+        if (!$user || $user->authorize('admin.super') === true) {
+            return;
+        }
+
+        $userGroups = (array) $user->get('groups');
+        $types = $event['types'] ?? [];
+
+        foreach (self::RESTRICTED_PAGE_TYPES as $type => $group) {
+            if (!isset($types[$type])) {
+                continue;
+            }
+            if ($group !== 'super' && in_array($group, $userGroups, true)) {
+                continue;
+            }
+            unset($types[$type]);
+        }
+
+        $event['types'] = $types;
     }
 
     public function onThemeInitialized(): void
