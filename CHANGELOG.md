@@ -1,3 +1,10 @@
+# v0.1.33
+## 09/13/2026
+
+1. [](#improvement)
+   * `<pre>` background in dark mode is a bit lighter now, matching the
+     same tint used for inline code.
+
 # v0.1.32
 ## 09/13/2026
 
