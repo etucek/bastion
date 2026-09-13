@@ -10,7 +10,7 @@ accent-color: '#8428DF'
 blog-page: '/blog'
 fontawesome:
   enabled: true
-  local: false
+  local: true
 
 footer:
   copyright: "&copy; 2022 Tucek"

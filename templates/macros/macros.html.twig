@@ -11,7 +11,10 @@
   } %}
   {% set classes = depth == 0 ? default_classes : nested_classes %}
 
-  {% for p in page.children.visible %}
+  {# Individual content items (blog posts, recipes) shouldn't clutter the
+     primary nav just because their folder happens to have a numeric prefix -
+     .visible alone doesn't know that, it only looks at that prefix. #}
+  {% for p in page.children.visible if p.template not in ['post', 'recipe'] %}
     {% set active_page = (p.active or p.activeChild) ? 'text-white' : classes.li %}
     {% set has_children = p.children.visible.count > 0 %}
     <li data-menu-item data-expanded="{{ p.activeChild ? 'true' : 'false' }}" class="{{ active_page }}">

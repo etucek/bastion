@@ -118,15 +118,28 @@ button {
   outline: none;
   border-color: var(--accent);
 }
+/* The Form plugin adds no structural class of its own - a submit button is
+   whatever the page's own form config's `classes:` string says, nothing
+   more. Give every submit button sane base padding/rounding regardless
+   (form authors who set no-default-style still get a usable button, not
+   an unstyled text blob), and reserve the accent gradient look for buttons
+   that haven't opted out of it. */
+.button-wrapper button[type="submit"],
 .form-field button[type="submit"] {
+  display: inline-block;
   border-radius: 0.375rem;
   padding: 0.5rem 1.25rem;
   font-size: 0.95rem;
   font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+.button-wrapper button[type="submit"]:not(.no-default-style),
+.form-field button[type="submit"]:not(.no-default-style) {
   background: linear-gradient(to bottom right, var(--accent), var(--accent-darker));
   color: var(--accent-contrast, #ffffff);
 }
-.form-field button[type="submit"]:hover {
+.button-wrapper button[type="submit"]:not(.no-default-style):hover,
+.form-field button[type="submit"]:not(.no-default-style):hover {
   filter: brightness(0.95);
 }
 

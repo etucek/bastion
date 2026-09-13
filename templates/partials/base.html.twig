@@ -70,7 +70,7 @@
     {% do assets.addCss('theme://build/css/site.css', 90) %}
     {% if fa_enabled %}
         {% if fa_local %}
-            {% do assets.addCss('theme://css/fontawesome/all.min.css', 85) %}
+            {% do assets.addCss('theme://css/fontawesome/css/all.min.css', 85) %}
         {% else %}
             {% do assets.addCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css', 85) %}
         {% endif %}
@@ -91,10 +91,10 @@
     {{ assets.js()|raw }}
 {% endblock %}
 </head>
-<body id="top" class="{% block body_classes %}{{ body_classes }}{% endblock %} min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+<body id="top" class="{% block body_classes %}{{ body_classes }}{% endblock %} min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
     <div id="page-wrapper" class="flex flex-col flex-1">
     {% block header %}
-        <header id="header" class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur transition-shadow dark:border-gray-800 dark:bg-gray-950/90 [.scrolled_&]:shadow-sm">
+        <header id="header" class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur transition-shadow dark:border-gray-800 dark:bg-gray-900/90 [.scrolled_&]:shadow-sm">
             <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <nav class="flex h-16 items-center justify-between gap-4" aria-label="{{ 'THEME_BASTION.ARIA.PRIMARY_NAV'|t|e('html_attr') }}">
                     <button type="button" id="toggle" data-mobile-nav-toggle="toggle" aria-expanded="false"

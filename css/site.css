@@ -3,6 +3,14 @@
 /* Sets dark mode to use the .dark class, matching theme-toggle.js */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* site.js adds .overflow-hidden to <html> while the nav panel or search
+   overlay is open, to lock background scroll. Without this, removing the
+   scrollbar at that moment shifts all content (including the sticky
+   header) a few pixels right - reserve the gutter always so nothing moves. */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* --accent/--link/--focus-ring/--accent-darker are defined exactly once, in
    base.html.twig's inline <style> (always emitted, with its own built-in
    fallback) - not here. An external stylesheet redefining the same :root
@@ -27,4 +35,12 @@
   --color-gray-700: #424a53;
   --color-gray-800: #161b22;
   --color-gray-900: #0d1117;
+
+  /* Real Tailwind color tokens (not just the var(--accent) arbitrary values
+     used elsewhere in this theme's own templates), so content frontmatter
+     that sets plain Tailwind classes like `hover:bg-primary` - as this
+     site's own contact-form button config does - actually resolves to the
+     configured accent instead of silently doing nothing. */
+  --color-primary: var(--accent);
+  --color-primary-darker: var(--accent-darker);
 }
