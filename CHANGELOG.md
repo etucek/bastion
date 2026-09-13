@@ -1,3 +1,28 @@
+# v0.1.24
+## 09/13/2026
+
+1. [](#new)
+   * Added a language switcher dropdown in the header (site has 3
+     configured languages; there was previously no way to switch on the
+     frontend), with its own `langswitcher.enabled` toggle.
+
+2. [](#bugfix)
+   * Code inside `<pre>` blocks kept the inline-code background tint per
+     line in dark mode - a CSS specificity gap (`.dark .prose code`, 2
+     classes, was beating `.prose pre code`, 1 class + 2 elements,
+     regardless of source order).
+   * Logged-out header icon was `fa-right-to-bracket`; switched to
+     `fa-user` to match the established login-icon convention.
+   * Login plugin's login page (`#grav-login`) was a hardcoded light card
+     with no dark mode styling.
+   * Replaced the default Grav/Quark screenshot.jpg, thumbnail.jpg and
+     favicon.png placeholders with the site's own branding.
+
+3. [](#improvement)
+   * Removed the Font Awesome enabled/local toggles - this install only
+     ever serves it locally, so both toggles and the CDN branch were dead
+     weight.
+
 # v0.1.23
 ## 09/13/2026
 
