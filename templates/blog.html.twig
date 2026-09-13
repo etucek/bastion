@@ -1,11 +1,9 @@
 {% extends 'partials/base.html.twig' %}
 {% set blog_image = page.media.images[page.header.hero_image] ?: page.media.images|first %}
 {% set collection = page.collection() %}
-{% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page'))) %}
-{% set show_breadcrumbs = header_var('show_breadcrumbs', [page, blog])|defined(true) %}
-{% set show_sidebar    = header_var('show_sidebar',    [page, blog])|defined(false) %}
-{% set show_pagination = header_var('show_pagination', [page, blog])|defined(true) %}
-{% set has_hero_content = blog_image or page.content|striptags|trim is not empty %}
+{% set show_breadcrumbs = header_var('show_breadcrumbs', [page])|defined(true) %}
+{% set show_pagination = header_var('show_pagination', [page])|defined(true) %}
+{% set grid_classes = page.header.content.grid_classes|default('grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6') %}
 
 {% block hero %}
     {% if blog_image %}
@@ -13,11 +11,15 @@
     {% endif %}
 {% endblock %}
 
+{# No sidebar and no secondary navigation on this template, matching
+   bastion-old's blog.html.twig - a plain full-bleed card grid. #}
 {% block body %}
-    <section id="body-wrapper" class="py-10">
+    <section id="body-wrapper" class="bg-gray-100 py-12 dark:bg-gray-800">
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled %}
-                {% include 'partials/breadcrumbs.html.twig' %}
+                <div class="mb-4">
+                    {% include 'partials/breadcrumbs.html.twig' %}
+                </div>
             {% endif %}
 
             {% if not blog_image and page.title %}
@@ -32,25 +34,17 @@
                 </header>
             {% endif %}
 
-            {% embed 'partials/layout.html.twig' with {blog: page, show_sidebar: show_sidebar} %}
-                {% block item %}
-                    <div class="blog-grid grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    {% for child in collection %}
-                        {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
-                    {% endfor %}
-                    </div>
+            <div class="grid {{ grid_classes }}">
+            {% for child in collection %}
+                {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
+            {% endfor %}
+            </div>
 
-                    {% if show_pagination and config.plugins.pagination.enabled and collection.params.pagination %}
-                        <div id="listing-footer" class="mt-8">
-                            {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
-                        </div>
-                    {% endif %}
-                {% endblock %}
-
-                {% block sidebar %}
-                    {% include 'partials/sidebar.html.twig' %}
-                {% endblock %}
-            {% endembed %}
+            {% if show_pagination and config.plugins.pagination.enabled and collection.params.pagination %}
+                <div id="listing-footer" class="mt-8 flex justify-center">
+                    {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
+                </div>
+            {% endif %}
         </div>
     </section>
 {% endblock %}
