@@ -1,3 +1,15 @@
+# v0.1.28
+## 09/13/2026
+
+1. [](#bugfix)
+   * Header control borders (menu, language switcher, theme toggle) now
+     match bastion-old exactly, and the language switcher toggle button
+     has a border like the other two - it had none.
+   * Language switcher ignored plugins.langswitcher.language_display -
+     both the button label and dropdown items were hardcoded to one
+     format regardless of that setting. Now reads it, matching the
+     plugin's own short/long partials.
+
 # v0.1.27
 ## 09/13/2026
 
