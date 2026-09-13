@@ -1,3 +1,21 @@
+# v0.1.26
+## 09/13/2026
+
+1. [](#new)
+   * Footer is now configurable in theme settings: copyright text, a
+     footer nav menu (with its own show/hide toggle), and social links
+     (with their own show/hide toggle) - previously only editable by
+     hand-editing bastion.yaml.
+   * Wired up `bastion_gallery_section()` (bastion-gallery plugin) so the
+     per-page gallery field it already injects into every page blueprint
+     actually renders - it was never called from any template.
+
+2. [](#bugfix)
+   * Header Transparent / Header Text Light / Header Text Dark did
+     nothing - config existed, no CSS ever read it. Implemented: the
+     header now sits transparently over a page's hero image until
+     scrolled, with white/near-black text as configured.
+
 # v0.1.25
 ## 09/13/2026
 
