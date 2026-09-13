@@ -113,7 +113,10 @@ class Bastion extends Theme
     {
         /** @var UserInterface|null $user */
         $user = Grav::instance()['user'] ?? null;
-        if (!$user || $user->authorize('admin.super') === true) {
+        if (!$user) {
+            return $types;
+        }
+        if ($user->authorize('admin.super') === true) {
             return $types;
         }
 
