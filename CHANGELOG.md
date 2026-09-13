@@ -1,3 +1,14 @@
+# v1.0.1
+## 09/13/2026
+
+1. [](#new)
+   * Ported onAdminPageTypes from bastion-old: the "choose page type"
+     picker in Admin now hides page types (vlan, device, post, recipe,
+     recipes, and singleton/system types) from anyone outside the
+     matching group (netdocsadmins/blogadmins/recipesadmins) or a super
+     admin. The groups already existed in user/config/groups.yaml; the
+     theme just never read them.
+
 # v1.0.0
 ## 09/13/2026
 
