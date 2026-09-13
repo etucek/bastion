@@ -1,3 +1,15 @@
+# v0.1.18
+## 09/13/2026
+
+1. [](#bugfix)
+   * Every modular template had its own left-aligned title instead of
+     sharing bastion-old's centered modular/partials/title.html.twig
+     (narrow column, optional subtitle, title, optional content). Ported
+     it and switched features/image-block/contact/gallery to use it.
+     Also compared gallery.html.twig against bastion-old's real version
+     for the first time and added the hover scale/brightness effect and
+     corrected default grid classes.
+
 # v0.1.17
 ## 09/13/2026
 
