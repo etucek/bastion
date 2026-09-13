@@ -126,6 +126,10 @@ class Bastion extends Theme
         return "rgba({$r}, {$g}, {$b}, {$a})";
     }
 
+    /**
+     * @param string $hex
+     * @return array{0: int, 1: int, 2: int}
+     */
     private function parseHex(string $hex): array
     {
         $hex = ltrim($hex, '#');
