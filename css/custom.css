@@ -101,6 +101,45 @@
   display: none;
 }
 
+/* Header Transparent / Header Text Light / Header Text Dark (blueprints.yaml
+   header-transparent/header-dark/header-light) - these toggles existed as
+   config with no implementation at all (no CSS ever read the body classes
+   they produce). #header:has(+ .hero-section) rather than duplicating
+   hero.html.twig's own display logic here: modular pages render their hero
+   from a modular child page, not page.header.hero, so that logic can't be
+   replicated from a body-class computed in base.html.twig anyway - the DOM
+   adjacency is the one signal available in every case. Reuses the existing
+   .scrolled class (already toggled by site.js for the header's shadow) so
+   no new JS is needed. */
+body.header-transparent #header:has(+ .hero-section) {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+body:not(.header-animated) #header:has(+ .hero-section) {
+  transition: none;
+}
+body.header-transparent.scrolled #header:has(+ .hero-section) {
+  position: sticky;
+}
+body.header-transparent:not(.scrolled) #header:has(+ .hero-section) {
+  background: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+body.header-transparent.header-dark:not(.scrolled) #header:has(+ .hero-section),
+body.header-transparent.header-dark:not(.scrolled) #header:has(+ .hero-section) * {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+body.header-transparent.header-light:not(.scrolled) #header:has(+ .hero-section),
+body.header-transparent.header-light:not(.scrolled) #header:has(+ .hero-section) * {
+  color: #111827;
+  border-color: rgba(17, 24, 39, 0.3);
+}
+
 /* Tailwind's preflight sets buttons to cursor: default (matching native
    browser behavior) rather than cursor: pointer. Every button in this theme
    is acting as a clickable control, not a native form submit, so restore

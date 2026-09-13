@@ -53,6 +53,8 @@
         </div>
         {% endif %}
 
+        {{ bastion_gallery_section() }}
+
         {% if show_pagination %}
         <nav class="mt-10 flex justify-center gap-3 border-t border-gray-200 pt-6 text-center dark:border-gray-800" aria-label="{{ 'THEME_BASTION.ARIA.POST_NAVIGATION'|t|e('html_attr') }}">
             {% if page.prevSibling %}

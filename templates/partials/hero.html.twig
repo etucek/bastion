@@ -19,7 +19,7 @@
 {% set alignment = hero.alignment|default('left') %}
 {% set align_items = alignment == 'center' ? 'items-center' : (alignment == 'right' ? 'items-end' : 'items-start') %}
 {% set text_align = alignment == 'center' ? 'text-center' : (alignment == 'right' ? 'text-right' : 'text-left') %}
-<section class="relative overflow-hidden {{ hero.padding|default('py-24 md:py-32') }}"
+<section class="relative overflow-hidden {{ hero_image ? 'hero-section' }} {{ hero.padding|default('py-24 md:py-32') }}"
          {% if hero_image %}style="background-image:url('{{ hero_image.url }}');background-size:cover;background-position:center;"{% endif %}>
     {% if hero_image %}
     <div class="absolute inset-0" style="background-image: linear-gradient(to {{ direction }}, rgba(34,34,34,{{ gradient_from }}), rgba(34,34,34,{{ gradient_to }}));"></div>

@@ -16,10 +16,13 @@ langswitcher:
 
 footer:
   copyright: "&copy; 2022 Tucek"
+  menu_enabled: false
+  menu: []
+  social_enabled: true
   social:
-    - { network: twitter, link: 'https://twitter.com/etucek' }
-    - { network: github, link: 'https://github.com/etucek' }
-    - { network: linkedin, link: 'https://www.linkedin.com/in/emir-tucek' }
+    - { network: twitter, link: 'https://twitter.com/etucek', newtab: true }
+    - { network: github, link: 'https://github.com/etucek', newtab: true }
+    - { network: linkedin, link: 'https://www.linkedin.com/in/emir-tucek', newtab: true }
 
 tailwind4:
   input: css/site.css

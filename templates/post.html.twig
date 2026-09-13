@@ -38,6 +38,8 @@
             {{ page.content|raw }}
         </div>
 
+        {{ bastion_gallery_section() }}
+
         {% if page.header.comments and config.plugins['comments-pro'].enabled %}
             {% include 'partials/comments-section.html.twig' ignore missing %}
         {% endif %}

@@ -28,6 +28,7 @@ en:
     ARIA:
       PRIMARY_NAV: "Primary"
       MOBILE_NAV: "Mobile"
+      FOOTER_NAV: "Footer"
       MENU: "Menu"
       OPEN_MENU: "Open menu"
       CLOSE_MENU: "Close menu"

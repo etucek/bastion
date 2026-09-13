@@ -149,6 +149,80 @@ form:
       validate:
         type: bool
 
+    footer.copyright:
+      type: editor
+      label: Copyright
+      help: Markdown/HTML shown next to the logo at the bottom of the footer.
+      size: large
+
+    footer.menu_enabled:
+      type: toggle
+      label: Show Footer Links
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    footer.menu:
+      type: list
+      label: Footer Links
+      collapsed: true
+      style: vertical
+      fields:
+        .label:
+          type: text
+          label: Label
+        .link:
+          type: text
+          label: Link
+        .newtab:
+          type: toggle
+          label: Open in New Tab
+          default: 0
+          options:
+            1: PLUGIN_ADMIN.ENABLED
+            0: PLUGIN_ADMIN.DISABLED
+          validate:
+            type: bool
+
+    footer.social_enabled:
+      type: toggle
+      label: Show Social Links
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    footer.social:
+      type: list
+      label: Social Links
+      collapsed: true
+      style: vertical
+      fields:
+        .network:
+          type: text
+          label: Network
+          help: 'A Font Awesome brand icon name, e.g. twitter, github, linkedin, facebook, instagram, youtube, mastodon'
+        .link:
+          type: text
+          label: Link
+          placeholder: 'https://socialnetwork.com/username'
+        .newtab:
+          type: toggle
+          label: Open in New Tab
+          default: 1
+          options:
+            1: PLUGIN_ADMIN.ENABLED
+            0: PLUGIN_ADMIN.DISABLED
+          validate:
+            type: bool
+
     blog_section:
       type: section
       title: Blog
