@@ -1,9 +1,9 @@
 {
-  "name": "etucek/bastion-theme",
+  "name": "etucek/bastion",
   "type": "grav-theme",
   "description": "A Tailwind CSS 4 Grav theme, built independently from Quark 2, compiled with the tailwind4 plugin - no Node.js toolchain required.",
   "keywords": ["grav", "theme", "bastion", "tailwind", "tailwindcss"],
-  "homepage": "https://github.com/etucek/bastion-theme",
+  "homepage": "https://github.com/etucek/bastion",
   "license": "MIT",
   "authors": [
     {
@@ -12,7 +12,7 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/etucek/bastion-theme/issues"
+    "issues": "https://github.com/etucek/bastion/issues"
   },
   "require": {
     "php": ">=8.3.0"

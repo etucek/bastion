@@ -7,9 +7,9 @@ icon: bolt
 author:
   name: Emir Tucek
   email: emir@tucek.me
-homepage: https://github.com/etucek/bastion-theme
+homepage: https://github.com/etucek/bastion
 keywords: grav, theme, bastion, tailwind, tailwindcss
-bugs: https://github.com/etucek/bastion-theme/issues
+bugs: https://github.com/etucek/bastion/issues
 license: MIT
 compatibility:
   grav: ['2.1']
@@ -36,7 +36,7 @@ form:
       type: colorpicker
       label: Accent Color
       help: Tints links and focus rings. Leave blank for the pure monochrome palette.
-      default: '#242424'
+      default: '#A664E8'
 
     header_section:
       type: section
