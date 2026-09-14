@@ -1,3 +1,10 @@
+# v1.1.1
+## 09/14/2026
+
+1. [](#bugfix)
+   * Accent Color setting was never actually applied - `bastion.yaml` (the theme's own shipped defaults, which is what `theme_var()` resolves at runtime) still hardcoded the old `#242424` after `blueprints.yaml`'s form field default was changed to `#A664E8`; only the latter got updated, so the configured color was silently ignored. Synced the two.
+   * The mobile nav dropdown panel (`bg-gray-800/95` in `base.html.twig`) and its menu-item text/hover colors (`macros.html.twig`) were hardcoded dark with no light-mode variant, so it rendered as a dark floating panel regardless of the selected theme instead of adapting like the rest of the site. Added light-mode classes alongside the existing `dark:` ones, and gave the item divider (`navigation.html.twig`) the same treatment.
+
 # v1.1.0
 ## 09/14/2026
 

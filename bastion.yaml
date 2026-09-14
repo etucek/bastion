@@ -12,7 +12,7 @@ header-dark: false
 header-light: false
 sticky-footer: true
 theme-mode: auto
-accent-color: '#242424'
+accent-color: '#A664E8'
 blog-page: '/blog'
 
 login:
