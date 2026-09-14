@@ -1,3 +1,9 @@
+# v1.1.5
+## 09/14/2026
+
+1. [](#improved)
+   * Rebuilt `build/css/site.css` for `bastion-netdocs` v1.4.5's `device.html.twig` change (Created/Modified moved under the title, stacked).
+
 # v1.1.4
 ## 09/14/2026
 
