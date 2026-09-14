@@ -14,7 +14,7 @@
 <div class="relative" data-dropdown>
     <button type="button" data-dropdown-toggle aria-haspopup="listbox" aria-expanded="false"
             aria-label="{{ 'THEME_BASTION.LANGUAGES'|t|e('html_attr') }}"
-            class="flex h-9 items-center gap-1 rounded-md border border-gray-300 px-2 text-sm text-gray-600 hover:text-[var(--accent)] dark:border-gray-600 dark:text-gray-300">
+            class="flex h-9 items-center gap-1 rounded-md border border-gray-300 px-2 text-sm text-gray-600 hover:text-primary dark:border-gray-600 dark:text-gray-300">
         <i class="fa-solid fa-globe" aria-hidden="true"></i>
         <span class="{{ display_format == 'short' ? 'uppercase' : '' }}">
             {{ display_format == 'short' ? langswitcher.current|upper : native_name(langswitcher.current)|capitalize }}
@@ -34,7 +34,7 @@
     {% if show_language %}
     <li role="option" aria-selected="{{ active_class == 'active' ? 'true' : 'false' }}">
         <a href="{{ lang_url ~ uri.params ~ (uri.query|length > 1 ? '?' ~ uri.query) }}"
-           class="block px-3 py-1.5 transition {{ active_class == 'active' ? 'font-medium text-[var(--accent)]' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700' }}">
+           class="block px-3 py-1.5 transition {{ active_class == 'active' ? 'font-medium text-primary' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700' }}">
             {{ display_format == 'short' ? language|upper : native_name(language)|capitalize }}
         </a>
     </li>

@@ -5,7 +5,7 @@
         <nav class="mb-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-gray-600 md:justify-start dark:text-gray-400" aria-label="{{ 'THEME_BASTION.ARIA.FOOTER_NAV'|t|e('html_attr') }}">
             {% for item in footer.menu %}
                 <a href="{{ item.link }}" {% if item.newtab %}target="_blank" rel="noopener"{% endif %}
-                   class="hover:text-[var(--accent)]">{{ item.label }}</a>
+                   class="hover:text-primary">{{ item.label }}</a>
             {% endfor %}
         </nav>
         {% endif %}
@@ -15,7 +15,7 @@
             {% for item in footer.social %}
                 {% set brand = item.network|replace({'__brands': ''}) %}
                 <a href="{{ item.link }}" aria-label="{{ brand }}" {% if item.newtab|default(true) %}target="_blank" rel="noopener"{% endif %}
-                   class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-gray-700 opacity-90 transition hover:opacity-100 hover:text-[var(--accent)] dark:bg-gray-700 dark:text-gray-200">
+                   class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-gray-700 opacity-90 transition hover:opacity-100 hover:text-primary dark:bg-gray-700 dark:text-gray-200">
                     <i class="fa-brands fa-{{ brand }}" aria-hidden="true"></i>
                 </a>
             {% endfor %}

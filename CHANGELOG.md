@@ -1,3 +1,9 @@
+# v1.1.2
+## 09/14/2026
+
+1. [](#improved)
+   * Switched the theme's own accent-colored links/hovers (`text-[var(--accent)]`, `hover:text-[var(--accent)]`, `hover:border-[var(--accent)]`) to the real `primary` Tailwind color token (`text-primary`, `hover:text-primary`, `hover:border-primary`) instead of the arbitrary-value syntax. `--color-primary: var(--accent)` in `css/site.css` was already declared for this purpose - it just wasn't used by the theme's own templates yet, only relied on by content frontmatter. No visual change; picks up standard Tailwind opacity-modifier/tooling support for free.
+
 # v1.1.1
 ## 09/14/2026
 

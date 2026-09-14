@@ -102,7 +102,7 @@
                     <button type="button" id="toggle" data-mobile-nav-toggle="toggle" aria-expanded="false"
                             data-label-open="{{ 'THEME_BASTION.MENU.OPEN'|t|e('html_attr') }}"
                             data-label-close="{{ 'THEME_BASTION.MENU.CLOSE'|t|e('html_attr') }}"
-                            class="relative -ml-2 inline-flex items-center gap-2 rounded-full border border-gray-300 py-1.5 pl-2 pr-3 hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-gray-600"
+                            class="relative -ml-2 inline-flex items-center gap-2 rounded-full border border-gray-300 py-1.5 pl-2 pr-3 hover:border-primary hover:text-primary dark:border-gray-600"
                             aria-label="{{ 'THEME_BASTION.MENU.OPEN'|t|e('html_attr') }}">
                         <span class="inline-flex h-5 w-5 items-center justify-center">
                             <span data-mobile-nav-icon="closed"><i class="fa-solid fa-bars" aria-hidden="true"></i></span>
@@ -112,7 +112,7 @@
                     </button>
                     <div class="flex items-center gap-1">
                         {% if config.plugins.simplesearch.enabled %}
-                        <button type="button" data-search-toggle="open" class="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 hover:text-[var(--accent)] dark:text-gray-300" aria-label="{{ 'THEME_BASTION.SEARCH.OPEN'|t|e('html_attr') }}">
+                        <button type="button" data-search-toggle="open" class="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 hover:text-primary dark:text-gray-300" aria-label="{{ 'THEME_BASTION.SEARCH.OPEN'|t|e('html_attr') }}">
                             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                         </button>
                         {% endif %}
@@ -120,7 +120,7 @@
                             {% if grav.user.authenticated %}
                             <span class="flex items-center gap-1.5 px-2 text-sm">{% include 'partials/login-status.html.twig' %}</span>
                             {% else %}
-                            <a href="{{ url(config.plugins.login.route) }}" class="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 hover:text-[var(--accent)] dark:text-gray-300" aria-label="{{ 'THEME_BASTION.LOGIN.LOGIN'|t|e('html_attr') }}" title="{{ 'THEME_BASTION.LOGIN.LOGIN'|t|e('html_attr') }}">
+                            <a href="{{ url(config.plugins.login.route) }}" class="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 hover:text-primary dark:text-gray-300" aria-label="{{ 'THEME_BASTION.LOGIN.LOGIN'|t|e('html_attr') }}" title="{{ 'THEME_BASTION.LOGIN.LOGIN'|t|e('html_attr') }}">
                                 <i class="fa-solid fa-user" aria-hidden="true"></i>
                             </a>
                             {% endif %}

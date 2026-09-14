@@ -15,8 +15,8 @@
                 {% if page.header.variation == 'vertical' %}
                     <div class="group flex flex-col rounded-md transition duration-300 hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-800">
                         <a class="flex flex-col items-center p-3 text-center {{ link ? '' : 'pointer-events-none' }}" href="{{ link }}">
-                            {% if feature.icon %}<i class="{{ feature.icon|fa_icon }} mb-2 text-4xl text-gray-500 group-hover:text-[var(--accent)]" aria-hidden="true"></i>{% endif %}
-                            {% if label %}<h3 class="mb-1 text-base font-semibold group-hover:text-[var(--accent)] md:text-lg">{{ label }}</h3>{% endif %}
+                            {% if feature.icon %}<i class="{{ feature.icon|fa_icon }} mb-2 text-4xl text-gray-500 group-hover:text-primary" aria-hidden="true"></i>{% endif %}
+                            {% if label %}<h3 class="mb-1 text-base font-semibold group-hover:text-primary md:text-lg">{{ label }}</h3>{% endif %}
                             {% if feature.text %}<p class="prose text-sm text-gray-500 dark:text-gray-400">{{ feature.text }}</p>{% endif %}
                         </a>
                     </div>
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <a class="hover:text-[var(--accent)] {{ link ? '' : 'pointer-events-none' }}" href="{{ link }}">
+                            <a class="hover:text-primary {{ link ? '' : 'pointer-events-none' }}" href="{{ link }}">
                                 {% if label %}<h3 class="mb-2 text-lg font-bold">{{ label }}</h3>{% endif %}
                             </a>
                             {% if feature.text %}<p class="prose text-sm text-gray-500 dark:text-gray-400">{{ feature.text }}</p>{% endif %}
