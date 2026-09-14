@@ -1,3 +1,9 @@
+# v1.1.0
+## 09/14/2026
+
+1. [](#other)
+   * Declared `color-tools` (`>=1.1.1`), `shortcode-core` (`>=4.0.0`) and `bastion-gallery` (`>=3.1.0`) as explicit dependencies in `blueprints.yaml`.
+
 # v1.0.8
 ## 09/13/2026
 
