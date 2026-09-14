@@ -1,3 +1,9 @@
+# v1.1.4
+## 09/14/2026
+
+1. [](#improved)
+   * Rebuilt `build/css/site.css` to pick up the new Created/Modified date classes added to `bastion-netdocs`'s `device.html.twig` (v1.4.4) - the tailwind4 build scans every enabled plugin's templates automatically, this was just the artifact catching up.
+
 # v1.1.3
 ## 09/14/2026
 
