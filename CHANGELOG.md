@@ -1,3 +1,9 @@
+# v1.1.3
+## 09/14/2026
+
+1. [](#bugfix)
+   * `default.html.twig` was the only content template still capping its article at `prose mx-auto max-w-3xl`, instead of `prose max-w-none` like `post`, `recipe`, `blog` and `modular/image-block` all already use - so a plain page rendered noticeably narrower than everything else, including `vlans`/`modular` which fill the shared `max-w-6xl` container from `base.html.twig` with no extra cap of their own. Switched to `max-w-none` to match.
+
 # v1.1.2
 ## 09/14/2026
 
