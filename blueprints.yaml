@@ -1,7 +1,7 @@
 name: Bastion
 slug: bastion
 type: theme
-version: 1.2.6
+version: 1.2.7
 description: A Tailwind CSS 4 Grav theme, built independently from Quark 2, compiled with the tailwind4 plugin - no Node.js toolchain required.
 icon: bolt
 author:

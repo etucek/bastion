@@ -1,3 +1,11 @@
+# v1.2.7
+## 09/15/2026
+
+1. [](#bugfix)
+   * The mobile nav toggle's "Menu"/"Close" text label had no responsive classes at all, so it showed on every screen size instead of only desktop - added `hidden md:inline`, matching the icon-only-on-mobile pattern the rest of the header already uses.
+2. [](#improved)
+   * Gave the mobile nav panel's scrollbar the same slim treatment `.prose pre` code blocks already use (`scrollbar-width: thin` + a `::-webkit-scrollbar` override) instead of the platform default, which was wide enough to visibly shrink the menu items on platforms without an overlay scrollbar.
+
 # v1.2.6
 ## 09/15/2026
 

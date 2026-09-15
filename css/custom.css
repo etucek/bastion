@@ -406,6 +406,31 @@ button {
 .dark .prose pre::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.25);
 }
+
+/* Same slim-scrollbar treatment as .prose pre above, but vertical: the
+   mobile nav panel's default browser scrollbar (overflow-y-auto, content
+   taller than max-h-[75vh]) is otherwise wide enough to visibly shrink the
+   menu items' width on platforms without an overlay scrollbar. */
+#mobile-nav-panel {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+}
+.dark #mobile-nav-panel {
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+#mobile-nav-panel::-webkit-scrollbar {
+  width: 0.5rem;
+}
+#mobile-nav-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+#mobile-nav-panel::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.25);
+}
+.dark #mobile-nav-panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+}
 .prose pre code,
 .dark .prose pre code {
   font-size: 100%;
