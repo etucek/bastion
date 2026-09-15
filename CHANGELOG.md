@@ -1,3 +1,9 @@
+# v1.2.0
+## 09/15/2026
+
+1. [](#new)
+   * Added "Transparent Header" and "Header Text" (auto/light/dark) to a page's Hero tab, under Display - lets a page with a hero image opt into a header that floats transparently over the image (light or dark text/icons, your choice, to stay readable against that specific image) and settles back into the site's normal header style once scrolled. Reuses the existing site-wide `header-transparent`/`header-dark`/`header-light` CSS and scroll-transition logic (`css/custom.css`, `js/site.js`) - `body_class()`'s per-page/theme-config fallback already supported this, it just had no per-page UI wired up to it yet. Additive: a page can turn these on over the site default, not force them off. Only applies to `page.header.hero`, same as the rest of the Hero tab - not a modular page's hero, which comes from a separate child page and was already outside what the site-wide toggle could see either.
+
 # v1.1.5
 ## 09/14/2026
 

@@ -70,6 +70,30 @@ form:
       label: THEME_BASTION.ADMIN.HERO_PADDING_CLASSES
       default: 'py-24 md:py-32'
 
+    header.hero.header_transparent:
+      toggleable: true
+      type: toggle
+      label: THEME_BASTION.ADMIN.HERO_HEADER_TRANSPARENT
+      help: THEME_BASTION.ADMIN.HERO_HEADER_TRANSPARENT_HELP
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+
+    header.hero.header_text:
+      toggleable: true
+      type: select
+      label: THEME_BASTION.ADMIN.HERO_HEADER_TEXT
+      help: THEME_BASTION.ADMIN.HERO_HEADER_TEXT_HELP
+      default: auto
+      options:
+        auto: THEME_BASTION.ADMIN.HERO_HEADER_TEXT_AUTO
+        light: THEME_BASTION.ADMIN.HERO_HEADER_TEXT_LIGHT
+        dark: THEME_BASTION.ADMIN.HERO_HEADER_TEXT_DARK
+
     section_overlay:
       type: section
       title: THEME_BASTION.ADMIN.HERO_OVERLAY_TITLE
