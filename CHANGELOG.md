@@ -1,3 +1,9 @@
+# v1.2.4
+## 09/15/2026
+
+1. [](#bugfix)
+   * Fixed the transparent header "pushing" content down when scrolling past the threshold (smooth scrolling back up, jarring going down). Root cause: the header switched `position: absolute` -> `sticky` at the `.scrolled` boundary, and that switch re-inserts the header's own height into document flow in one frame - shifting the hero/content down by ~64px instantly. `position` can't be transitioned either way, so no `transition:` fix could smooth it out. Changed to a constant `position: fixed` for the whole hero-transparent state instead of toggling - fixed never reserves flow space, so there's no insertion to jump on in the first place, going down or up.
+
 # v1.2.3
 ## 09/15/2026
 

@@ -121,8 +121,14 @@ h1, h2, h3, h4, h5, h6 {
    adjacency is the one signal available in every case. Reuses the existing
    .scrolled class (already toggled by site.js for the header's shadow) so
    no new JS is needed. */
+/* Fixed, not just absolute-then-sticky: switching position modes at the
+   .scrolled threshold (previously absolute -> sticky) re-inserted the
+   header's own height into document flow at that exact instant, pushing
+   the hero/content down by ~64px in one frame - a visible "push" scrolling
+   down. Fixed never reserves flow space either way, so there's nothing
+   left to insert - only the background/color fade below remains. */
 body.header-transparent #header:has(+ .hero-section) {
-  position: absolute;
+  position: fixed;
   inset-inline: 0;
   top: 0;
   transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -137,9 +143,6 @@ body.header-transparent #header:has(+ .hero-section) * {
 body:not(.header-animated) #header:has(+ .hero-section),
 body:not(.header-animated) #header:has(+ .hero-section) * {
   transition: none;
-}
-body.header-transparent.scrolled #header:has(+ .hero-section) {
-  position: sticky;
 }
 body.header-transparent:not(.scrolled) #header:has(+ .hero-section) {
   background: transparent;
