@@ -43,6 +43,8 @@ en:
       OPEN: "Search"
       CLOSE: "Close search"
       HEADLINE: "Search"
+    ERROR:
+      BACK_HOME: "Back to homepage"
     LOGIN:
       LOGIN: "Login"
       LOGOUT: "Logout"

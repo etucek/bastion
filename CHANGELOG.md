@@ -1,3 +1,9 @@
+# v1.3.0
+## 09/15/2026
+
+1. [](#new)
+   * Redesigned `error.html.twig` - it was completely unstyled (bare `<h1>`/`<p>`, plus a `.btn` class that no longer exists anywhere in the theme's CSS). Now shows a large muted status code, the translated error message, an accent-colored "Back to homepage" button, and a "Search" button that opens the existing search overlay (when simplesearch is enabled) - fully light/dark aware, matching the rest of the theme. Purely driven by the same two data points the old template used (`page.header.http_response_code`, `page.content`), so it isn't tied to 404 specifically.
+
 # v1.2.8
 ## 09/15/2026
 
