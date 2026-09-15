@@ -1,3 +1,9 @@
+# v1.2.8
+## 09/15/2026
+
+1. [](#improved)
+   * The mobile menu toggle's pill border now hides alongside its "Menu"/"Close" text label below the `md` breakpoint (`border-0 md:border`), instead of leaving an empty pill outline around a bare icon - matches the icon-only look of its sibling header buttons (search, login) at that size.
+
 # v1.2.7
 ## 09/15/2026
 
