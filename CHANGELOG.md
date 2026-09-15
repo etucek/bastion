@@ -1,3 +1,9 @@
+# v1.2.3
+## 09/15/2026
+
+1. [](#improved)
+   * Smoothed the transparent-header-to-scrolled transition: `color` and `backdrop-filter` were never in the header's `transition:` list, so the header-dark/header-light text color and the backdrop blur snapped instantly at the `.scrolled` threshold while background-color/border-color/box-shadow faded - inconsistent and jarring. Also added a `transition` to the header's own descendants (nav links, icons, buttons), since the header-dark/header-light override sets `color` on each of them individually via `#header:has(+ .hero-section) *`, and a child element doesn't inherit its parent's `transition` property.
+
 # v1.2.2
 ## 09/15/2026
 

@@ -125,9 +125,17 @@ body.header-transparent #header:has(+ .hero-section) {
   position: absolute;
   inset-inline: 0;
   top: 0;
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, color 0.3s ease-in-out;
 }
-body:not(.header-animated) #header:has(+ .hero-section) {
+/* The header-dark/header-light override below sets `color` on every
+   descendant (nav links, icons, buttons), not just #header itself - each of
+   those needs its own transition so its color change fades along with the
+   header's background instead of snapping the instant .scrolled toggles. */
+body.header-transparent #header:has(+ .hero-section) * {
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+body:not(.header-animated) #header:has(+ .hero-section),
+body:not(.header-animated) #header:has(+ .hero-section) * {
   transition: none;
 }
 body.header-transparent.scrolled #header:has(+ .hero-section) {
