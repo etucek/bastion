@@ -178,16 +178,6 @@ button {
   cursor: pointer;
 }
 
-/* Nav panel: a single toggle-revealed menu used at every viewport width
-   (no separate always-visible desktop bar) - nested children render inline,
-   indented, rather than as hover popovers. */
-.dropmenu .dropmenu-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-  padding-left: 1rem;
-}
-
 /* simplesearch's searchbox partial ships no CSS of its own
    (plugins.simplesearch.built_in_css: false) - these three classes are its
    entire contract. */

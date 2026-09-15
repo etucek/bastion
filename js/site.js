@@ -6,70 +6,6 @@
 
   var body = document.body;
 
-  // Mark nav items that have children so CSS can draw a caret
-  document.querySelectorAll('.dropmenu li').forEach(function (li) {
-    if (li.querySelector(':scope > ul')) li.classList.add('has-children');
-  });
-
-  // Keep dropdown panels inside the viewport. Panels are laid out even while
-  // hidden, so their position can be measured up front and re-checked on
-  // resize; nothing runs while the visitor is hovering. querySelectorAll
-  // returns document order, so a parent panel is flipped before the nested
-  // panels hanging off it are measured.
-  var EDGE_GAP = 8;
-  var panels = document.querySelectorAll('.dropmenu li > ul');
-
-  function fitPanels() {
-    if (!panels.length) return;
-    var vw = document.documentElement.clientWidth;
-    panels.forEach(function (ul) { ul.parentNode.classList.remove('flip-x'); });
-    panels.forEach(function (ul) {
-      var li = ul.parentNode;
-      var rtl = getComputedStyle(ul).direction === 'rtl';
-      var rect = ul.getBoundingClientRect();
-      if (!(rtl ? rect.left < EDGE_GAP : rect.right > vw - EDGE_GAP)) return;
-      li.classList.add('flip-x');
-      // Never trade one clipped edge for the other. On a wrapped nav the last
-      // item can sit at the far start, where flipping would push it off the
-      // opposite side.
-      var flipped = ul.getBoundingClientRect();
-      if (rtl ? flipped.right > vw - EDGE_GAP : flipped.left < EDGE_GAP) {
-        li.classList.remove('flip-x');
-      }
-    });
-  }
-
-  var fitTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(fitTimer);
-    fitTimer = setTimeout(fitPanels, 100);
-  });
-  fitPanels();
-  // Web fonts can land after first paint and change the panel widths
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPanels);
-
-  // Click-to-open on touch devices (hover is flaky on iOS)
-  var isTouch = matchMedia('(hover: none)').matches;
-  if (isTouch) {
-    document.querySelectorAll('.dropmenu li.has-children > a').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        var li = a.parentNode;
-        if (!li.classList.contains('open')) {
-          e.preventDefault();
-          document.querySelectorAll('.dropmenu li.open').forEach(function (other) {
-            if (other !== li && !other.contains(li)) other.classList.remove('open');
-          });
-          li.classList.add('open');
-        }
-      });
-    });
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('.dropmenu')) {
-        document.querySelectorAll('.dropmenu li.open').forEach(function (li) { li.classList.remove('open'); });
-      }
-    });
-  }
-
   // Mobile menu toggle - header hamburger doubles as the close button, its
   // icon morphs bars <-> xmark in place, plus backdrop click.
   var toggle = document.getElementById('toggle');
@@ -116,7 +52,7 @@
     item.dataset.expanded = expanded ? 'true' : 'false';
 
     var panel = item.querySelector(':scope > [data-menu-panel]');
-    if (panel) panel.classList.toggle('hidden', !expanded);
+    if (panel) panel.classList.toggle('open', expanded);
 
     var iconOpen = menuToggle.querySelector('[data-menu-icon-open]');
     var iconClosed = menuToggle.querySelector('[data-menu-icon-closed]');
@@ -209,7 +145,7 @@
     var toggle = dropdown.querySelector('[data-dropdown-toggle]');
     var panel = dropdown.querySelector('[data-dropdown-panel]');
     if (!toggle || !panel) return;
-    panel.classList.toggle('hidden', !open);
+    panel.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
@@ -219,7 +155,7 @@
     toggle.addEventListener('click', function(event) {
       event.stopPropagation();
       var panel = dropdown.querySelector('[data-dropdown-panel]');
-      setOpen(dropdown, panel && panel.classList.contains('hidden'));
+      setOpen(dropdown, panel && !panel.classList.contains('open'));
     });
   });
 

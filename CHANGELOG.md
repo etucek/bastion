@@ -1,3 +1,10 @@
+# v1.2.5
+## 09/15/2026
+
+1. [](#improved)
+   * Language switcher dropdown and the mobile nav's nested-submenu accordion both used a hard `hidden` (display:none) toggle, snapping open/closed instantly - unlike the mobile nav overlay and search overlay, which already fade via `invisible`/`opacity-0`/`opacity-100`. Switched both to the same fade idiom: the dropdown now fades + slides in slightly (`[&.open]:visible [&.open]:opacity-100 [&.open]:translate-y-0`), and the submenu accordion animates open via `max-height`/`opacity` instead of popping.
+   * Removed the `.dropmenu`/`.dropmenu-panel`/`.flip-x`/`.has-children` mechanism from `site.js` and `custom.css` (~35 lines of JS, one CSS rule) - leftover from before the nav was rewritten to the current `data-menu-*` attribute system. `class="dropmenu"` was never applied anywhere in any template, so `document.querySelectorAll('.dropmenu ...')` always returned nothing; it ran as a no-op on every page load.
+
 # v1.2.4
 ## 09/15/2026
 
