@@ -1,3 +1,9 @@
+# v1.2.2
+## 09/15/2026
+
+1. [](#other)
+   * Removed five templates nothing referenced anywhere in the theme (confirmed via a full repo-wide grep, including all plugins): `partials/archives.html.twig` and `partials/taxonomylist.html.twig` (leftover sidebar widgets from before this fork dropped the sidebar entirely - the Archives/TaxonomyList plugins' own templates at the same path are unaffected), `partials/relatedpages.html.twig` (same - nothing ever called the relatedpages plugin's data), `partials/blog-item.html.twig` (pre-Tailwind leftover from the original upstream fork, using old classes like `content-item`/`h-entry`/`e-content`/`btn btn-ghost` - superseded by `blog-list-item.html.twig`), and `partials/blog/page-summary.html.twig` (only ever included by the now-removed `blog-item.html.twig`).
+
 # v1.2.1
 ## 09/15/2026
 
