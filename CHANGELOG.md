@@ -1,3 +1,12 @@
+# v1.3.2
+## 09/15/2026
+
+1. [](#bugfix)
+   * `page.prevSibling`/`page.nextSibling` (used for the Previous/Next Post nav on `post.html.twig` and `recipe.html.twig`) rendered a link even at the very first/last item, going nowhere (`href=""`). Cause: `Collection::adjacentSibling()` (Grav core) returns the collection itself at the boundary instead of `false`, so a bare `{% if page.prevSibling %}` is always true - a Collection object is truthy regardless. Checking `.url` instead of the object itself fixes it without touching core: a real sibling page's url is never empty, but the bug's fallback return value has none.
+
+2. [](#new)
+   * Added "Search Results Per Page" to the theme's Search section (Admin) - previously hardcoded to 10 in `bastion.php` with no way to change it, unlike Recipes' own per-page Items field.
+
 # v1.3.1
 ## 09/15/2026
 

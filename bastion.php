@@ -50,7 +50,10 @@ class Bastion extends Theme
         'device'  => 'netdocsadmins',
     ];
 
-    /** Results per page for simplesearch_results.html.twig - see onTwigSiteVariables(). */
+    /**
+     * Fallback for theme.search-results-limit (blueprints.yaml's Search
+     * section) if it's somehow unset - see onTwigSiteVariables().
+     */
     private const SEARCH_RESULTS_LIMIT = 10;
 
     public static function getSubscribedEvents(): array
@@ -193,7 +196,7 @@ class Bastion extends Theme
             return;
         }
 
-        $limit = self::SEARCH_RESULTS_LIMIT;
+        $limit = (int) $this->grav['config']->get('theme.search-results-limit', self::SEARCH_RESULTS_LIMIT);
         // Captured before slicing below, which shrinks count() to just the
         // current page - simplesearch_results.html.twig's "X results found"
         // summary needs the real total across every page, not just this one.

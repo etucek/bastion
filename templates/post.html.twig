@@ -45,11 +45,16 @@
         {% endif %}
 
         {% if show_pagination %}
+        {# page.prevSibling/nextSibling are never actually falsy at the first/
+           last item - Collection::adjacentSibling() (Grav core) returns the
+           collection itself there instead of false, so `{% if page.prevSibling %}`
+           alone is always true. .url is genuinely empty in that case (a real
+           sibling page's url never is), so check that instead. #}
         <nav class="mt-10 flex justify-center gap-3 border-t border-gray-200 pt-6 text-center dark:border-gray-800" aria-label="{{ 'THEME_BASTION.ARIA.POST_NAVIGATION'|t|e('html_attr') }}">
-            {% if page.prevSibling %}
+            {% if page.prevSibling.url %}
                 <a class="inline-block rounded-md border border-gray-300 px-4 py-2 text-sm hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800" href="{{ page.prevSibling.url }}"><i class="fa-solid fa-angle-left" aria-hidden="true"></i> {{ 'THEME_BASTION.BLOG.ITEM.PREV_POST'|t }}</a>
             {% endif %}
-            {% if page.nextSibling %}
+            {% if page.nextSibling.url %}
                 <a class="inline-block rounded-md border border-gray-300 px-4 py-2 text-sm hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800" href="{{ page.nextSibling.url }}">{{ 'THEME_BASTION.BLOG.ITEM.NEXT_POST'|t }} <i class="fa-solid fa-angle-right" aria-hidden="true"></i></a>
             {% endif %}
         </nav>
