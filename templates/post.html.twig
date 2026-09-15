@@ -4,7 +4,7 @@
 
 {% block hero %}
     {% if hero_image %}
-    <section class="relative h-64 overflow-hidden sm:h-80 md:h-96" style="background-image:url('{{ hero_image.url }}');background-size:cover;background-position:center;">
+    <section class="relative h-64 overflow-hidden hero-section sm:h-80 md:h-96" style="background-image:url('{{ hero_image.url }}');background-size:cover;background-position:center;">
         <div class="absolute inset-0 bg-black/40"></div>
         <div class="relative flex h-full items-end">
             <div class="mx-auto w-full max-w-3xl px-4 pb-8 text-white sm:px-6 lg:px-8">

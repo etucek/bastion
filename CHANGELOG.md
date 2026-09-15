@@ -1,3 +1,9 @@
+# v1.2.1
+## 09/15/2026
+
+1. [](#bugfix)
+   * The v1.2.0 Hero-tab "Transparent Header"/"Header Text" override had no effect on `post.html.twig`/`recipe.html.twig`: unlike `default`/`blog`/`recipes` (which all render their hero through `partials/hero.html.twig`), these two build their own simpler inline hero `<section>` and it was missing the `hero-section` class the CSS relies on (`#header:has(+ .hero-section)`) to detect that a hero follows the header. Added the class to both - same fix, same root cause in both files.
+
 # v1.2.0
 ## 09/15/2026
 
