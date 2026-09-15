@@ -1,0 +1,41 @@
+title: Search Results
+extends@: default
+
+form:
+  fields:
+    tabs:
+      fields:
+        search_results:
+          type: tab
+          title: THEME_BASTION.BLUEPRINTS.SEARCH_RESULTS
+          ordering@: 2
+
+          fields:
+
+            search_results_config_section:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.SEARCH_RESULTS_CONFIGURATION
+              underline: true
+
+              fields:
+                header.pagination:
+                  type: toggle
+                  label: THEME_BASTION.BLUEPRINTS.BLOG_PAGINATION
+                  help: THEME_BASTION.BLUEPRINTS.SEARCH_RESULTS_PAGINATION_HELP
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+
+                header.search_results_limit:
+                  type: number
+                  label: THEME_BASTION.BLUEPRINTS.SEARCH_RESULTS_PER_PAGE
+                  help: THEME_BASTION.BLUEPRINTS.SEARCH_RESULTS_PER_PAGE_HELP
+                  default: 10
+                  validate:
+                    required: true
+                    type: int
+                    min: 1

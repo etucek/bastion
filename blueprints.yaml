@@ -1,7 +1,7 @@
 name: Bastion
 slug: bastion
 type: theme
-version: 1.3.2
+version: 1.3.3
 description: A Tailwind CSS 4 Grav theme, built independently from Quark 2, compiled with the tailwind4 plugin - no Node.js toolchain required.
 icon: bolt
 author:
@@ -235,21 +235,6 @@ form:
       label: Blog Page Route
       size: medium
       default: '/blog'
-
-    search_section:
-      type: section
-      title: Search
-      underline: true
-
-    search-results-limit:
-      type: number
-      label: Search Results Per Page
-      help: How many matches to show per page on the search results page before paginating.
-      size: small
-      default: 10
-      validate:
-        min: 1
-        step: 1
 
     login_section:
       type: section

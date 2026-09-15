@@ -1,3 +1,9 @@
+# v1.3.3
+## 09/15/2026
+
+1. [](#improved)
+   * Moved search pagination from a theme-wide "Search Results Per Page" setting (v1.3.2) to a proper per-page blueprint (`blueprints/simplesearch_results.yaml`), mirroring how `blog.yaml`/`recipes.yaml` already expose their own pagination fields on the listing page itself rather than in theme settings. Adds an "Enable Pagination" toggle (`header.pagination`) alongside "Results Per Page" (`header.search_results_limit`, default 10) on the Search Results page's own edit form in Admin. Turning pagination off now genuinely shows every result on one page again (no silent 10-result cap with no way to reach the rest) instead of just hiding the page-number widget.
+
 # v1.3.2
 ## 09/15/2026
 

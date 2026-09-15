@@ -4,6 +4,7 @@ namespace Grav\Theme;
 use Grav\Common\Data\Blueprint;
 use Grav\Common\Grav;
 use Grav\Common\Page\Collection;
+use Grav\Common\Page\Interfaces\PageInterface;
 use Grav\Common\Page\Pages;
 use Grav\Common\Theme;
 use Grav\Common\Twig\Twig;
@@ -51,8 +52,9 @@ class Bastion extends Theme
     ];
 
     /**
-     * Fallback for theme.search-results-limit (blueprints.yaml's Search
-     * section) if it's somehow unset - see onTwigSiteVariables().
+     * Fallback for header.search_results_limit (blueprints/
+     * simplesearch_results.yaml) if it's somehow unset - see
+     * onTwigSiteVariables().
      */
     private const SEARCH_RESULTS_LIMIT = 10;
 
@@ -170,10 +172,15 @@ class Bastion extends Theme
      * *current page's own header* has `pagination: true` or
      * `content.pagination: true` (see its onPageInitialized) - it's not a
      * blanket site-wide listener despite plugins.pagination.enabled being on.
-     * user/pages/08.search/simplesearch_results.*.md sets `pagination: true`
-     * for exactly this reason; without it, firing onCollectionProcessed below
-     * would have no listener and 'pagination' would stay the plain `true` set
-     * two lines down instead of becoming a real PaginationHelper.
+     * That's also why `header.pagination` and `header.search_results_limit`
+     * are exposed as real Admin fields on blueprints/simplesearch_results.yaml
+     * (mirroring how blog.yaml/recipes.yaml expose their own pagination
+     * fields) rather than a theme-wide setting - it's the same per-page
+     * mechanism those already use, not a new one. If `header.pagination` is
+     * off, this returns before doing anything: the pagination plugin's own
+     * listener never activates either in that case, so firing
+     * onCollectionProcessed would find nothing listening and slicing anyway
+     * would just drop results with no way to reach them.
      *
      * Hooked at onTwigSiteVariables, not simplesearch's own
      * onSimpleSearchCollection event: that one fires from inside
@@ -196,19 +203,26 @@ class Bastion extends Theme
             return;
         }
 
-        $limit = (int) $this->grav['config']->get('theme.search-results-limit', self::SEARCH_RESULTS_LIMIT);
-        // Captured before slicing below, which shrinks count() to just the
-        // current page - simplesearch_results.html.twig's "X results found"
-        // summary needs the real total across every page, not just this one.
+        // Captured before any slicing below, which shrinks count() to just
+        // the current page - simplesearch_results.html.twig's "X results
+        // found" summary needs the real total across every page, not just
+        // this one, regardless of whether pagination itself is on.
         $twig->twig_vars['search_results_total'] = $collection->count();
 
+        /** @var PageInterface|null $page */
+        $page = $this->grav['page'];
+        if (!$page || !$page->value('header.pagination')) {
+            return;
+        }
+
+        $limit = (int) ($page->value('header.search_results_limit') ?: self::SEARCH_RESULTS_LIMIT);
         $collection->setParams(['pagination' => true, 'limit' => $limit]);
         $this->grav->fireEvent('onCollectionProcessed', new Event(['collection' => $collection]));
 
         /** @var \Grav\Common\Uri $uri */
         $uri = $this->grav['uri'];
-        $page = (int) $uri->currentPage();
-        $start = $limit > 0 && $page > 0 ? ($page - 1) * $limit : 0;
+        $pageNum = (int) $uri->currentPage();
+        $start = $limit > 0 && $pageNum > 0 ? ($pageNum - 1) * $limit : 0;
         if ($start || $collection->count() > $limit) {
             $collection->slice($start, $limit);
         }
