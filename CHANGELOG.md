@@ -1,3 +1,9 @@
+# v1.2.6
+## 09/15/2026
+
+1. [](#bugfix)
+   * v1.2.5's mobile nav submenu accordion animation used `max-h-96` (24rem) as its "open" cap, sized against a submenu that happened to fit - a menu item with more children than that (e.g. Tech's 9) got clipped at 24rem with no way to reach the rest, hidden behind whatever rendered next. `max-height` inherently needs a guessed-tall-enough cap; switched to the `grid-template-rows: 0fr -> 1fr` technique instead, which animates to the content's actual height, however tall that turns out to be, with nothing to guess.
+
 # v1.2.5
 ## 09/15/2026
 

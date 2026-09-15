@@ -31,9 +31,17 @@
         {% endif %}
       </div>
       {% if has_children %}
-      <ul data-menu-panel class="max-h-0 space-y-1 overflow-hidden py-1 pl-4 opacity-0 transition-[max-height,opacity] duration-300 ease-in-out [&.open]:max-h-96 [&.open]:opacity-100 {{ p.activeChild ? 'open' : '' }}">
-        {{ macros.nav_loop(p, depth + 1) }}
-      </ul>
+      {# grid-template-rows 0fr -> 1fr, not max-height: max-height needs a
+         guessed cap tall enough for any submenu's real content, and a cap
+         that's too short clips items with no way to reach them (found the
+         hard way - Tech has 9 children, past the 24rem this used to use).
+         0fr/1fr animates to the content's actual height, whatever that is,
+         no guessing. #}
+      <div data-menu-panel class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out [&.open]:grid-rows-[1fr] [&.open]:opacity-100 {{ p.activeChild ? 'open' : '' }}">
+        <ul class="space-y-1 overflow-hidden py-1 pl-4">
+          {{ macros.nav_loop(p, depth + 1) }}
+        </ul>
+      </div>
       {% endif %}
     </li>
   {% endfor %}
