@@ -10,7 +10,10 @@
         </div>
 
         {% if query %}
-            {% set count = search_results ? search_results.count : 0 %}
+            {# search_results_total is the real count across every page - search_results
+               itself is already sliced down to just this page's items by the time this
+               template runs (see bastion.php's onTwigSiteVariables()). #}
+            {% set count = search_results_total|default(search_results ? search_results.count : 0) %}
             <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
                 {% if count is same as(1) %}
                     {{ "PLUGIN_SIMPLESEARCH.SEARCH_RESULTS_SUMMARY_SINGULAR"|t(query|e)|raw }}
@@ -25,6 +28,12 @@
                 {% include 'partials/simplesearch_item.html.twig' with {'page': result_page} %}
             {% endfor %}
         </div>
+
+        {% if search_results and search_results.params.pagination %}
+            <div class="mt-8 flex justify-center">
+                {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: search_results.params.pagination} %}
+            </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

@@ -1,3 +1,10 @@
+# v1.3.1
+## 09/15/2026
+
+1. [](#new)
+   * Added pagination to `simplesearch_results.html.twig` (10 results per page) - it previously rendered every match on one page with no way to page through them. Simplesearch builds its results collection by hand instead of through `Pages::getCollection()`, so neither of the two things that method normally does for a paginated collection happened on their own; `bastion.php`'s new `onTwigSiteVariables()` reproduces both (firing `onCollectionProcessed` so the pagination plugin builds its nav, then slicing to the current page) in the same order core uses. Also fixed the "X results found" summary, which would otherwise have reported only the current page's count once pagination was slicing it down.
+   * `07.recipes/recipes.md` had no `content:` block at all, so `recipes.html.twig`'s existing pagination code (identical to blog's) never had anything to paginate - added the same `limit`/`order`/`pagination: true` config `blog.md` uses. Also published the page (`published: false` -> `true`); it was previously unreachable on the live site.
+
 # v1.3.0
 ## 09/15/2026
 

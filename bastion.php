@@ -3,6 +3,7 @@ namespace Grav\Theme;
 
 use Grav\Common\Data\Blueprint;
 use Grav\Common\Grav;
+use Grav\Common\Page\Collection;
 use Grav\Common\Page\Pages;
 use Grav\Common\Theme;
 use Grav\Common\Twig\Twig;
@@ -49,6 +50,9 @@ class Bastion extends Theme
         'device'  => 'netdocsadmins',
     ];
 
+    /** Results per page for simplesearch_results.html.twig - see onTwigSiteVariables(). */
+    private const SEARCH_RESULTS_LIMIT = 10;
+
     public static function getSubscribedEvents(): array
     {
         return [
@@ -57,6 +61,11 @@ class Bastion extends Theme
             'onTwigLoader'         => ['onTwigLoader', 0],
             'onTwigInitialized'    => ['onTwigInitialized', 0],
             'onAdminPageTypes'     => ['onAdminPageTypes', 0],
+            // Must run after simplesearch's own onTwigSiteVariables
+            // (registered at priority 0 from within its onPluginsInitialized,
+            // not in its getSubscribedEvents() list) - see the docblock on
+            // onTwigSiteVariables() below for why.
+            'onTwigSiteVariables'  => ['onTwigSiteVariables', -10],
         ];
     }
 
@@ -138,6 +147,68 @@ class Bastion extends Theme
 
     public function onThemeInitialized(): void
     {
+    }
+
+    /**
+     * Paginate simplesearch_results.html.twig's search_results, which
+     * otherwise renders every match on one page. Unlike a page's own
+     * `page.collection()`, simplesearch builds its results collection by
+     * hand (see simplesearch.php's onPagesInitialized()) rather than through
+     * Pages::getCollection() - so neither of the two things that method
+     * normally does for a paginated collection happen on their own: firing
+     * onCollectionProcessed (which is how the pagination plugin builds its
+     * page-number nav) and slicing the collection down to the current page's
+     * items. Both are reproduced here in the same order Pages::getCollection()
+     * uses - the plugin needs the collection's full, unsliced count to
+     * compute the page count, so slicing has to happen after the event, not
+     * before.
+     *
+     * The pagination plugin only wires up onCollectionProcessed at all if the
+     * *current page's own header* has `pagination: true` or
+     * `content.pagination: true` (see its onPageInitialized) - it's not a
+     * blanket site-wide listener despite plugins.pagination.enabled being on.
+     * user/pages/08.search/simplesearch_results.*.md sets `pagination: true`
+     * for exactly this reason; without it, firing onCollectionProcessed below
+     * would have no listener and 'pagination' would stay the plain `true` set
+     * two lines down instead of becoming a real PaginationHelper.
+     *
+     * Hooked at onTwigSiteVariables, not simplesearch's own
+     * onSimpleSearchCollection event: that one fires from inside
+     * onPagesInitialized, before the actual query-matching loop runs (still
+     * just "every published, routable page") - pagination built off it would
+     * paginate the wrong, unfiltered set, and slicing it early would then
+     * feed the query filter an arbitrary 10-item subset instead of
+     * everything it's supposed to search. onTwigSiteVariables is where
+     * simplesearch itself (also on this event, at the default priority 0)
+     * publishes the real, fully-filtered collection as `search_results` -
+     * this needs to run after that, hence priority -10 in
+     * getSubscribedEvents().
+     */
+    public function onTwigSiteVariables(): void
+    {
+        /** @var Twig $twig */
+        $twig = $this->grav['twig'];
+        $collection = $twig->twig_vars['search_results'] ?? null;
+        if (!$collection instanceof Collection) {
+            return;
+        }
+
+        $limit = self::SEARCH_RESULTS_LIMIT;
+        // Captured before slicing below, which shrinks count() to just the
+        // current page - simplesearch_results.html.twig's "X results found"
+        // summary needs the real total across every page, not just this one.
+        $twig->twig_vars['search_results_total'] = $collection->count();
+
+        $collection->setParams(['pagination' => true, 'limit' => $limit]);
+        $this->grav->fireEvent('onCollectionProcessed', new Event(['collection' => $collection]));
+
+        /** @var \Grav\Common\Uri $uri */
+        $uri = $this->grav['uri'];
+        $page = (int) $uri->currentPage();
+        $start = $limit > 0 && $page > 0 ? ($page - 1) * $limit : 0;
+        if ($start || $collection->count() > $limit) {
+            $collection->slice($start, $limit);
+        }
     }
 
     public function onTwigLoader(): void
