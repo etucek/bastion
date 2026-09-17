@@ -1,3 +1,9 @@
+# v1.3.6
+## 09/17/2026
+
+1. [](#bugfix)
+   * A recipe's tag pills weren't clickable, unlike a blog post's - they were just static spans. Now they link to the recipes listing filtered by that tag (`/recipes/tag_recipe:xxx`), the same way blog's already did.
+
 # v1.3.5
 ## 09/17/2026
 
