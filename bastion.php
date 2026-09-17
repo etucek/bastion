@@ -78,11 +78,14 @@ class Bastion extends Theme
      * Allow-list pageTypes() as a `data-options@` provider - see
      * blueprints/default.yaml, where the Advanced tab's "Page Template"
      * field is pointed at it instead of core's own
-     * \Grav\Common\Page\Pages::pageTypes.
+     * \Grav\Common\Page\Pages::pageTypes. Also allow-lists the per-type
+     * tag autocompletes (see blueprints/post.yaml and blueprints/recipe.yaml).
      */
     public function onPluginsInitialized(): void
     {
         Blueprint::addAllowedDynamicCallable(self::class . '::pageTypes');
+        Blueprint::addAllowedDynamicCallable(self::class . '::tagOptionsPost');
+        Blueprint::addAllowedDynamicCallable(self::class . '::tagOptionsRecipe');
     }
 
     /**
@@ -158,26 +161,47 @@ class Bastion extends Theme
      *
      * @return array<string, string>
      */
-    public static function tagOptions(): array
+    public static function tagOptionsPost(): array
+    {
+        return self::distinctTaxonomyValues('post', 'tag_post');
+    }
+
+    /**
+     * `data-options@` provider for the recipe "Tags" field
+     * (see blueprints/recipe.yaml). Same rationale as {@see tagOptionsPost()},
+     * kept on its own `tag_recipe` taxonomy so a recipe never shows up
+     * mixed in with blog posts (or devices) tagged the same word.
+     *
+     * @return array<string, string>
+     */
+    public static function tagOptionsRecipe(): array
+    {
+        return self::distinctTaxonomyValues('recipe', 'tag_recipe');
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private static function distinctTaxonomyValues(string $template, string $taxonomyKey): array
     {
         $pages = Grav::instance()['pages'];
 
-        $tags = [];
+        $values = [];
         foreach ($pages->all() as $page) {
-            if ($page->template() !== 'post') {
+            if ($page->template() !== $template) {
                 continue;
             }
-            foreach ((array) ($page->taxonomy()['tag'] ?? []) as $tag) {
-                $tag = (string) $tag;
-                if ($tag !== '') {
-                    $tags[$tag] = $tag;
+            foreach ((array) ($page->taxonomy()[$taxonomyKey] ?? []) as $value) {
+                $value = (string) $value;
+                if ($value !== '') {
+                    $values[$value] = $value;
                 }
             }
         }
 
-        ksort($tags, SORT_NATURAL | SORT_FLAG_CASE);
+        ksort($values, SORT_NATURAL | SORT_FLAG_CASE);
 
-        return $tags;
+        return $values;
     }
 
     public function onThemeInitialized(): void

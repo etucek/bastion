@@ -1,3 +1,10 @@
+# v1.3.5
+## 09/17/2026
+
+1. [](#new)
+   * Blog posts and recipes each get their own "Tags" field now, kept on separate taxonomies (`tag_post`, `tag_recipe` in `site.yaml`) so the same word tagged on a post never pulls a recipe into its results, or vice versa. Recipe tags show as pills under the title, same as blog. `Bastion::tagOptionsPost()`/`tagOptionsRecipe()` replace the single `tagOptions()` from v1.3.4, one per type, each autocompleting only from that type's own existing tags.
+   * The blog's tag field/URL param is renamed from `tag` to `tag_post` for consistency with the above - existing tagged content and the `?tag_post:xxx` filter links were migrated along with it.
+
 # v1.3.4
 ## 09/17/2026
 

@@ -6,6 +6,22 @@ form:
     tabs:
       fields:
 
+        options:
+          fields:
+            section_tags:
+              type: section
+              title: THEME_BASTION.BLUEPRINTS.TAGS
+              underline: true
+
+              fields:
+                header.taxonomy.tag_recipe:
+                  type: selectize
+                  label: THEME_BASTION.BLUEPRINTS.TAGS
+                  size: small
+                  data-options@: '\Grav\Theme\Bastion::tagOptionsRecipe'
+                  validate:
+                    type: array
+
         recipe:
           type: tab
           title: THEME_BASTION.BLUEPRINTS.RECIPE

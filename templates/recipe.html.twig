@@ -39,6 +39,14 @@
         </div>
         {% endif %}
 
+        {% if page.taxonomy.tag_recipe %}
+        <div class="my-4 flex flex-wrap gap-2">
+            {% for tag in page.taxonomy.tag_recipe %}
+            <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         <div class="prose max-w-none text-gray-700 dark:text-gray-300">
             {{ page.content|raw }}
         </div>

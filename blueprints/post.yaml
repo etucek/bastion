@@ -14,11 +14,11 @@ form:
               underline: true
 
               fields:
-                header.taxonomy.tag:
+                header.taxonomy.tag_post:
                   type: selectize
                   label: THEME_BASTION.BLUEPRINTS.TAGS
                   size: small
-                  data-options@: '\Grav\Theme\Bastion::tagOptions'
+                  data-options@: '\Grav\Theme\Bastion::tagOptionsPost'
                   validate:
                     type: array
 
