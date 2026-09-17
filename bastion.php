@@ -35,6 +35,7 @@ class Bastion extends Theme
         'blog'                  => 'super',
         'vlans'                 => 'super',
         'customers'             => 'super',
+        'tags'                  => 'super',
         // Structural/system types that aren't really "content" an editor
         // would ever choose to create.
         'root'                  => 'super',

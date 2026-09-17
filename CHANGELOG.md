@@ -1,3 +1,9 @@
+# v1.3.7
+## 09/17/2026
+
+1. [](#bugfix)
+   * The new `tags` page type (bastion-netdocs v1.6.6) was missing from `RESTRICTED_PAGE_TYPES`, so unlike `customers` and the rest of netdocs' singleton/structural types, any editor could create one from the page-type picker instead of just a super admin.
+
 # v1.3.6
 ## 09/17/2026
 
