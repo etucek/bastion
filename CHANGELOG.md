@@ -1,3 +1,10 @@
+# v1.3.4
+## 09/17/2026
+
+1. [](#improved)
+   * Removed the "Taxonomies" section (a `taxonomy` field nested under a `tag` sub-list - three labels for what was, in practice, always just a tag list, since the site only defines the `tag` taxonomy) from every page type's Options tab by default. Uninstalled the `Taxonomy List` plugin too - it was enabled but unused, nothing in the theme ever referenced the twig global it exposed; the tag pills/filtering on the blog were already built directly into the theme against Grav's core taxonomy engine.
+   * Re-added a single flat "Tags" field to blog posts only (`post.yaml`), since that's the only content type that actually uses tags. It's a `selectize` field like the netdocs `Customer`/`Zone` fields, autocompleting from every tag already used on an existing post (`Bastion::tagOptions()`) instead of a hardcoded list.
+
 # v1.3.3
 ## 09/15/2026
 

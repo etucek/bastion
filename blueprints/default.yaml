@@ -47,6 +47,8 @@ form:
 
         options:
           fields:
+            unset-taxonomies@: true
+
             section_comments:
               type: section
               title: THEME_BASTION.BLUEPRINTS.COMMENTS_CONFIGURATION

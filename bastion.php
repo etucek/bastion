@@ -150,6 +150,36 @@ class Bastion extends Theme
         return $types;
     }
 
+    /**
+     * `data-options@` provider for the blog post "Tags" field
+     * (see blueprints/post.yaml) - autocompletes from every tag already
+     * used on an existing post, so it doesn't fragment into near-duplicates
+     * (e.g. "Photo" vs "photos") the way a free-text field would.
+     *
+     * @return array<string, string>
+     */
+    public static function tagOptions(): array
+    {
+        $pages = Grav::instance()['pages'];
+
+        $tags = [];
+        foreach ($pages->all() as $page) {
+            if ($page->template() !== 'post') {
+                continue;
+            }
+            foreach ((array) ($page->taxonomy()['tag'] ?? []) as $tag) {
+                $tag = (string) $tag;
+                if ($tag !== '') {
+                    $tags[$tag] = $tag;
+                }
+            }
+        }
+
+        ksort($tags, SORT_NATURAL | SORT_FLAG_CASE);
+
+        return $tags;
+    }
+
     public function onThemeInitialized(): void
     {
     }

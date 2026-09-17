@@ -95,6 +95,7 @@ en:
       COMMENTS_CONFIGURATION: "Comments"
       ENABLE_COMMENTS: "Enable Comments"
       ENABLE_COMMENTS_HELP: "Show the comments section on this page."
+      TAGS: "Tags"
       POST: "Post"
       BLOG_AUTHOR: "Post Author"
       BLOG_SHOW_BREADCRUMBS: "Show Breadcrumbs"
