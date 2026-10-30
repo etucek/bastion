@@ -1,3 +1,9 @@
+# v1.3.9
+## 10/30/2026
+
+1. [](#improved)
+   * Recompiled CSS (`tailwind4` plugin) to pick up new utility classes used by bastion-netdocs' drag-and-drop photo reordering (v2.4.0): `cursor-move`, `pointer-events-none`, `opacity-40`, a translucent drag-handle badge. No theme source changes.
+
 # v1.3.8
 ## 10/30/2026
 
