@@ -1,3 +1,9 @@
+# v1.3.8
+## 10/30/2026
+
+1. [](#improved)
+   * Recompiled CSS (`tailwind4` plugin) to pick up new utility classes used by bastion-netdocs' device edit/add forms (v2.3.1): a styled file-picker label, `sr-only`, and adjusted photo-grid spacing. No theme source changes - Tailwind scans templates site-wide, including plugin templates, so a plugin-only change can still need a theme CSS rebuild.
+
 # v1.3.7
 ## 09/17/2026
 
