@@ -48,8 +48,9 @@ class Bastion extends Theme
         'recipes' => 'recipesadmins',
         'recipe'  => 'recipesadmins',
         'post'    => 'blogadmins',
-        'vlan'    => 'netdocsadmins',
-        'device'  => 'netdocsadmins',
+        'vlan'           => 'netdocsadmins',
+        'device'         => 'netdocsadmins',
+        'device-gallery' => 'netdocsadmins',
     ];
 
     /**

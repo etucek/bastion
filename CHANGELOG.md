@@ -1,3 +1,9 @@
+# v1.4.1
+## 11/02/2026
+
+1. [](#improved)
+   * Restricted the new `device-gallery` page type (bastion-netdocs v2.6.0) to `netdocsadmins` in the page-type picker, the same way `vlan`/`device` already are - harmless on a site without bastion-netdocs installed, since the type simply won't exist there.
+
 # v1.4.0
 ## 11/02/2026
 
