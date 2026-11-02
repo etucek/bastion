@@ -1,3 +1,9 @@
+# v1.4.0
+## 11/02/2026
+
+1. [](#new)
+   * Search results now show a netdocs device/VLAN's own Description field as the snippet, instead of its page body (`page.summary`), which is empty for these - a device/VLAN's description lives in its header, not its content, so search results for one always came up with a blank snippet even when a description was filled in. Checks `header.device.description`/`header.vlan.description` first, falling back to the normal body summary for every other page type - no effect on sites that don't have bastion-netdocs installed, since neither key exists there.
+
 # v1.3.9
 ## 10/30/2026
 

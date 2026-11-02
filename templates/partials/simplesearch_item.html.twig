@@ -2,7 +2,14 @@
 <article class="search-row">
   <div class="search-url">{{ page.url(true) }}</div>
   <h3 class="search-title"><a href="{{ page.url }}">{{ page.title }}</a></h3>
-  {% set summary = page.summary|trim %}
+  {#- A netdocs device/vlan's real description lives in its own header
+      field, not the page body - page.summary (derived from body content)
+      is empty for these, so the snippet was blank even when a device had
+      a perfectly good description filled in. Prefer that field when
+      present; every other page type is unaffected since neither header
+      key exists on it. #}
+  {% set netdocs_description = (page.header.device.description ?? page.header.vlan.description ?? null)|trim %}
+  {% set summary = netdocs_description ?: page.summary|trim %}
   {% if summary or page.date %}
     <p class="search-snippet">
       {% if page.date %}<span class="search-date">{{ page.date|date(config.system.pages.dateformat.short) }}{{ summary ? ' — ' }}</span>{% endif %}{{ summary|raw }}
