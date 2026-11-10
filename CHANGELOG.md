@@ -1,3 +1,9 @@
+# v1.4.3
+## 11/10/2026
+
+1. [](#bugfix)
+   * A search result whose snippet fell back to `page.summary` (no description field filled in) could blow out the whole results page's width whenever that page's content happened to include a fenced code block near the top - `page.summary()`'s default mode returns full rendered HTML, naively character-sliced to length, which can cut mid-tag or just leave a `<pre>` with a long unwrapped line in place, stretching the page out to match it. Snippets now use `page.summary(null, true)` (strip tags before slicing) instead - a "Google-style" result preview, which this already claimed to be, was never supposed to carry its own code blocks/headings/lists anyway.
+
 # v1.4.2
 ## 11/10/2026
 

@@ -17,10 +17,18 @@
       present; every other page type is unaffected since neither header
       key exists on it. #}
   {% set netdocs_description = (page.header.device.description ?? page.header.vlan.description ?? null)|trim %}
-  {% set summary = netdocs_description ?: page.summary|trim %}
+  {#- page.summary() without textOnly=true returns rendered HTML, naively
+      character-sliced to the configured summary length - which can slice
+      mid-tag, or land inside a fenced code block, whose <pre> doesn't wrap
+      a long line by default and was stretching the whole results page
+      out to match it ("page.summary|trim" + "|raw" below, before this).
+      textOnly strips tags *before* slicing, which a "Google-style"
+      snippet (see top of file) should be doing anyway - a search result
+      preview was never meant to carry its own headings/code blocks/lists. #}
+  {% set summary = netdocs_description ?: page.summary(null, true)|trim %}
   {% if summary or page.date %}
     <p class="search-snippet">
-      {% if page.date %}<span class="search-date">{{ page.date|date(config.system.pages.dateformat.short) }}{{ summary ? ' — ' }}</span>{% endif %}{{ summary|raw }}
+      {% if page.date %}<span class="search-date">{{ page.date|date(config.system.pages.dateformat.short) }}{{ summary ? ' — ' }}</span>{% endif %}{{ summary }}
     </p>
   {% endif %}
 </article>
