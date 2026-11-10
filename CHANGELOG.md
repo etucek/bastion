@@ -1,3 +1,9 @@
+# v1.4.2
+## 11/10/2026
+
+1. [](#improved)
+   * A device page's own title is just its IP (bastion-netdocs keeps it that way on purpose, for filesystem/listing sort order), but users now rely on its `vmware/device name` just as much. Search results for a device now show both, name last - "10.217.217.217 - w6-mgmt" - instead of the bare IP. Devices without a name filled in (pre-dating that field) keep showing their plain IP title.
+
 # v1.4.1
 ## 11/02/2026
 

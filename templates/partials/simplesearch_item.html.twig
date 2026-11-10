@@ -1,7 +1,15 @@
 {# Google-style result: url breadcrumb, title link, snippet - no thumbnail #}
 <article class="search-row">
   <div class="search-url">{{ page.url(true) }}</div>
-  <h3 class="search-title"><a href="{{ page.url }}">{{ page.title }}</a></h3>
+  {#- A device page's own title is just its IP (bastion-netdocs keeps it that
+      way on purpose, for filesystem/listing sort order) - but to our users
+      the device's name matters as much as its IP by now, so show both here,
+      name last ("10.217.217.217 - w6-mgmt"). Only devices have a vm_name
+      field at all, and only once one's actually filled in - older devices
+      from before it existed just keep showing their plain IP title. #}
+  {% set netdocs_name = (page.header.device.vm_name ?? null)|trim %}
+  {% set netdocs_title = netdocs_name ? page.header.device.ip ~ ' - ' ~ netdocs_name : page.title %}
+  <h3 class="search-title"><a href="{{ page.url }}">{{ netdocs_title }}</a></h3>
   {#- A netdocs device/vlan's real description lives in its own header
       field, not the page body - page.summary (derived from body content)
       is empty for these, so the snippet was blank even when a device had
