@@ -1,3 +1,10 @@
+# v1.4.4
+## 11/11/2026
+
+1. [](#other)
+   * Replace outdated scaffolding notes with the current architecture, runtime/build dependencies, NetDocs/Gallery integration and validation commands.
+   * Add repository instructions covering Twig integration, Tailwind output, search event ordering and manual checks. No CSS or template changes are required for this documentation update.
+
 # v1.4.3
 ## 11/10/2026
 
